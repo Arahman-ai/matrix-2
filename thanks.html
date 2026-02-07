@@ -1,101 +1,141 @@
-<!-- ✅ thanks.html (put this file in the SAME folder as index.html) -->
+<!-- ✅ Save this as: thanks.html (same folder as index.html) -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Thanks — BridgeBay Digital Solutions</title>
+  <meta name="description" content="Thanks for requesting your free visibility audit. BridgeBay Digital Solutions will reply within 24–48 hours." />
+
   <style>
     :root{
-      --bg:#fbf3ea;
+      --bg:#0f0f10;
       --card:#ffffff;
-      --ink:#1f1f1f;
-      --muted:#5b5b5b;
-      --accent:#e27a2d;
+      --ink:#121212;
+      --muted:#5a5a5a;
+      --line:rgba(0,0,0,.12);
+      --accent:#111111;
       --radius:18px;
-      --shadow:0 12px 30px rgba(0,0,0,.08);
-      --max:860px;
+      --shadow:0 16px 50px rgba(0,0,0,.35);
+      --max:920px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background:var(--bg);
-      color:var(--ink);
+      color:#fff;
       line-height:1.45;
     }
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:12px 0 18px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900}
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,#1a1a1a,#2c2c2c);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
+    }
+    .brand-title{font-size:16px;line-height:1.1;letter-spacing:.2px}
+    .tiny{font-size:12px;color:rgba(255,255,255,.70)}
     .card{
+      margin-top:18px;
       background:var(--card);
+      color:var(--ink);
+      border:1px solid var(--line);
       border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
-      border:1px solid rgba(0,0,0,.10);
-    }
-    .top{
-      display:flex;align-items:center;gap:10px;margin-bottom:18px;
-      font-weight:900;
-    }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:linear-gradient(135deg,var(--accent),#ffb17a);
-      box-shadow:0 10px 20px rgba(226,122,45,.25);
-      flex:0 0 auto;
     }
     h1{
       margin:0 0 10px;
-      font-size:36px;line-height:1.08;
-      font-family:ui-serif, Georgia, "Times New Roman", Times, serif;
-      letter-spacing:-.5px;
+      font-size:34px;
+      letter-spacing:-.4px;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      color:#111;
     }
-    p{margin:0 0 10px;color:var(--muted)}
+    p{margin:0 0 10px;color:rgba(0,0,0,.70)}
+    .em{font-weight:850;color:#111}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
       padding:12px 16px;border-radius:999px;
-      background:var(--accent);color:#fff;text-decoration:none;
-      font-weight:900;border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 12px 22px rgba(226,122,45,.25);
+      background:#111;color:#fff;text-decoration:none;
+      font-weight:900;border:1px solid #111;
       cursor:pointer;white-space:nowrap;
+      box-shadow:0 14px 28px rgba(0,0,0,.18);
     }
+    .btn:hover{background:#000}
     .btn.secondary{
-      background:#fff;color:var(--ink);box-shadow:none;
-      border:1px solid rgba(0,0,0,.12);
+      background:#fff;color:#111;border:1px solid #111;box-shadow:none;
     }
-    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-    .tiny{font-size:12px;color:rgba(0,0,0,.55)}
+    .btn.secondary:hover{background:#f3f3f3}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .info{
+      margin-top:12px;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(0,0,0,.03);
+      border:1px solid rgba(0,0,0,.08);
+    }
+    .footer{
+      margin-top:22px;
+      text-align:center;
+      font-size:13px;
+      color:rgba(255,255,255,.65);
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="top">
-      <div class="logo" aria-hidden="true"></div>
-      <div>BridgeBay Digital Solutions <span class="tiny">USA • Bangladesh</span></div>
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">B</div>
+        <div>
+          <div class="brand-title">BridgeBay Digital Solutions</div>
+          <div class="tiny">USA • Bangladesh</div>
+        </div>
+      </div>
+
+      <a class="btn secondary" href="./index.html">Back to Home</a>
     </div>
 
     <div class="card">
       <h1>Thanks — we got your request ✅</h1>
       <p>
-        We’ll review your restaurant’s online visibility and prepare your audit.
-        You’ll hear back within <strong>24–48 hours</strong>.
-      </p>
-      <p class="tiny">
-        Tip: If you want the fastest response, message us on WhatsApp.
+        We’ll review your online visibility and reply within <span class="em">24–48 hours</span>
+        with your detailed audit + recommendations.
       </p>
 
-      <div class="row">
+      <div class="info">
+        <p class="em" style="margin-bottom:6px;">Want a faster response?</p>
+        <p style="margin-bottom:0;">Message us on WhatsApp and mention “Free Audit” + your business name.</p>
+      </div>
+
+      <div class="actions">
         <a class="btn" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp</a>
-        <a class="btn secondary" href="/">Back to Home</a>
+        <a class="btn secondary" href="mailto:bridgebayinternational@gmail.com">Email Us</a>
+        <a class="btn secondary" href="./index.html#contact">Submit Another Request</a>
       </div>
 
       <p class="tiny" style="margin-top:14px;">
-        Email: <strong>bridgebayinternational@gmail.com</strong> • WhatsApp: <strong>+1 912-541-9169</strong>
+        Tip: If you provided your Google Maps link, we can finish your audit faster.
       </p>
     </div>
 
-    <p class="tiny" style="text-align:center;margin-top:18px;">
+    <div class="footer">
       © <span id="y"></span> BridgeBay Digital Solutions
-    </p>
+    </div>
   </div>
 
   <script>
-    document.getElementById("y").textConte
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
