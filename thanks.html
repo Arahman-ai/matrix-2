@@ -78,8 +78,15 @@
     @keyframes px-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.88)}}
 
     .brand-title{
-      font-size:16px;line-height:1.1;letter-spacing:.2px;
+      font-size:16px;line-height:1.1;letter-spacing:.2px;font-weight:900;
       background:linear-gradient(90deg,#fff 0%,#FF9F43 40%,#A29BFE 70%,#fff 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:shimmer 5s linear infinite;
+    }
+    .brand-sub{
+      font-size:12px;line-height:1.2;letter-spacing:.3px;font-weight:700;
+      background:linear-gradient(90deg,#FF9F43 0%,#A29BFE 100%);
       background-size:200% auto;
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
       animation:shimmer 5s linear infinite;
@@ -230,7 +237,8 @@
           </div>
         </div>
         <div>
-          <div class="brand-title">Rangu Digital Solutions</div>
+          <div class="brand-title">Rangu</div>
+          <div class="brand-sub">Digital Transformations</div>
           <span class="tiny">USA • Bangladesh</span>
         </div>
       </a>
@@ -294,7 +302,7 @@
         <a class="btn wa" href="https://wa.me/19125419169?text=Hi%2C%20I%20just%20requested%20a%20Free%20Audit%20for%20my%20business" target="_blank" rel="noopener">
           Chat on WhatsApp
         </a>
-        <a class="btn secondary" href="mailto:rangu.connect@gmail.com">Email Us</a>
+        <a class="btn secondary" href="/cdn-cgi/l/email-protection#91e3f0fff6e4bff2fefffff4f2e5d1f6fcf0f8fdbff2fefc">Email Us</a>
         <a class="btn secondary" href="./index.html">Back to Home</a>
       </div>
 
@@ -313,8 +321,4 @@
 
   </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/clou
