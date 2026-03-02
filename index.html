@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rangu Digital Solutions — Get Found on Google Maps</title>
-  <meta name="description" content="Tired of competitors showing up before you on Google? Rangu Digital Solutions fixes that — USA & Bangladesh." />
+  <title>Rangu Digital Transformations — Get Found on Google Maps</title>
+  <meta name="description" content="Tired of competitors showing up before you on Google? Rangu Digital Transformations fixes that — USA & Bangladesh." />
 
   <style>
     :root{
@@ -79,8 +79,15 @@
     @keyframes px-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.88)}}
 
     .brand-title{
-      font-size:16px;line-height:1.1;letter-spacing:.2px;
+      font-size:16px;line-height:1.1;letter-spacing:.2px;font-weight:900;
       background:linear-gradient(90deg,#fff 0%,#FF9F43 40%,#A29BFE 70%,#fff 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:shimmer 5s linear infinite;
+    }
+    .brand-sub{
+      font-size:12px;line-height:1.2;letter-spacing:.3px;font-weight:700;
+      background:linear-gradient(90deg,#FF9F43 0%,#A29BFE 100%);
       background-size:200% auto;
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
       animation:shimmer 5s linear infinite;
@@ -333,7 +340,8 @@
         </div>
       </div>
       <div>
-        <div class="brand-title">Rangu Digital Solutions</div>
+        <div class="brand-title">Rangu</div>
+        <div class="brand-sub">Digital Transformations</div>
         <span class="tiny">Serving USA • Bangladesh</span>
       </div>
     </div>
@@ -341,9 +349,20 @@
       <a href="#how" class="anchor">How It Works</a>
       <a href="#who" class="anchor">Who We Help</a>
       <a href="#services" class="anchor">Services</a>
-      <a href="#faq" class="anchor">FAQ</a>
       <a href="./pricing.html">Pricing</a>
+      <a href="#faq" class="anchor">FAQ</a>
       <a href="#contact" class="anchor">Free Audit</a>
+      <a href="./login.html" style="
+        display:inline-flex;align-items:center;gap:6px;
+        padding:8px 16px;border-radius:999px;
+        background:rgba(255,255,255,.08);
+        border:1px solid rgba(255,255,255,.18);
+        color:#fff;font-weight:800;font-size:13px;
+        text-decoration:none;transition:background .15s;
+      " onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Login
+      </a>
     </nav>
   </div>
 
@@ -421,20 +440,60 @@
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card anchor" id="pricing">
         <h2>Pricing</h2>
-        <p>Every business is different — so we don't use one-size-fits-all pricing.</p>
-        <div class="pricing-note">
-          <div class="em">Get a custom quote after your free audit.</div>
-          <p style="margin-top:6px;">We'll propose a plan based on your location, competition level, and growth goal.</p>
-          <div class="cta">
-            <a class="btn js-open-audit" href="#contact">Get Audit + Pricing</a>
+        <p>Simple plans for every stage of growth. No hidden fees.</p>
+
+        <!-- Mini pricing tiers -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin:14px 0;">
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:#f8f8f8;border:1px solid rgba(0,0,0,.08);">
+            <div>
+              <div style="font-weight:900;font-size:14px;color:#111;">🌱 Starter</div>
+              <div style="font-size:12px;color:#888;margin-top:2px;">GBP + Reviews + Monthly Report</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:900;color:#111;font-size:16px;">$199<span style="font-size:11px;font-weight:600;color:#888;">/mo</span></div>
+              <div style="font-size:11px;color:#00B894;font-weight:700;">৳5,500/mo BD</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(255,159,67,.08),rgba(255,107,107,.05));border:2px solid rgba(255,159,67,.3);">
+            <div>
+              <div style="font-weight:900;font-size:14px;color:#111;">🚀 Growth <span style="font-size:10px;background:linear-gradient(135deg,#FF6B6B,#FF9F43);color:#fff;padding:2px 8px;border-radius:999px;margin-left:4px;">Popular</span></div>
+              <div style="font-size:12px;color:#888;margin-top:2px;">Starter + SEO + Social + Citations</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:900;color:#111;font-size:16px;">$399<span style="font-size:11px;font-weight:600;color:#888;">/mo</span></div>
+              <div style="font-size:11px;color:#00B894;font-weight:700;">৳11,000/mo BD</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:#f8f8f8;border:1px solid rgba(0,0,0,.08);">
+            <div>
+              <div style="font-weight:900;font-size:14px;color:#111;">👑 Pro</div>
+              <div style="font-size:12px;color:#888;margin-top:2px;">Growth + Ads + Backlinks + Manager</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:900;color:#111;font-size:16px;">$799<span style="font-size:11px;font-weight:600;color:#888;">/mo</span></div>
+              <div style="font-size:11px;color:#00B894;font-weight:700;">৳22,000/mo BD</div>
+            </div>
           </div>
         </div>
+
+        <div class="cta">
+          <a class="btn accent" href="./pricing.html">See Full Pricing →</a>
+          <a class="btn secondary js-open-audit" href="#contact">Get Free Audit</a>
+        </div>
+        <p style="font-size:11px;color:rgba(0,0,0,.45);margin-top:10px;">No contracts. Cancel anytime. Save 20% annually.</p>
       </section>
 
       <section class="card anchor" id="why">
         <h2>Why Choose Us</h2>
         <div>
-          <span class="pill">🇺🇸 🇧🇩 USA + BD</span>
+          <span class="pill">
+            <svg width="16" height="11" viewBox="0 0 20 14" style="border-radius:2px"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/></svg>
+            <svg width="16" height="11" viewBox="0 0 20 14" style="border-radius:2px"><rect width="20" height="14" fill="#006A4E"/><circle cx="9.5" cy="7" r="4" fill="#F42A41"/></svg>
+            USA + BD
+          </span>
           <span class="pill">📍 Local-first</span>
           <span class="pill">📈 Data-driven</span>
           <span class="pill">💬 Clear reporting</span>
@@ -448,7 +507,10 @@
       <section class="card anchor" id="global">
         <h2>Serving USA & Bangladesh</h2>
         <p>
-          🇺🇸 United States | 🇧🇩 Bangladesh<br>
+          <svg width="18" height="13" viewBox="0 0 20 14" style="border-radius:2px;vertical-align:middle"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/></svg>
+          United States &nbsp;|&nbsp;
+          <svg width="18" height="13" viewBox="0 0 20 14" style="border-radius:2px;vertical-align:middle"><rect width="20" height="14" fill="#006A4E"/><circle cx="9.5" cy="7" r="4" fill="#F42A41"/></svg>
+          Bangladesh<br>
           Time-zone friendly support + WhatsApp + email.
         </p>
         <div class="cta" style="margin-top:12px;">
@@ -575,7 +637,7 @@
         <p style="margin-bottom:8px;">WhatsApp (fastest):</p>
         <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp</a>
         <p style="margin-top:14px;margin-bottom:8px;">Email:</p>
-        <p class="em" style="margin:0;">rangu.connect@gmail.com</p>
+        <p class="em" style="margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c2e3d323b29723f333232393f281c3b313d3530723f3331">[email&#160;protected]</a></p>
         <p style="margin-top:12px;font-size:12px;color:rgba(0,0,0,.55);">
           🇺🇸 🇧🇩 Time-zone friendly support for USA & Bangladesh clients.
         </p>
@@ -591,7 +653,7 @@
       <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
       <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
     </div>
-    © <span id="y"></span> Rangu Digital Solutions • USA • Bangladesh
+    © <span id="y"></span> Rangu Digital Transformations • USA • Bangladesh
   </div>
 
 </div>
@@ -630,7 +692,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
   const modal = document.getElementById('auditModal');
@@ -693,13 +755,4 @@
       restaurant,city,
       address:document.getElementById('m_address').value||"",
       website:document.getElementById('m_website').value||"",
-      maps:document.getElementById('m_maps').value||"",
-      phone:document.getElementById('m_phone').value||"",
-      goal:document.getElementById('m_goal').value||"More customers"
-    });
-    closeModal();
-  });
-</script>
-</body>
-</html>
-
+      m
