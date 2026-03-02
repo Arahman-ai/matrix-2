@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pricing — Rangu Digital Solutions</title>
+  <meta name="description" content="Simple, transparent pricing for local businesses in USA & Bangladesh. Choose the plan that fits your growth goals." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    :root{
+      --bg:#0c0e12;
+      --card:#ffffff;
+      --ink:#121212;
+      --muted:#5a5a5a;
+      --line:rgba(0,0,0,.12);
+      --radius:18px;
+      --shadow:0 16px 50px rgba(0,0,0,.4);
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.45;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,159,67,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(116,185,255,.06) 0%, transparent 60%),
+        radial-gradient(circle 1px at center, rgba(255,255,255,.08) 1px, transparent 0);
+      background-size: auto, auto, 28px 28px;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 100px}
+
+    /* ── TOPBAR ── */
+    .topbar{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:14px;padding-bottom:18px;
+      position:sticky;top:0;
+      background:rgba(12,14,18,.88);
+      backdrop-filter:blur(14px);
+      z-index:80;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .brand{display:flex;align-items:center;gap:12px;padding:10px 0;font-weight:900;color:#fff;text-decoration:none;}
+    .logo-wrap{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,#1a1a1a,#2c2c2c);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;flex:0 0 auto;padding:5px;
+    }
+    .pixel-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);
+      gap:2px;width:100%;height:100%;border-radius:4px;overflow:hidden;
+    }
+    .px{border-radius:1.5px;animation:px-pulse 3s ease-in-out infinite;}
+    .px1{background:#FF6B6B;animation-delay:.00s}.px2{background:#FF9F43;animation-delay:.10s}
+    .px3{background:#FFEAA7;animation-delay:.20s}.px4{background:#55EFC4;animation-delay:.30s}
+    .px5{background:#74B9FF;animation-delay:.40s}.px6{background:#A29BFE;animation-delay:.50s}
+    .px7{background:#FD79A8;animation-delay:.60s}.px8{background:#00CEC9;animation-delay:.70s}
+    .px9{background:#E17055;animation-delay:.80s}.px10{background:#6C5CE7;animation-delay:.90s}
+    .px11{background:#00B894;animation-delay:1.00s}.px12{background:#FDCB6E;animation-delay:1.10s}
+    .px13{background:#E84393;animation-delay:1.20s}.px14{background:#0984E3;animation-delay:1.30s}
+    .px15{background:#F9CA24;animation-delay:1.40s}.px16{background:#6AB04C;animation-delay:1.50s}
+    @keyframes px-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.88)}}
+
+    .brand-title{
+      font-size:16px;line-height:1.1;letter-spacing:.2px;
+      background:linear-gradient(90deg,#fff 0%,#FF9F43 40%,#A29BFE 70%,#fff 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:shimmer 5s linear infinite;
+    }
+    @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+    .tiny{font-size:12px;color:rgba(255,255,255,.65)}
+
+    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 0}
+    .nav a{
+      color:rgba(255,255,255,.75);text-decoration:none;font-weight:750;font-size:13px;
+      padding:8px 10px;border-radius:999px;border:1px solid transparent;
+    }
+    .nav a:hover{color:#fff;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);}
+    .nav a.active{color:#fff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 18px;border-radius:999px;background:#111;color:#fff;
+      text-decoration:none;font-weight:900;border:1px solid #111;
+      cursor:pointer;white-space:nowrap;
+      box-shadow:0 14px 28px rgba(0,0,0,.25);transition:all .15s;
+    }
+    .btn:hover{background:#000}
+    .btn.secondary{background:#fff;color:#111;border:1px solid #ddd;box-shadow:none;}
+    .btn.secondary:hover{background:#f3f3f3}
+    .btn.accent{
+      background:linear-gradient(135deg,#FF6B6B,#FF9F43);
+      color:#fff;border:none;
+      box-shadow:0 8px 24px rgba(255,107,107,.35);
+    }
+    .btn.accent:hover{filter:brightness(1.1);transform:translateY(-1px);}
+    .btn.ghost{background:transparent;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);box-shadow:none;}
+    .btn.ghost:hover{background:rgba(255,255,255,.08)}
+    .btn-full{width:100%;justify-content:center;padding:14px;}
+
+    /* ── HERO ── */
+    .hero{
+      text-align:center;
+      padding:60px 20px 40px;
+    }
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 16px;border-radius:999px;
+      background:rgba(255,159,67,.1);
+      border:1px solid rgba(255,159,67,.25);
+      color:#FF9F43;font-size:13px;font-weight:700;
+      margin-bottom:20px;
+    }
+    .hero h1{
+      font-family:ui-serif,Georgia,"Times New Roman",Times,serif;
+      font-size:48px;line-height:1.05;letter-spacing:-.6px;
+      color:#fff;margin:0 0 16px;
+    }
+    @media(max-width:680px){.hero h1{font-size:34px}}
+    .hero p{
+      font-size:18px;color:rgba(255,255,255,.65);
+      max-width:560px;margin:0 auto 24px;
+    }
+
+    /* ── MARKET SWITCHER ── */
+    .market-switcher{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      margin-bottom:20px;
+    }
+    .market-btn{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 20px;border-radius:999px;
+      font-size:14px;font-weight:800;cursor:pointer;
+      border:2px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.55);
+      transition:all .15s;
+    }
+    .market-btn.active{
+      background:#fff;color:#111;border-color:#fff;
+    }
+    .market-btn:hover:not(.active){
+      background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);
+    }
+
+    /* ── BILLING TOGGLE ── */
+    .toggle-wrap{
+      display:flex;align-items:center;justify-content:center;gap:14px;
+      margin-bottom:48px;
+    }
+    .toggle-label{font-size:14px;font-weight:700;color:rgba(255,255,255,.6);}
+    .toggle-label.active{color:#fff;}
+    .toggle{
+      width:52px;height:28px;border-radius:999px;
+      background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+      position:relative;cursor:pointer;transition:background .2s;
+    }
+    .toggle.on{background:linear-gradient(135deg,#FF6B6B,#FF9F43);}
+    .toggle-knob{
+      position:absolute;top:3px;left:3px;
+      width:22px;height:22px;border-radius:50%;background:#fff;
+      transition:transform .2s;box-shadow:0 2px 8px rgba(0,0,0,.3);
+    }
+    .toggle.on .toggle-knob{transform:translateX(24px);}
+    .save-badge{
+      background:rgba(0,184,148,.15);border:1px solid rgba(0,184,148,.3);
+      color:#00B894;font-size:11px;font-weight:700;
+      padding:4px 10px;border-radius:999px;
+    }
+
+    /* BD note box */
+    .bd-note{
+      background:rgba(0,184,148,.06);
+      border:1px solid rgba(0,184,148,.18);
+      border-radius:14px;padding:14px 18px;
+      display:none;align-items:center;gap:12px;
+      margin-bottom:32px;font-size:13px;
+      color:rgba(255,255,255,.75);
+    }
+    .bd-note.show{display:flex;}
+    .bd-note strong{color:#fff;}
+
+    /* Price sub (BDT) */
+    .price-bdt{
+      font-size:13px;color:#00B894;font-weight:700;
+      margin-top:2px;display:none;
+    }
+    .price-bdt.show{display:block;}
+
+    /* ── PRICING CARDS ── */
+    .pricing-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+      align-items:start;
+    }
+    @media(max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;}}
+
+    .plan{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      position:relative;
+      transition:transform .2s,box-shadow .2s;
+    }
+    .plan:hover{transform:translateY(-4px);box-shadow:0 28px 70px rgba(0,0,0,.45);}
+
+    /* Popular plan */
+    .plan.popular{
+      border:2px solid #FF9F43;
+      transform:scale(1.03);
+      box-shadow:0 24px 70px rgba(255,159,67,.25);
+    }
+    .plan.popular:hover{transform:scale(1.03) translateY(-4px);}
+
+    .popular-badge{
+      position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,#FF6B6B,#FF9F43);
+      color:#fff;font-size:12px;font-weight:900;
+      padding:6px 18px;border-radius:999px;white-space:nowrap;
+      box-shadow:0 4px 16px rgba(255,107,107,.4);
+    }
+
+    .plan-icon{
+      width:48px;height:48px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;margin-bottom:16px;
+    }
+    .plan-icon.starter{background:rgba(116,185,255,.12);border:1px solid rgba(116,185,255,.2);}
+    .plan-icon.growth{background:rgba(255,159,67,.12);border:1px solid rgba(255,159,67,.2);}
+    .plan-icon.pro{background:rgba(108,92,231,.12);border:1px solid rgba(108,92,231,.2);}
+
+    .plan-name{font-size:13px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+    .plan-tagline{font-size:15px;font-weight:700;color:#111;margin-bottom:20px;}
+
+    .plan-price{margin-bottom:6px;}
+    .price-amount{
+      font-family:ui-serif,Georgia,"Times New Roman",Times,serif;
+      font-size:48px;font-weight:900;color:#111;line-height:1;
+    }
+    .price-period{font-size:14px;color:var(--muted);font-weight:600;}
+    .price-annual{font-size:12px;color:#00B894;font-weight:700;margin-bottom:20px;display:none;}
+    .price-annual.show{display:block;}
+
+    .divider{height:1px;background:rgba(0,0,0,.08);margin:20px 0;}
+
+    /* Features list */
+    .features{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px;}
+    .features li{
+      display:flex;align-items:flex-start;gap:10px;
+      font-size:14px;color:#444;
+    }
+    .features li .check{
+      flex:0 0 18px;height:18px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:10px;margin-top:1px;
+    }
+    .check.yes{background:rgba(0,184,148,.12);color:#00B894;}
+    .check.no{background:rgba(0,0,0,.05);color:#ccc;}
+    .features li.muted{color:#bbb;}
+
+    /* Add-ons */
+    .addons{
+      margin-top:40px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:28px;
+    }
+    .addons h3{color:#fff;font-size:20px;margin:0 0 6px;font-family:ui-serif,Georgia,"Times New Roman",Times,serif;}
+    .addons p{color:rgba(255,255,255,.6);font-size:14px;margin:0 0 20px;}
+    .addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media(max-width:900px){.addon-grid{grid-template-columns:1fr}}
+    .addon-item{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;padding:16px;
+      transition:border-color .15s,background .15s;
+    }
+    .addon-item:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);}
+    .addon-item b{display:block;color:#fff;font-size:14px;margin-bottom:4px;}
+    .addon-item span{font-size:13px;color:rgba(255,255,255,.55);}
+    .addon-price{display:block;color:#FF9F43;font-weight:900;font-size:13px;margin-top:8px;}
+
+    /* FAQ */
+    .faq-section{margin-top:40px;}
+    .faq-section h3{color:#fff;font-size:22px;margin:0 0 16px;font-family:ui-serif,Georgia,"Times New Roman",Times,serif;}
+    details{
+      border:1px solid rgba(255,255,255,.10);border-radius:14px;
+      overflow:hidden;background:rgba(255,255,255,.03);
+    }
+    details+details{margin-top:8px;}
+    summary{
+      padding:16px 20px;cursor:pointer;font-weight:700;color:#fff;font-size:14px;
+      list-style:none;display:flex;justify-content:space-between;align-items:center;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:'＋';font-size:16px;color:rgba(255,255,255,.4);}
+    details[open] summary::after{content:'－';}
+    .faq-body{padding:0 20px 16px;color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;}
+
+    /* CTA bottom */
+    .bottom-cta{
+      margin-top:50px;text-align:center;
+      padding:48px 32px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+    }
+    .bottom-cta h2{
+      color:#fff;font-size:32px;margin:0 0 10px;
+      font-family:ui-serif,Georgia,"Times New Roman",Times,serif;
+    }
+    .bottom-cta p{color:rgba(255,255,255,.6);margin:0 0 24px;}
+    .bottom-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+    /* Footer */
+    .footer{
+      margin-top:22px;text-align:center;font-size:13px;
+      color:rgba(255,255,255,.45);
+      display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .footer-logo{
+      display:inline-grid;grid-template-columns:repeat(4,1fr);gap:1.5px;
+      width:16px;height:16px;border-radius:3px;overflow:hidden;
+    }
+    .footer-logo .px{border-radius:0.5px;animation:none;}
+
+    /* Floating WhatsApp */
+    .wa-float{
+      position:fixed;bottom:28px;right:28px;z-index:999;
+      width:58px;height:58px;border-radius:50%;background:#25D366;
+      box-shadow:0 6px 24px rgba(37,211,102,.5);
+      display:flex;align-items:center;justify-content:center;
+      text-decoration:none;
+      animation:wa-pop .4s cubic-bezier(.34,1.56,.64,1) both;
+      transition:transform .15s,box-shadow .15s;
+    }
+    .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,.65);}
+    @keyframes wa-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+    .wa-float svg{width:30px;height:30px;fill:#fff;}
+  </style>
+</head>
+<body>
+
+<!-- Floating WhatsApp -->
+<a class="wa-float" href="https://wa.me/19125419169" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a class="brand" href="./index.html">
+      <div class="logo-wrap" aria-hidden="true">
+        <div class="pixel-grid">
+          <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
+          <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
+          <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
+          <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
+        </div>
+      </div>
+      <div>
+        <div class="brand-title">Rangu Digital Solutions</div>
+        <span class="tiny">Serving USA • Bangladesh</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="./index.html#how">How It Works</a>
+      <a href="./index.html#who">Who We Help</a>
+      <a href="./index.html#services">Services</a>
+      <a href="./pricing.html" class="active">Pricing</a>
+      <a href="./index.html#contact">Free Audit</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">💰 Simple & Transparent Pricing</div>
+    <h1>Plans That Grow<br>With Your Business</h1>
+    <p>No hidden fees. No long-term contracts. Cancel anytime. Start with a free audit.</p>
+
+    <!-- Market Switcher -->
+    <div class="market-switcher">
+      <button class="market-btn active" id="btn-us" onclick="switchMarket('us')">🇺🇸 USA Pricing</button>
+      <button class="market-btn" id="btn-bd" onclick="switchMarket('bd')">🇧🇩 Bangladesh Pricing</button>
+    </div>
+
+    <!-- BD Note -->
+    <div class="bd-note" id="bd-note">
+      <span style="font-size:20px">🇧🇩</span>
+      <span>Prices shown in <strong>USD & BDT</strong> — optimized for the Bangladesh market. Payment via bKash, bank transfer, or card accepted.</span>
+    </div>
+
+    <!-- Billing Toggle -->
+    <div class="toggle-wrap">
+      <span class="toggle-label active" id="monthly-label">Monthly</span>
+      <div class="toggle" id="billingToggle" onclick="toggleBilling()">
+        <div class="toggle-knob"></div>
+      </div>
+      <span class="toggle-label" id="annual-label">Annual</span>
+      <span class="save-badge">Save 20%</span>
+    </div>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="plan">
+      <div class="plan-icon starter">🌱</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-tagline">Perfect to get found locally</div>
+      <div class="plan-price">
+        <span class="price-amount" id="starter-price">$199</span>
+        <span class="price-period">/month</span>
+      </div>
+      <div class="price-bdt" id="starter-bdt">৳5,500 / মাস</div>
+      <div class="price-annual" id="starter-annual">Billed $1,910/yr — save $478</div>
+
+      <div class="divider"></div>
+
+      <ul class="features">
+        <li><span class="check yes">✓</span><span><b>Google Business Profile</b> full optimization</span></li>
+        <li><span class="check yes">✓</span><span><b>Review strategy</b> — get 10–20 reviews/month</span></li>
+        <li><span class="check yes">✓</span><span><b>NAP consistency</b> check across directories</span></li>
+        <li><span class="check yes">✓</span><span><b>2 Google Posts</b> per week</span></li>
+        <li><span class="check yes">✓</span><span><b>Monthly report</b> — calls, views, clicks</span></li>
+        <li><span class="check yes">✓</span><span>WhatsApp support</span></li>
+        <li class="muted"><span class="check no">—</span><span>Local SEO & website optimization</span></li>
+        <li class="muted"><span class="check no">—</span><span>Paid ads management</span></li>
+        <li class="muted"><span class="check no">—</span><span>Competitor tracking</span></li>
+      </ul>
+
+      <a class="btn btn-full secondary" href="https://wa.me/19125419169?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20plan" target="_blank">Get Started →</a>
+      <p style="text-align:center;font-size:12px;color:#bbb;margin:10px 0 0;">Start with a free audit</p>
+    </div>
+
+    <!-- GROWTH (Popular) -->
+    <div class="plan popular">
+      <div class="popular-badge">⭐ Most Popular</div>
+      <div class="plan-icon growth">🚀</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-tagline">Rank higher, get more customers</div>
+      <div class="plan-price">
+        <span class="price-amount" id="growth-price">$399</span>
+        <span class="price-period">/month</span>
+      </div>
+      <div class="price-bdt" id="growth-bdt">৳11,000 / মাস</div>
+      <div class="price-annual" id="growth-annual">Billed $3,830/yr — save $958</div>
+
+      <div class="divider"></div>
+
+      <ul class="features">
+        <li><span class="check yes">✓</span><span>Everything in <b>Starter</b></span></li>
+        <li><span class="check yes">✓</span><span><b>Local SEO</b> — on-page optimization</span></li>
+        <li><span class="check yes">✓</span><span><b>5 local citations</b> built monthly</span></li>
+        <li><span class="check yes">✓</span><span><b>Competitor analysis</b> & tracking</span></li>
+        <li><span class="check yes">✓</span><span><b>Social media</b> — 3 posts/week (FB + IG)</span></li>
+        <li><span class="check yes">✓</span><span><b>Keyword ranking</b> report monthly</span></li>
+        <li><span class="check yes">✓</span><span><b>Conversion audit</b> — CTAs, offers, trust</span></li>
+        <li class="muted"><span class="check no">—</span><span>Paid ads management</span></li>
+        <li class="muted"><span class="check no">—</span><span>Dedicated account manager</span></li>
+      </ul>
+
+      <a class="btn btn-full accent" href="https://wa.me/19125419169?text=Hi%2C%20I%27m%20interested%20in%20the%20Growth%20plan" target="_blank">Get Started →</a>
+      <p style="text-align:center;font-size:12px;color:#bbb;margin:10px 0 0;">Start with a free audit</p>
+    </div>
+
+    <!-- PRO -->
+    <div class="plan">
+      <div class="plan-icon pro">👑</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-tagline">Full-service digital dominance</div>
+      <div class="plan-price">
+        <span class="price-amount" id="pro-price">$799</span>
+        <span class="price-period">/month</span>
+      </div>
+      <div class="price-bdt" id="pro-bdt">৳22,000 / মাস</div>
+      <div class="price-annual" id="pro-annual">Billed $7,670/yr — save $1,918</div>
+
+      <div class="divider"></div>
+
+      <ul class="features">
+        <li><span class="check yes">✓</span><span>Everything in <b>Growth</b></span></li>
+        <li><span class="check yes">✓</span><span><b>Google + Social Ads</b> management</span></li>
+        <li><span class="check yes">✓</span><span><b>Ad budget strategy</b> + weekly optimization</span></li>
+        <li><span class="check yes">✓</span><span><b>10 local citations</b> built monthly</span></li>
+        <li><span class="check yes">✓</span><span><b>Local backlink</b> outreach</span></li>
+        <li><span class="check yes">✓</span><span><b>Dedicated account manager</b></span></li>
+        <li><span class="check yes">✓</span><span><b>Weekly</b> performance reports</span></li>
+        <li><span class="check yes">✓</span><span><b>Offer & promo testing</b> strategy</span></li>
+        <li><span class="check yes">✓</span><span>Priority WhatsApp support</span></li>
+      </ul>
+
+      <a class="btn btn-full secondary" href="https://wa.me/19125419169?text=Hi%2C%20I%27m%20interested%20in%20the%20Pro%20plan" target="_blank">Get Started →</a>
+      <p style="text-align:center;font-size:12px;color:#bbb;margin:10px 0 0;">Start with a free audit</p>
+    </div>
+
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="addons">
+    <h3>⚡ Add-On Services</h3>
+    <p>Enhance any plan with these one-time or monthly add-ons.</p>
+    <div class="addon-grid">
+      <div class="addon-item">
+        <b>Website Setup</b>
+        <span>Simple landing page or local SEO website setup</span>
+        <span class="addon-price">From $299 one-time</span>
+      </div>
+      <div class="addon-item">
+        <b>Extra Social Posts</b>
+        <span>Additional FB/IG/TikTok posts per week</span>
+        <span class="addon-price">$49/post</span>
+      </div>
+      <div class="addon-item">
+        <b>Photo & Video Shoot</b>
+        <span>Professional photos for GBP & social media</span>
+        <span class="addon-price">From $149 one-time</span>
+      </div>
+      <div class="addon-item">
+        <b>Competitor Deep-Dive</b>
+        <span>Full manual competitor audit report</span>
+        <span class="addon-price">$99 one-time</span>
+      </div>
+      <div class="addon-item">
+        <b>Ad Budget Management</b>
+        <span>We manage your existing ad spend (no ad creation)</span>
+        <span class="addon-price">$99/month</span>
+      </div>
+      <div class="addon-item">
+        <b>Bengali Market Setup</b>
+        <span>GBP + social optimized for Bangladesh market</span>
+        <span class="addon-price">$149 one-time</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h3>Pricing Questions</h3>
+    <details>
+      <summary>Is there a contract or minimum commitment?</summary>
+      <div class="faq-body">No long-term contracts. All plans are month-to-month and you can cancel anytime. We're confident in our results — we don't need to lock you in.</div>
+    </details>
+    <details>
+      <summary>What happens after the free audit?</summary>
+      <div class="faq-body">After your free audit, we'll recommend the best plan for your business based on your location, competition level, and goals. You're never pressured to sign up immediately.</div>
+    </details>
+    <details>
+      <summary>Do prices differ for USA vs Bangladesh clients?</summary>
+      <div class="faq-body">Yes — we offer flexible pricing based on your market. Bangladesh clients get adjusted pricing that reflects local market conditions. Message us on WhatsApp for Bangladesh-specific pricing.</div>
+    </details>
+    <details>
+      <summary>What does "free audit" include?</summary>
+      <div class="faq-body">Our free audit covers your Google Maps presence, reviews & photos analysis, a manual competitor comparison, and 3–5 quick growth wins you can act on immediately. No cost, no obligation.</div>
+    </details>
+    <details>
+      <summary>Can I upgrade or downgrade my plan?</summary>
+      <div class="faq-body">Absolutely. You can upgrade, downgrade, or add services at any time. We'll adjust your billing on the next cycle with no penalty.</div>
+    </details>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <h2>Not Sure Which Plan?</h2>
+    <p>Start with a free visibility audit — we'll tell you exactly what your business needs and recommend the right plan.</p>
+    <div class="bottom-actions">
+      <a class="btn accent" href="./index.html#contact">Get My Free Audit →</a>
+      <a class="btn ghost" href="https://wa.me/19125419169" target="_blank">Chat on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">
+      <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
+      <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
+      <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
+      <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
+    </div>
+    © <span id="y"></span> Rangu Digital Solutions • USA • Bangladesh
+  </div>
+
+</div>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  let isAnnual = false;
+  let market = 'us';
+
+  const prices = {
+    us: {
+      starter: { monthly: 199, annual: 159, annualTotal: '1,910', annualSave: '478' },
+      growth:  { monthly: 399, annual: 319, annualTotal: '3,830', annualSave: '958' },
+      pro:     { monthly: 799, annual: 639, annualTotal: '7,670', annualSave: '1,918' },
+    },
+    bd: {
+      starter: { monthly: 49,  annual: 39,  annualTotal: '470',   annualSave: '118',  bdt: '৳5,500', bdtAnnual: '৳4,400' },
+      growth:  { monthly: 99,  annual: 79,  annualTotal: '950',   annualSave: '238',  bdt: '৳11,000', bdtAnnual: '৳8,800' },
+      pro:     { monthly: 199, annual: 159, annualTotal: '1,910', annualSave: '478',  bdt: '৳22,000', bdtAnnual: '৳17,500' },
+    }
+  };
+
+  function updatePrices() {
+    const m = prices[market];
+    ['starter','growth','pro'].forEach(plan => {
+      const p = m[plan];
+      const price = isAnnual ? p.annual : p.monthly;
+      const prefix = market === 'us' ? '$' : '$';
+      document.getElementById(`${plan}-price`).textContent = `${prefix}${price}`;
+
+      // Annual note
+      const annualEl = document.getElementById(`${plan}-annual`);
+      annualEl.textContent = `Billed $${p.annualTotal}/yr — save $${p.annualSave}`;
+      annualEl.classList.toggle('show', isAnnual);
+
+      // BDT price
+      const bdtEl = document.getElementById(`${plan}-bdt`);
+      if (market === 'bd') {
+        bdtEl.textContent = isAnnual ? `${p.bdtAnnual} / মাস` : `${p.bdt} / মাস`;
+        bdtEl.classList.add('show');
+      } else {
+        bdtEl.classList.remove('show');
+      }
+    });
+  }
+
+  function switchMarket(m) {
+    market = m;
+    document.getElementById('btn-us').classList.toggle('active', m === 'us');
+    document.getElementById('btn-bd').classList.toggle('active', m === 'bd');
+    document.getElementById('bd-note').classList.toggle('show', m === 'bd');
+    updatePrices();
+  }
+
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('billingToggle');
+    toggle.classList.toggle('on', isAnnual);
+    document.getElementById('monthly-label').classList.toggle('active', !isAnnual);
+    document.getElementById('annual-label').classList.toggle('active', isAnnual);
+    updatePrices();
+  }
+</script>
+</body>
+</html>
