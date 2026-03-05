@@ -409,21 +409,21 @@
       </a>
     </nav>
     <!-- Mobile hamburger -->
-    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" onclick="toggleMobileMenu()">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 
-  <!-- Mobile Menu — position:fixed covers full viewport regardless of parent -->
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
-    <a href="#how" onclick="toggleMobileMenu()">How It Works</a>
-    <a href="#who" onclick="toggleMobileMenu()">Who We Help</a>
-    <a href="#services" onclick="toggleMobileMenu()">Services</a>
+    <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+    <a href="#how" class="mm-link">How It Works</a>
+    <a href="#who" class="mm-link">Who We Help</a>
+    <a href="#services" class="mm-link">Services</a>
     <a href="./pricing.html">Pricing</a>
-    <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
-    <a href="#contact" onclick="toggleMobileMenu()" style="background:linear-gradient(135deg,#FF6B6B,#FF9F43);border:none;">Free Audit</a>
-    <a href="./login.html" style="border-color:rgba(255,255,255,.3);">Login</a>
+    <a href="#faq" class="mm-link">FAQ</a>
+    <a href="#contact" class="mm-link" style="background:linear-gradient(135deg,#FF6B6B,#FF9F43);border:none;">Free Audit</a>
+    <a href="./login.html">Login</a>
   </div>
 
   <!-- HERO + TOP GRID -->
@@ -771,14 +771,28 @@
     if(el){el.textContent=e;el.dataset.h='mailto:'+e;}
   })();
 
-  // Mobile menu
-  function toggleMobileMenu(){
-    const menu=document.getElementById('mobileMenu');
-    const btn=document.getElementById('hamburgerBtn');
-    menu.classList.toggle('open');
-    btn.classList.toggle('open');
-    document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
-  }
+  // Mobile menu — event listeners (more reliable than onclick on iOS Safari)
+  (function(){
+    var hamburger = document.getElementById('hamburgerBtn');
+    var menu = document.getElementById('mobileMenu');
+    var closeBtn = document.getElementById('mobileMenuClose');
+    var mmLinks = document.querySelectorAll('.mm-link');
+
+    function openMenu(){
+      menu.classList.add('open');
+      hamburger.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu(){
+      menu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if(hamburger) hamburger.addEventListener('click', function(e){ e.stopPropagation(); openMenu(); });
+    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+    mmLinks.forEach(function(a){ a.addEventListener('click', closeMenu); });
+  })();
 
   const modal = document.getElementById('auditModal');
   function openModal(){ modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); }
