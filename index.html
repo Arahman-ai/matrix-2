@@ -696,7 +696,11 @@
         <p style="margin-bottom:8px;">WhatsApp (fastest):</p>
         <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp</a>
         <p style="margin-top:14px;margin-bottom:8px;">Email:</p>
-        <p class="em" style="margin:0;"><a id="contact-email-link" href="#" style="color:#111;font-weight:850;text-decoration:none;"></a></p>
+        <p class="em" style="margin:0;overflow:hidden;">
+          <span style="display:inline-block;unicode-bidi:bidi-override;direction:rtl;color:#111;font-weight:850;letter-spacing:0;">
+            moc.liamg&#64;tcennoc.ugnar
+          </span>
+        </p>
         <p style="margin-top:12px;font-size:12px;color:rgba(0,0,0,.55);">
           <svg width="14" height="10" viewBox="0 0 20 14" style="border-radius:2px;vertical-align:middle;margin-right:3px"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/></svg>
           <svg width="14" height="10" viewBox="0 0 20 14" style="border-radius:2px;vertical-align:middle;margin-right:6px"><rect width="20" height="14" fill="#006A4E"/><circle cx="9.5" cy="7" r="4" fill="#F42A41"/></svg>
@@ -714,7 +718,7 @@
       <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
       <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
     </div>
-    © <span id="y"></span> Rangu Digital Transformations • USA • Bangladesh
+    © <span id="y">2026</span> Rangu Digital Transformations • USA • Bangladesh
   </div>
 
 </div>
@@ -753,14 +757,15 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  // Fix email — avoid Cloudflare obfuscation
+  // Email — built from char codes, Cloudflare cannot detect or obfuscate
   (function(){
-    const u='rangu.connect';const d='gmail.com';
-    const el=document.getElementById('contact-email-link');
-    if(el){el.href='mailto:'+u+'@'+d;el.textContent=u+'@'+d;}
+    var p=[114,97,110,103,117,46,99,111,110,110,101,99,116,64,103,109,97,105,108,46,99,111,109];
+    var e=p.map(function(c){return String.fromCharCode(c);}).join('');
+    var el=document.getElementById('em');
+    if(el){el.textContent=e;el.dataset.h='mailto:'+e;}
   })();
 
   // Mobile menu
