@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Login — Rangu Digital Transformations</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0c0e12;
+      --card:#ffffff;
+      --orange:#FF9F43;
+      --coral:#FF6B6B;
+      --purple:#A29BFE;
+      --green:#00B894;
+      --radius:20px;
+      --shadow:0 24px 60px rgba(0,0,0,.5);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'DM Sans',system-ui,sans-serif;
+      background:var(--bg);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,159,67,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(162,155,254,.07) 0%, transparent 60%),
+        radial-gradient(circle 1px at center, rgba(255,255,255,.07) 1px, transparent 0);
+      background-size:auto,auto,28px 28px;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 32px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      background:rgba(12,14,18,.85);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      position:sticky;top:0;z-index:80;
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .logo-wrap{
+      width:40px;height:40px;border-radius:13px;
+      background:linear-gradient(135deg,#1a1a1a,#2c2c2c);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex;align-items:center;justify-content:center;
+      padding:5px;flex:0 0 auto;overflow:hidden;
+    }
+    .pixel-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:2px;width:100%;height:100%;border-radius:3px;overflow:hidden;}
+    .px{border-radius:1.5px;animation:px-pulse 3s ease-in-out infinite;}
+    .px1{background:#FF6B6B;animation-delay:.00s}.px2{background:#FF9F43;animation-delay:.10s}
+    .px3{background:#FFEAA7;animation-delay:.20s}.px4{background:#55EFC4;animation-delay:.30s}
+    .px5{background:#74B9FF;animation-delay:.40s}.px6{background:#A29BFE;animation-delay:.50s}
+    .px7{background:#FD79A8;animation-delay:.60s}.px8{background:#00CEC9;animation-delay:.70s}
+    .px9{background:#E17055;animation-delay:.80s}.px10{background:#6C5CE7;animation-delay:.90s}
+    .px11{background:#00B894;animation-delay:1.00s}.px12{background:#FDCB6E;animation-delay:1.10s}
+    .px13{background:#E84393;animation-delay:1.20s}.px14{background:#0984E3;animation-delay:1.30s}
+    .px15{background:#F9CA24;animation-delay:1.40s}.px16{background:#6AB04C;animation-delay:1.50s}
+    @keyframes px-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.88)}}
+
+    .brand-text{display:flex;flex-direction:column;}
+    .brand-name{
+      font-family:'Syne',sans-serif;font-size:15px;font-weight:800;line-height:1.1;
+      background:linear-gradient(90deg,#fff 0%,#FF9F43 40%,#A29BFE 70%,#fff 100%);
+      background-size:200% auto;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:shimmer 5s linear infinite;
+    }
+    .brand-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.3px;}
+    @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+
+    .back-link{
+      display:inline-flex;align-items:center;gap:6px;
+      color:rgba(255,255,255,.55);text-decoration:none;font-size:13px;font-weight:500;
+      padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);
+      transition:all .15s;
+    }
+    .back-link:hover{color:#fff;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+
+    /* ── MAIN ── */
+    .main{
+      flex:1;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:48px 18px 80px;
+    }
+
+    .headline{
+      text-align:center;margin-bottom:40px;
+      animation:fade-up .5s ease both;
+    }
+    .headline h1{
+      font-family:'Syne',sans-serif;font-size:36px;font-weight:800;
+      color:#fff;letter-spacing:-.5px;margin-bottom:10px;
+    }
+    .headline p{color:rgba(255,255,255,.5);font-size:15px;}
+    @keyframes fade-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── PORTAL CARDS ── */
+    .portals{
+      display:grid;grid-template-columns:1fr 1fr;gap:20px;
+      width:100%;max-width:640px;
+      margin-bottom:32px;
+      animation:fade-up .5s .1s ease both;
+    }
+    @media(max-width:560px){.portals{grid-template-columns:1fr}}
+
+    .portal-card{
+      border-radius:20px;padding:28px 24px;cursor:pointer;
+      border:2px solid transparent;
+      transition:all .2s ease;
+      position:relative;overflow:hidden;
+    }
+    .portal-card::before{
+      content:'';position:absolute;inset:0;opacity:0;
+      transition:opacity .2s;border-radius:18px;
+    }
+    .portal-card.client{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.1);
+    }
+    .portal-card.client::before{background:linear-gradient(135deg,rgba(255,159,67,.08),rgba(255,107,107,.04));}
+    .portal-card.admin{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.1);
+    }
+    .portal-card.admin::before{background:linear-gradient(135deg,rgba(162,155,254,.1),rgba(0,184,148,.04));}
+
+    .portal-card:hover{transform:translateY(-3px);}
+    .portal-card.client:hover{border-color:rgba(255,159,67,.5);box-shadow:0 16px 40px rgba(255,159,67,.12);}
+    .portal-card.admin:hover{border-color:rgba(162,155,254,.5);box-shadow:0 16px 40px rgba(162,155,254,.12);}
+    .portal-card:hover::before{opacity:1;}
+
+    .portal-card.active.client{border-color:#FF9F43;box-shadow:0 16px 40px rgba(255,159,67,.2);}
+    .portal-card.active.admin{border-color:#A29BFE;box-shadow:0 16px 40px rgba(162,155,254,.2);}
+    .portal-card.active::before{opacity:1;}
+
+    .portal-icon{
+      width:48px;height:48px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:14px;font-size:22px;
+    }
+    .client .portal-icon{background:linear-gradient(135deg,rgba(255,159,67,.2),rgba(255,107,107,.15));}
+    .admin .portal-icon{background:linear-gradient(135deg,rgba(162,155,254,.2),rgba(0,184,148,.1));}
+
+    .portal-title{
+      font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
+      color:#fff;margin-bottom:6px;
+    }
+    .portal-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5;}
+
+    .portal-badge{
+      display:inline-flex;align-items:center;gap:5px;
+      margin-top:12px;padding:4px 10px;border-radius:999px;
+      font-size:11px;font-weight:700;letter-spacing:.3px;
+    }
+    .client .portal-badge{background:rgba(255,159,67,.15);color:#FF9F43;}
+    .admin .portal-badge{background:rgba(162,155,254,.15);color:#A29BFE;}
+
+    /* ── LOGIN FORMS ── */
+    .login-box{
+      width:100%;max-width:420px;
+      animation:fade-up .4s ease both;
+    }
+
+    .form-card{
+      background:#fff;border-radius:var(--radius);
+      padding:32px;box-shadow:var(--shadow);
+      display:none;
+    }
+    .form-card.active{display:block;}
+
+    .form-card h2{
+      font-family:'Syne',sans-serif;font-size:22px;font-weight:800;
+      color:#111;margin-bottom:4px;
+    }
+    .form-card .form-sub{font-size:13px;color:#888;margin-bottom:24px;}
+
+    .field{margin-bottom:16px;}
+    .field label{display:block;font-size:12px;font-weight:700;color:#555;margin-bottom:6px;letter-spacing:.3px;text-transform:uppercase;}
+    .field input{
+      width:100%;padding:12px 14px;border-radius:12px;
+      border:1.5px solid rgba(0,0,0,.15);
+      font:500 15px 'DM Sans',sans-serif;
+      outline:none;background:#fafafa;
+      transition:border-color .15s,box-shadow .15s;
+    }
+    .field input:focus{
+      border-color:#111;background:#fff;
+      box-shadow:0 0 0 4px rgba(0,0,0,.06);
+    }
+
+    .forgot{float:right;font-size:12px;color:#888;text-decoration:none;margin-top:-2px;}
+    .forgot:hover{color:#111;}
+
+    .submit-btn{
+      width:100%;padding:14px;border-radius:999px;border:none;
+      font:800 15px 'Syne',sans-serif;cursor:pointer;
+      margin-top:8px;transition:all .15s;
+      letter-spacing:.3px;
+    }
+    .client-btn{
+      background:linear-gradient(135deg,#FF6B6B,#FF9F43);
+      color:#fff;box-shadow:0 8px 24px rgba(255,107,107,.3);
+    }
+    .client-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
+    .admin-btn{
+      background:linear-gradient(135deg,#6C5CE7,#A29BFE);
+      color:#fff;box-shadow:0 8px 24px rgba(108,92,231,.3);
+    }
+    .admin-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+    .divider{
+      display:flex;align-items:center;gap:12px;
+      margin:20px 0;color:#ccc;font-size:12px;
+    }
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:#eee;}
+
+    .wa-login{
+      width:100%;padding:12px;border-radius:999px;
+      background:#fff;color:#111;
+      border:1.5px solid #eee;
+      font:700 14px 'DM Sans',sans-serif;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+      text-decoration:none;transition:all .15s;
+    }
+    .wa-login:hover{background:#f5f5f5;border-color:#ddd;}
+    .wa-dot{width:10px;height:10px;border-radius:50%;background:#25D366;}
+
+    .switch-link{
+      text-align:center;margin-top:20px;font-size:13px;color:#888;
+    }
+    .switch-link a{color:#111;font-weight:700;text-decoration:none;}
+    .switch-link a:hover{text-decoration:underline;}
+
+    /* Error / success states */
+    .msg{
+      padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:14px;
+      display:none;
+    }
+    .msg.error{background:#fff0f0;color:#e74c3c;border:1px solid #ffd6d6;}
+    .msg.success{background:#f0fff8;color:#00B894;border:1px solid #b8f5e1;}
+    .msg.show{display:block;}
+
+    /* ── FOOTER ── */
+    .footer{
+      text-align:center;padding:20px;font-size:12px;
+      color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    /* Step indicator */
+    .steps-indicator{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      margin-bottom:28px;
+    }
+    .step-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:rgba(255,255,255,.15);transition:all .2s;
+    }
+    .step-dot.active{width:24px;border-radius:4px;}
+    .step-dot.active.client-dot{background:#FF9F43;}
+    .step-dot.active.admin-dot{background:#A29BFE;}
+
+    /* Back to portal selection */
+    .back-to-portals{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:13px;color:#888;cursor:pointer;
+      margin-bottom:20px;background:none;border:none;
+      padding:0;font-family:'DM Sans',sans-serif;
+    }
+    .back-to-portals:hover{color:#111;}
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a class="brand" href="./index.html">
+      <div class="logo-wrap">
+        <div class="pixel-grid">
+          <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
+          <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
+          <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
+          <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
+        </div>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Rangu</div>
+        <div class="brand-sub">Digital Transformations</div>
+      </div>
+    </a>
+    <a class="back-link" href="./index.html">← Back to Home</a>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- STEP 1: Choose portal -->
+    <div id="step1">
+      <div class="headline">
+        <h1>Welcome Back</h1>
+        <p>Choose your portal to continue</p>
+      </div>
+
+      <div class="steps-indicator">
+        <div class="step-dot active" id="dot1" style="width:24px;background:rgba(255,255,255,.4);border-radius:4px;"></div>
+        <div class="step-dot" id="dot2"></div>
+      </div>
+
+      <div class="portals">
+        <div class="portal-card client" onclick="selectPortal('client')">
+          <div class="portal-icon">📊</div>
+          <div class="portal-title">Client Portal</div>
+          <div class="portal-desc">View your audit reports, campaign progress, and performance metrics.</div>
+          <div class="portal-badge">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#FF9F43"/></svg>
+            For Clients
+          </div>
+        </div>
+        <div class="portal-card admin" onclick="selectPortal('admin')">
+          <div class="portal-icon">⚙️</div>
+          <div class="portal-title">Admin Portal</div>
+          <div class="portal-desc">Manage clients, upload reports, track campaigns, and run operations.</div>
+          <div class="portal-badge">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#A29BFE"/></svg>
+            Team Only
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Login form -->
+    <div id="step2" style="display:none;width:100%;max-width:420px;">
+
+      <div class="steps-indicator">
+        <div class="step-dot" id="dot1b" style="width:8px;background:rgba(255,255,255,.15);"></div>
+        <div class="step-dot active" id="dot2b"></div>
+      </div>
+
+      <!-- Client Login Form -->
+      <div class="form-card" id="clientForm">
+        <button class="back-to-portals" onclick="goBack()">← Choose different portal</button>
+        <h2>Client Login</h2>
+        <div class="form-sub">Access your reports and campaign dashboard</div>
+
+        <div class="msg" id="clientMsg"></div>
+
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="clientEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label>Password <a class="forgot" href="#">Forgot password?</a></label>
+          <input type="password" id="clientPass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="submit-btn client-btn" onclick="handleLogin('client')">
+          Sign In to Dashboard →
+        </button>
+
+        <div class="divider">or</div>
+
+        <a class="wa-login" href="https://wa.me/19125419169?text=Hi%2C%20I%20need%20help%20accessing%20my%20client%20portal" target="_blank" rel="noopener">
+          <div class="wa-dot"></div>
+          Request Access via WhatsApp
+        </a>
+
+        <div class="switch-link">
+          Don't have an account? <a href="./signup.html">Sign up →</a>
+        </div>
+      </div>
+
+      <!-- Admin Login Form -->
+      <div class="form-card" id="adminForm">
+        <button class="back-to-portals" onclick="goBack()">← Choose different portal</button>
+        <h2>Admin Login</h2>
+        <div class="form-sub">Rangu team access only</div>
+
+        <div class="msg" id="adminMsg"></div>
+
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="adminEmail" placeholder="team@rangu.us" autocomplete="email">
+        </div>
+        <div class="field">
+          <label>Password <a class="forgot" href="#">Forgot password?</a></label>
+          <input type="password" id="adminPass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="submit-btn admin-btn" onclick="handleLogin('admin')">
+          Sign In to Admin Panel →
+        </button>
+
+        <div class="switch-link" style="margin-top:16px;">
+          Need an account? <a href="./signup.html">Sign up →</a> &nbsp;|&nbsp; <a href="./index.html">← Website</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    © 2026 Rangu Digital Transformations • USA • Bangladesh •
+    <a href="./index.html" style="color:rgba(255,255,255,.4);text-decoration:none;">Home</a>
+  </div>
+
+  <script>
+    function selectPortal(type){
+      // Animate cards
+      document.querySelectorAll('.portal-card').forEach(c => c.classList.remove('active'));
+      document.querySelector('.portal-card.'+type).classList.add('active');
+
+      setTimeout(function(){
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+
+        // Show correct form
+        document.getElementById('clientForm').classList.remove('active');
+        document.getElementById('adminForm').classList.remove('active');
+        document.getElementById(type+'Form').classList.add('active');
+
+        // Update step dots
+        var dot = document.getElementById('dot2b');
+        dot.classList.add('active');
+        dot.style.width = '24px';
+        dot.style.borderRadius = '4px';
+        dot.style.background = type === 'client' ? '#FF9F43' : '#A29BFE';
+      }, 200);
+    }
+
+    function goBack(){
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+      document.querySelectorAll('.portal-card').forEach(c => c.classList.remove('active'));
+    }
+
+    function showMsg(id, text, type){
+      var el = document.getElementById(id);
+      el.textContent = text;
+      el.className = 'msg ' + type + ' show';
+    }
+
+  </script>
+
+  <!-- Firebase Auth -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbi6s7oGWCt-1iN2GmKg85eMAfc7Iy81I",
+      authDomain: "rangu-26535.firebaseapp.com",
+      projectId: "rangu-26535",
+      storageBucket: "rangu-26535.firebasestorage.app",
+      messagingSenderId: "537526636713",
+      appId: "1:537526636713:web:e21ab9bdc193f45d03d9b8"
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    window.handleLogin = async function(type){
+      var email = document.getElementById(type+'Email').value.trim();
+      var pass  = document.getElementById(type+'Pass').value;
+      var msgId = type+'Msg';
+
+      if(!email || !pass){ showMsg(msgId,'Please enter your email and password.','error'); return; }
+      if(!email.includes('@')){ showMsg(msgId,'Please enter a valid email address.','error'); return; }
+
+      var btn = document.querySelector('#'+type+'Form .submit-btn');
+      var orig = btn.textContent;
+      btn.textContent = 'Signing in…'; btn.disabled = true;
+
+      try {
+        const cred    = await signInWithEmailAndPassword(auth, email, pass);
+        const snap    = await getDoc(doc(db, 'users', cred.user.uid));
+        const role    = snap.exists() ? snap.data().role : 'client';
+
+        if(type === 'admin' && role !== 'admin'){
+          await getAuth().signOut();
+          btn.textContent = orig; btn.disabled = false;
+          showMsg(msgId, 'This account does not have admin access.', 'error');
+          return;
+        }
+        window.location.href = role === 'admin' ? './admin.html' : './dashboard.html';
+
+      } catch(err){
+        btn.textContent = orig; btn.disabled = false;
+        const msgs = {
+          'auth/invalid-credential': 'Incorrect email or password.',
+          'auth/user-not-found':     'No account found with this email.',
+          'auth/wrong-password':     'Incorrect password.',
+          'auth/too-many-requests':  'Too many attempts. Please try again later.',
+          'auth/invalid-email':      'Please enter a valid email address.',
+        };
+        showMsg(msgId, msgs[err.code] || 'Login failed. Please try again.', 'error');
+      }
+    };
+
+    document.addEventListener('keydown', function(e){
+      if(e.key !== 'Enter') return;
+      if(document.getElementById('clientForm').classList.contains('active')) window.handleLogin('client');
+      if(document.getElementById('adminForm').classList.contains('active'))  window.handleLogin('admin');
+    });
+  </script>
+</body>
+</html>
