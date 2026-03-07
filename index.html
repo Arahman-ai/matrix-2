@@ -108,6 +108,8 @@
       display:none;flex-direction:column;gap:5px;cursor:pointer;
       padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,.15);
       background:rgba(255,255,255,.06);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
     }
     .hamburger span{width:20px;height:2px;background:#fff;border-radius:2px;transition:all .2s;}
     .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
@@ -131,12 +133,16 @@
       padding:12px 32px;border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       text-align:center;width:260px;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
     }
     .mobile-menu a:hover{background:rgba(255,255,255,.08);}
     .mobile-menu-close{
       position:absolute;top:24px;right:24px;
       font-size:28px;color:rgba(255,255,255,.6);cursor:pointer;
-      background:none;border:none;padding:8px;
+      background:none;border:none;padding:12px;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
     }
 
     @media(max-width:700px){
@@ -666,28 +672,31 @@
           </div>
         </div>
 
-        <form id="auditForm" action="https://formspree.io/f/xgoyllqb" method="POST">
-          <input type="hidden" name="_subject" value="New Free Audit Request - Rangu Digital Transformations">
-          <input type="hidden" name="_replyto" value="rangu.connect@gmail.com">
-          <input type="hidden" name="_next" value="/thanks.html">
-          <input type="hidden" name="instant_audit_overview" id="instant_audit_overview" value="">
+        <form id="auditForm">
+          <input type="hidden" id="instant_audit_overview" value="">
           <div class="grid2">
-            <input type="text" name="name" id="f_name" placeholder="Your Name" required>
-            <input type="text" name="restaurant" id="f_restaurant" placeholder="Business / Organization Name" required>
+            <input type="text" id="f_name" placeholder="Your Name" required>
+            <input type="text" id="f_restaurant" placeholder="Business / Organization Name" required>
           </div>
           <div class="grid2">
-            <input type="text" name="city" id="f_city" placeholder="City / Country" required>
-            <input type="tel" name="phone" id="f_phone" placeholder="Phone / WhatsApp">
+            <input type="text" id="f_city" placeholder="City / Country" required>
+            <input type="tel" id="f_phone" placeholder="Phone / WhatsApp">
           </div>
           <div class="grid2">
-            <input type="text" name="address" id="f_address" placeholder="Address (optional)">
-            <input type="url" name="website" id="f_website" placeholder="Website (optional)">
+            <input type="text" id="f_address" placeholder="Address (optional)">
+            <input type="url" id="f_website" placeholder="Website (optional)">
           </div>
-          <input type="url" name="google_maps_link" id="f_maps" placeholder="Google Maps link (optional)">
-          <textarea name="message" id="f_message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
+          <input type="url" id="f_maps" placeholder="Google Maps link (optional)">
+          <textarea id="f_message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
           <div class="form-actions">
-            <button class="btn-block primary" type="submit">Send Request — We'll Email Your Detailed Report</button>
+            <button class="btn-block primary" type="submit" id="submitAuditBtn">Send Request — We'll Email Your Detailed Report</button>
             <button class="btn-block secondary" type="button" id="openInstantAuditBtn">Generate Instant Audit Overview</button>
+          </div>
+          <div id="formSuccess" style="display:none;background:#00B894;color:#fff;padding:14px 18px;border-radius:10px;text-align:center;font-weight:600;margin-top:8px;">
+            ✅ Request sent! We'll get back to you within 24 hours.
+          </div>
+          <div id="formError" style="display:none;background:#FF6B6B;color:#fff;padding:14px 18px;border-radius:10px;text-align:center;margin-top:8px;">
+            ❌ Something went wrong. Please try WhatsApp instead.
           </div>
         </form>
       </div>
@@ -771,27 +780,36 @@
     if(el){el.textContent=e;el.dataset.h='mailto:'+e;}
   })();
 
-  // Mobile menu — event listeners (more reliable than onclick on iOS Safari)
+  // Mobile menu — touchstart + click for iOS Safari
   (function(){
     var hamburger = document.getElementById('hamburgerBtn');
     var menu = document.getElementById('mobileMenu');
     var closeBtn = document.getElementById('mobileMenuClose');
     var mmLinks = document.querySelectorAll('.mm-link');
 
-    function openMenu(){
+    function openMenu(e){ e.preventDefault(); e.stopPropagation();
       menu.classList.add('open');
       hamburger.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-    function closeMenu(){
+    function closeMenu(e){ if(e){ e.preventDefault(); }
       menu.classList.remove('open');
       hamburger.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    if(hamburger) hamburger.addEventListener('click', function(e){ e.stopPropagation(); openMenu(); });
-    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
-    mmLinks.forEach(function(a){ a.addEventListener('click', closeMenu); });
+    if(hamburger){
+      hamburger.addEventListener('click', openMenu);
+      hamburger.addEventListener('touchstart', openMenu, {passive:false});
+    }
+    if(closeBtn){
+      closeBtn.addEventListener('click', closeMenu);
+      closeBtn.addEventListener('touchstart', closeMenu, {passive:false});
+    }
+    mmLinks.forEach(function(a){
+      a.addEventListener('click', closeMenu);
+      a.addEventListener('touchstart', closeMenu, {passive:false});
+    });
   })();
 
   const modal = document.getElementById('auditModal');
@@ -855,3 +873,51 @@
       address:document.getElementById('m_address').value||"",
       website:document.getElementById('m_website').value||"",
       m
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAbi6s7oGWCt-1iN2GmKg85eMAfc7Iy81I",
+    authDomain: "rangu-26535.firebaseapp.com",
+    projectId: "rangu-26535",
+    storageBucket: "rangu-26535.firebasestorage.app",
+    messagingSenderId: "537526636713",
+    appId: "1:537526636713:web:e21ab9bdc193f45d03d9b8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  document.getElementById('auditForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitAuditBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const name     = document.getElementById('f_name').value.trim();
+    const business = document.getElementById('f_restaurant').value.trim();
+    const city     = document.getElementById('f_city').value.trim();
+    const phone    = document.getElementById('f_phone').value.trim();
+    const address  = document.getElementById('f_address').value.trim();
+    const website  = document.getElementById('f_website').value.trim();
+    const maps     = document.getElementById('f_maps').value.trim();
+    const message  = document.getElementById('f_message').value.trim();
+
+    try {
+      await addDoc(collection(db, 'auditRequests'), {
+        name, business, city, phone, address, website, maps, message,
+        submittedAt: new Date().toISOString(),
+        status: 'new'
+      });
+      document.getElementById('formSuccess').style.display = 'block';
+      document.getElementById('formError').style.display = 'none';
+      document.getElementById('auditForm').reset();
+    } catch(err) {
+      document.getElementById('formError').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+      btn.textContent = 'Send Request — We Will Email Your Detailed Report';
+      btn.disabled = false;
+    }
+  });
+</script>
