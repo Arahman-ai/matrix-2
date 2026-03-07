@@ -557,38 +557,8 @@
             <div class="card-title">🔥 New Audit Requests</div>
             <a class="card-action" href="#">View all</a>
           </div>
-          <div class="lead-item">
-            <div class="lead-avatar">MK</div>
-            <div class="lead-info">
-              <div class="lead-name">Md. Karim — Karim Pharmacy</div>
-              <div class="lead-detail">Dhaka, BD • Submitted 2h ago</div>
-            </div>
-            <div class="lead-actions">
-              <a class="lead-act wa" href="https://wa.me/8801700000000" target="_blank">Chat</a>
-              <button class="lead-act email">Email</button>
-            </div>
-          </div>
-          <div class="lead-item">
-            <div class="lead-avatar" style="background:linear-gradient(135deg,#74B9FF,#0984E3);">SL</div>
-            <div class="lead-info">
-              <div class="lead-name">Sarah L. — The Bistro NYC</div>
-              <div class="lead-detail">New York, USA • Submitted 5h ago</div>
-            </div>
-            <div class="lead-actions">
-              <a class="lead-act wa" href="https://wa.me/19125419169" target="_blank">Chat</a>
-              <button class="lead-act email">Email</button>
-            </div>
-          </div>
-          <div class="lead-item">
-            <div class="lead-avatar" style="background:linear-gradient(135deg,#00B894,#00CEC9);">RA</div>
-            <div class="lead-info">
-              <div class="lead-name">Rahim Ahmed — Hotel Seagull</div>
-              <div class="lead-detail">Cox's Bazar, BD • Submitted yesterday</div>
-            </div>
-            <div class="lead-actions">
-              <a class="lead-act wa" href="https://wa.me/8801800000000" target="_blank">Chat</a>
-              <button class="lead-act email">Email</button>
-            </div>
+          <div id="auditRequestsList">
+            <div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div>
           </div>
         </div>
       </div>
@@ -644,7 +614,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, getDocs, collection, addDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, getDocs, collection, addDoc, query, where, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAbi6s7oGWCt-1iN2GmKg85eMAfc7Iy81I",
@@ -683,6 +653,7 @@
 
     // Load all clients
     loadClients();
+    loadAuditRequests();
   });
 
   // ── Load real clients from Firestore ──
@@ -752,7 +723,60 @@
     });
   }
 
-  window.viewClient = function(uid){
+  // ── Load real audit requests ──
+  async function loadAuditRequests(){
+    const list = document.getElementById('auditRequestsList');
+    const snap = await getDocs(collection(db, 'auditRequests'));
+    const requests = [];
+    snap.forEach(d => requests.push({id: d.id, ...d.data()}));
+
+    // Sort newest first
+    requests.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+    // Update stat count
+    const statCards = document.querySelectorAll('.stat-value');
+    if(statCards[2]) statCards[2].textContent = requests.filter(r => r.status === 'new').length;
+
+    if(requests.length === 0){
+      list.innerHTML = `<div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">No audit requests yet</div>`;
+      return;
+    }
+
+    const colors = ['#FF6B6B','#FF9F43','#A29BFE','#00B894','#74B9FF','#FD79A8'];
+    list.innerHTML = requests.slice(0,5).map(function(r){
+      const initials = (r.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+      const color    = colors[Math.abs((r.name||'').charCodeAt(0)||0) % colors.length];
+      const waNum    = (r.phone||'').replace(/[^0-9]/g,'');
+      const timeAgo  = r.submittedAt ? timeSince(new Date(r.submittedAt)) : 'Recently';
+      return `
+        <div class="lead-item" id="req-${r.id}">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,${color},${color}aa)">${initials}</div>
+          <div class="lead-info">
+            <div class="lead-name">${r.name||'—'} — ${r.business||'—'}</div>
+            <div class="lead-detail">${r.city||'—'} • ${timeAgo}</div>
+            ${r.message ? `<div class="lead-detail" style="margin-top:4px;font-style:italic;">"${r.message.substring(0,60)}${r.message.length>60?'...':''}"</div>` : ''}
+          </div>
+          <div class="lead-actions">
+            ${waNum ? `<a class="lead-act wa" href="https://wa.me/${waNum}" target="_blank">Chat</a>` : ''}
+            <button class="lead-act email" onclick="markDone('${r.id}')" style="background:#00B894">Done</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  window.markDone = async function(id){
+    await updateDoc(doc(db, 'auditRequests', id), { status: 'done' });
+    document.getElementById('req-'+id).style.opacity = '0.4';
+  };
+
+  function timeSince(date){
+    const seconds = Math.floor((new Date() - date) / 1000);
+    if(seconds < 60) return 'Just now';
+    if(seconds < 3600) return Math.floor(seconds/60) + 'm ago';
+    if(seconds < 86400) return Math.floor(seconds/3600) + 'h ago';
+    return Math.floor(seconds/86400) + 'd ago';
+  }
+
     alert('Client UID: ' + uid + '\n\nFull client view coming soon!');
   };
 
