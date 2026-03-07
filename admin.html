@@ -629,6 +629,9 @@
   const auth = getAuth(app);
   const db   = getFirestore(app);
 
+  // Load audit requests immediately — no auth needed
+  loadAuditRequests();
+
   // Sign out
   document.querySelectorAll('a[href="./login.html"]').forEach(a => {
     a.addEventListener('click', async function(e){
@@ -653,7 +656,6 @@
 
     // Load all clients
     loadClients();
-    loadAuditRequests();
   });
 
   // ── Load real clients from Firestore ──
@@ -785,6 +787,10 @@
     return Math.floor(seconds/86400) + 'd ago';
   }
 
+    alert('Client UID: ' + uid + '\n\nFull client view coming soon!');
+  };
+
+  window.viewClient = function(uid){
     alert('Client UID: ' + uid + '\n\nFull client view coming soon!');
   };
 
