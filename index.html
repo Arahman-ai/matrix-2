@@ -872,7 +872,10 @@
       restaurant,city,
       address:document.getElementById('m_address').value||"",
       website:document.getElementById('m_website').value||"",
-      m
+      maps:document.getElementById('m_maps').value||""
+    });
+  });
+</script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
