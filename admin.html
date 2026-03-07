@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin Panel — Rangu Digital Transformations</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#07090d;
+      --sidebar:#0d1117;
+      --purple:#A29BFE;
+      --coral:#FF6B6B;
+      --orange:#FF9F43;
+      --green:#00B894;
+      --cyan:#00CEC9;
+      --radius:14px;
+      --shadow:0 4px 24px rgba(0,0,0,.25);
+      --sidebar-w:240px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'DM Sans',system-ui,sans-serif;
+      background:#0f1117;
+      color:#e2e8f0;
+      min-height:100vh;
+    }
+
+    .layout{display:flex;min-height:100vh;}
+
+    /* ── SIDEBAR ── */
+    .sidebar{
+      width:var(--sidebar-w);
+      background:var(--sidebar);
+      border-right:1px solid rgba(255,255,255,.06);
+      display:flex;flex-direction:column;
+      position:fixed;top:0;left:0;bottom:0;z-index:100;
+      transition:transform .25s ease;
+    }
+    .sidebar-brand{padding:20px;border-bottom:1px solid rgba(255,255,255,.06);}
+    .brand-row{display:flex;align-items:center;gap:10px;}
+    .logo-wrap{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#1a1a1a,#2c2c2c);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;padding:4px;flex:0 0 auto;overflow:hidden;}
+    .pixel-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:1.5px;width:100%;height:100%;border-radius:2px;overflow:hidden;}
+    .px{border-radius:1px;animation:px-pulse 3s ease-in-out infinite;}
+    .px1{background:#FF6B6B;animation-delay:.00s}.px2{background:#FF9F43;animation-delay:.10s}
+    .px3{background:#FFEAA7;animation-delay:.20s}.px4{background:#55EFC4;animation-delay:.30s}
+    .px5{background:#74B9FF;animation-delay:.40s}.px6{background:#A29BFE;animation-delay:.50s}
+    .px7{background:#FD79A8;animation-delay:.60s}.px8{background:#00CEC9;animation-delay:.70s}
+    .px9{background:#E17055;animation-delay:.80s}.px10{background:#6C5CE7;animation-delay:.90s}
+    .px11{background:#00B894;animation-delay:1.00s}.px12{background:#FDCB6E;animation-delay:1.10s}
+    .px13{background:#E84393;animation-delay:1.20s}.px14{background:#0984E3;animation-delay:1.30s}
+    .px15{background:#F9CA24;animation-delay:1.40s}.px16{background:#6AB04C;animation-delay:1.50s}
+    @keyframes px-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.88)}}
+
+    .brand-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;}
+    .brand-sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;}
+    .admin-tag{
+      display:inline-flex;align-items:center;gap:4px;margin-top:10px;
+      padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;
+      background:rgba(162,155,254,.15);color:#A29BFE;
+      border:1px solid rgba(162,155,254,.2);
+    }
+
+    .nav-section{padding:14px 10px;flex:1;overflow-y:auto;}
+    .nav-label{font-size:9px;font-weight:700;letter-spacing:1.2px;color:rgba(255,255,255,.2);padding:0 8px;margin-bottom:5px;text-transform:uppercase;}
+    .nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;color:rgba(255,255,255,.45);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;margin-bottom:1px;transition:all .15s;}
+    .nav-item:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);}
+    .nav-item.active{background:rgba(162,155,254,.12);color:#A29BFE;}
+    .nav-item svg{width:15px;height:15px;flex:0 0 15px;}
+    .nav-badge{margin-left:auto;background:#FF6B6B;color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:999px;}
+
+    .sidebar-footer{padding:14px;border-top:1px solid rgba(255,255,255,.06);}
+    .admin-info{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+    .admin-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6C5CE7,#A29BFE);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex:0 0 32px;}
+    .admin-name{font-size:12px;font-weight:600;color:#fff;}
+    .admin-role{font-size:10px;color:rgba(255,255,255,.3);}
+    .logout-btn{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:11px;font-weight:500;text-decoration:none;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;transition:color .15s;}
+    .logout-btn:hover{color:rgba(255,255,255,.6);}
+
+    /* ── MAIN ── */
+    .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh;}
+
+    .topbar{
+      background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);
+      padding:0 24px;height:58px;
+      display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:50;
+    }
+    .page-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;}
+    .topbar-right{display:flex;align-items:center;gap:10px;}
+    .topbar-btn{
+      padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;
+      cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+      transition:all .15s;
+    }
+    .topbar-btn.primary{background:linear-gradient(135deg,#6C5CE7,#A29BFE);color:#fff;}
+    .topbar-btn.primary:hover{filter:brightness(1.1);}
+    .topbar-btn.ghost{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1);}
+    .topbar-btn.ghost:hover{background:rgba(255,255,255,.1);color:#fff;}
+
+    .mobile-menu-btn{display:none;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);align-items:center;justify-content:center;cursor:pointer;}
+
+    .content{padding:24px;flex:1;}
+
+    /* ── STATS ── */
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+    @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+    .stat-card{
+      background:#161b24;border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--radius);padding:18px;
+    }
+    .stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+    .stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+    .stat-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;}
+    .stat-value{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#fff;}
+    .stat-label{font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;}
+    .stat-change{font-size:11px;font-weight:700;margin-top:6px;}
+    .stat-change.up{color:#00B894;}
+    .stat-change.down{color:#FF6B6B;}
+
+    /* ── CLIENTS TABLE ── */
+    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .section-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#fff;}
+
+    .search-bar{
+      display:flex;align-items:center;gap:8px;
+      background:#161b24;border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;padding:7px 14px;
+    }
+    .search-bar input{background:none;border:none;outline:none;color:#fff;font:500 13px 'DM Sans',sans-serif;width:180px;}
+    .search-bar input::placeholder{color:rgba(255,255,255,.25);}
+
+    .table-wrap{
+      background:#161b24;border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--radius);overflow:hidden;margin-bottom:22px;
+    }
+    table{width:100%;border-collapse:collapse;}
+    thead th{
+      padding:12px 16px;text-align:left;font-size:10px;font-weight:700;
+      letter-spacing:.8px;text-transform:uppercase;
+      color:rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.06);
+      background:#111622;
+    }
+    tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .1s;}
+    tbody tr:last-child{border-bottom:none;}
+    tbody tr:hover{background:rgba(255,255,255,.025);}
+    td{padding:13px 16px;font-size:13px;color:rgba(255,255,255,.75);vertical-align:middle;}
+
+    .client-cell{display:flex;align-items:center;gap:10px;}
+    .c-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex:0 0 32px;}
+    .c-name{font-weight:600;color:#fff;font-size:13px;}
+    .c-biz{font-size:11px;color:rgba(255,255,255,.35);}
+
+    .status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;}
+    .status-badge .dot{width:6px;height:6px;border-radius:50%;}
+    .status-active{background:rgba(0,184,148,.12);color:#00B894;}
+    .status-active .dot{background:#00B894;}
+    .status-pending{background:rgba(255,159,67,.12);color:#FF9F43;}
+    .status-pending .dot{background:#FF9F43;}
+    .status-paused{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
+    .status-paused .dot{background:rgba(255,255,255,.3);}
+
+    .plan-badge{padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;}
+    .plan-starter{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);}
+    .plan-growth{background:rgba(255,159,67,.12);color:#FF9F43;}
+    .plan-pro{background:rgba(162,155,254,.12);color:#A29BFE;}
+
+    .score-bar{display:flex;align-items:center;gap:8px;}
+    .mini-bar{width:60px;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;}
+    .mini-fill{height:100%;border-radius:999px;}
+
+    .action-btns{display:flex;gap:6px;}
+    .act-btn{
+      padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;
+      cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;transition:all .15s;
+    }
+    .act-btn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2);}
+    .act-btn.primary{background:rgba(162,155,254,.15);color:#A29BFE;border-color:rgba(162,155,254,.2);}
+    .act-btn.primary:hover{background:rgba(162,155,254,.25);}
+
+    /* ── TWO COL ── */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+    @media(max-width:900px){.two-col{grid-template-columns:1fr}}
+
+    /* ── DARK CARD ── */
+    .dark-card{background:#161b24;border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:20px;}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+    .card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;}
+    .card-action{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none;}
+    .card-action:hover{color:rgba(255,255,255,.7);}
+
+    /* ── TASKS ── */
+    .task-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+    .task-item:last-child{border-bottom:none;}
+    .task-check{width:18px;height:18px;border-radius:5px;border:2px solid rgba(255,255,255,.15);flex:0 0 18px;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .task-check.done{background:#00B894;border-color:#00B894;}
+    .task-check.done::after{content:'✓';color:#fff;font-size:10px;font-weight:800;}
+    .task-text{flex:1;}
+    .task-title{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:2px;}
+    .task-title.done{text-decoration:line-through;color:rgba(255,255,255,.3);}
+    .task-meta{font-size:11px;color:rgba(255,255,255,.25);}
+    .task-priority{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;}
+    .p-high{background:rgba(255,107,107,.15);color:#FF6B6B;}
+    .p-med{background:rgba(255,159,67,.12);color:#FF9F43;}
+    .p-low{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);}
+
+    /* ── LEADS ── */
+    .lead-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+    .lead-item:last-child{border-bottom:none;}
+    .lead-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF6B6B,#FF9F43);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex:0 0 34px;}
+    .lead-info{flex:1;}
+    .lead-name{font-size:13px;font-weight:600;color:#fff;}
+    .lead-detail{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;}
+    .lead-time{font-size:11px;color:rgba(255,255,255,.25);}
+    .lead-actions{display:flex;gap:5px;}
+    .lead-act{padding:5px 9px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+    .lead-act.wa{background:#25D366;color:#fff;}
+    .lead-act.email{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);}
+
+    /* ── REVENUE ── */
+    .revenue-list{display:flex;flex-direction:column;gap:10px;}
+    .rev-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+    .rev-left{display:flex;align-items:center;gap:10px;}
+    .rev-dot{width:8px;height:8px;border-radius:50%;}
+    .rev-name{font-size:13px;color:rgba(255,255,255,.7);}
+    .rev-plan{font-size:11px;color:rgba(255,255,255,.3);}
+    .rev-amount{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#fff;}
+
+    /* ── QUICK ACTIONS ── */
+    .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
+    @media(max-width:900px){.quick-grid{grid-template-columns:repeat(2,1fr)}}
+    .quick-btn{
+      background:#161b24;border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--radius);padding:16px;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      cursor:pointer;text-align:center;transition:all .15s;text-decoration:none;
+    }
+    .quick-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);transform:translateY(-1px);}
+    .quick-icon{font-size:22px;}
+    .quick-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.7);}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:18px;z-index:999;}
+    .modal-backdrop.open{display:flex;}
+    .modal{background:#161b24;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:min(560px,100%);box-shadow:0 24px 60px rgba(0,0,0,.5);}
+    .modal-head{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;}
+    .modal-head h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;}
+    .modal-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer;padding:4px;}
+    .modal-close:hover{color:#fff;}
+    .modal-body{padding:20px;}
+    .field{margin-bottom:14px;}
+    .field label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,.35);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
+    .field input,.field select,.field textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font:500 13px 'DM Sans',sans-serif;outline:none;transition:border-color .15s;}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(162,155,254,.5);background:rgba(162,155,254,.05);}
+    .field select option{background:#1e2330;color:#fff;}
+    .field textarea{min-height:80px;resize:vertical;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .modal-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:10px;justify-content:flex-end;}
+    .btn-cancel{padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);font:700 13px 'DM Sans',sans-serif;cursor:pointer;}
+    .btn-save{padding:9px 18px;border-radius:999px;background:linear-gradient(135deg,#6C5CE7,#A29BFE);color:#fff;border:none;font:700 13px 'Syne',sans-serif;cursor:pointer;}
+
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99;}
+
+    @media(max-width:768px){
+      .sidebar{transform:translateX(-100%);}
+      .sidebar.open{transform:translateX(0);}
+      .sidebar-overlay.open{display:block;}
+      .main{margin-left:0;}
+      .mobile-menu-btn{display:flex;}
+      .content{padding:14px;}
+      .topbar{padding:0 14px;}
+      table{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- ADD CLIENT MODAL -->
+<div class="modal-backdrop" id="addClientModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Add New Client</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="grid2">
+        <div class="field"><label>Client Name</label><input type="text" placeholder="John Rahman"></div>
+        <div class="field"><label>Business Name</label><input type="text" placeholder="Rahman's Restaurant"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Email</label><input type="email" placeholder="john@example.com"></div>
+        <div class="field"><label>WhatsApp</label><input type="tel" placeholder="+1 555 000 0000"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>City / Country</label><input type="text" placeholder="New York, USA"></div>
+        <div class="field"><label>Plan</label>
+          <select>
+            <option>Starter — $199/mo</option>
+            <option selected>Growth — $399/mo</option>
+            <option>Pro — $799/mo</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Google Maps Link</label><input type="url" placeholder="https://maps.google.com/..."></div>
+      <div class="field"><label>Notes</label><textarea placeholder="Initial audit findings, goals..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveClient()">Add Client →</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-row">
+        <div class="logo-wrap">
+          <div class="pixel-grid">
+            <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
+            <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
+            <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
+            <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
+          </div>
+        </div>
+        <div>
+          <div class="brand-name">Rangu</div>
+          <div class="brand-sub">Digital Transformations</div>
+        </div>
+      </div>
+      <div class="admin-tag">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#A29BFE"/></svg>
+        Admin Panel
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Main</div>
+      <a class="nav-item active" href="#" onclick="setPage('dashboard',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" href="#" onclick="setPage('clients',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clients
+        <span class="nav-badge">8</span>
+      </a>
+      <a class="nav-item" href="#" onclick="setPage('leads',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        New Leads
+        <span class="nav-badge">3</span>
+      </a>
+
+      <div class="nav-label" style="margin-top:10px;">Work</div>
+      <a class="nav-item" href="#" onclick="setPage('tasks',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Tasks
+      </a>
+      <a class="nav-item" href="#" onclick="setPage('reports',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Upload Reports
+      </a>
+      <a class="nav-item" href="#" onclick="setPage('revenue',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Revenue
+      </a>
+
+      <div class="nav-label" style="margin-top:10px;">Tools</div>
+      <a class="nav-item" href="https://wa.me/19125419169" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        WhatsApp
+      </a>
+      <a class="nav-item" href="./index.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        View Website
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="admin-info">
+        <div class="admin-avatar">AR</div>
+        <div>
+          <div class="admin-name">Arifur Rahman</div>
+          <div class="admin-role">Admin • Rangu</div>
+        </div>
+      </div>
+      <a class="logout-btn" href="./login.html">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="page-title" id="pageTitle">Admin Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn ghost">⬆ Upload Report</button>
+        <button class="topbar-btn primary" onclick="openModal()">+ Add Client</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:rgba(162,155,254,.12);">👥</div>
+            <div class="stat-badge" style="background:rgba(0,184,148,.12);color:#00B894;">↑ +2 this month</div>
+          </div>
+          <div class="stat-value">8</div>
+          <div class="stat-label">Active Clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:rgba(255,159,67,.12);">💰</div>
+            <div class="stat-badge" style="background:rgba(255,159,67,.12);color:#FF9F43;">MRR</div>
+          </div>
+          <div class="stat-value">$2,994</div>
+          <div class="stat-label">Monthly Revenue</div>
+          <div class="stat-change up">↑ +$798 vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:rgba(255,107,107,.12);">🔥</div>
+            <div class="stat-badge" style="background:rgba(255,107,107,.12);color:#FF6B6B;">Action needed</div>
+          </div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">New Audit Requests</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:rgba(0,206,201,.12);">📋</div>
+            <div class="stat-badge" style="background:rgba(255,159,67,.12);color:#FF9F43;">Due this week</div>
+          </div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Pending Tasks</div>
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="quick-grid">
+        <a class="quick-btn" href="#" onclick="openModal()">
+          <div class="quick-icon">➕</div>
+          <div class="quick-label">Add Client</div>
+        </a>
+        <a class="quick-btn" href="#">
+          <div class="quick-icon">📤</div>
+          <div class="quick-label">Upload Report</div>
+        </a>
+        <a class="quick-btn" href="https://wa.me/19125419169" target="_blank">
+          <div class="quick-icon">💬</div>
+          <div class="quick-label">Message Client</div>
+        </a>
+        <a class="quick-btn" href="#">
+          <div class="quick-icon">📊</div>
+          <div class="quick-label">View Analytics</div>
+        </a>
+      </div>
+
+      <!-- CLIENTS TABLE -->
+      <div class="section-header">
+        <div class="section-title">All Clients</div>
+        <div class="search-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search clients..." id="clientSearch" oninput="filterClients()">
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="clientsTable">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Plan</th>
+              <th>Status</th>
+              <th>Visibility Score</th>
+              <th>Last Report</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="clientsBody">
+            <tr>
+              <td><div class="client-cell"><div class="c-avatar" style="background:linear-gradient(135deg,#FF6B6B,#FF9F43)">JR</div><div><div class="c-name">John's Restaurant</div><div class="c-biz">New York, USA</div></div></div></td>
+              <td><span class="plan-badge plan-growth">Growth</span></td>
+              <td><span class="status-badge status-active"><span class="dot"></span>Active</span></td>
+              <td><div class="score-bar"><div class="mini-bar"><div class="mini-fill" style="width:78%;background:#FF9F43"></div></div><span>78</span></div></td>
+              <td style="color:rgba(255,255,255,.4);font-size:12px;">Jan 5, 2026</td>
+              <td><div class="action-btns"><button class="act-btn primary">View</button><button class="act-btn">Report</button><button class="act-btn">WhatsApp</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="client-cell"><div class="c-avatar" style="background:linear-gradient(135deg,#6C5CE7,#A29BFE)">SK</div><div><div class="c-name">Spice Kingdom</div><div class="c-biz">Dhaka, BD</div></div></div></td>
+              <td><span class="plan-badge plan-pro">Pro</span></td>
+              <td><span class="status-badge status-active"><span class="dot"></span>Active</span></td>
+              <td><div class="score-bar"><div class="mini-bar"><div class="mini-fill" style="width:85%;background:#A29BFE"></div></div><span>85</span></div></td>
+              <td style="color:rgba(255,255,255,.4);font-size:12px;">Jan 3, 2026</td>
+              <td><div class="action-btns"><button class="act-btn primary">View</button><button class="act-btn">Report</button><button class="act-btn">WhatsApp</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="client-cell"><div class="c-avatar" style="background:linear-gradient(135deg,#00B894,#55EFC4)">GH</div><div><div class="c-name">Green Hotel</div><div class="c-biz">Chittagong, BD</div></div></div></td>
+              <td><span class="plan-badge plan-starter">Starter</span></td>
+              <td><span class="status-badge status-pending"><span class="dot"></span>Pending</span></td>
+              <td><div class="score-bar"><div class="mini-bar"><div class="mini-fill" style="width:42%;background:#00B894"></div></div><span>42</span></div></td>
+              <td style="color:rgba(255,255,255,.4);font-size:12px;">Not sent yet</td>
+              <td><div class="action-btns"><button class="act-btn primary">View</button><button class="act-btn">Report</button><button class="act-btn">WhatsApp</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="client-cell"><div class="c-avatar" style="background:linear-gradient(135deg,#FDCB6E,#F9CA24)">RM</div><div><div class="c-name">Royal Mart</div><div class="c-biz">Houston, USA</div></div></div></td>
+              <td><span class="plan-badge plan-growth">Growth</span></td>
+              <td><span class="status-badge status-active"><span class="dot"></span>Active</span></td>
+              <td><div class="score-bar"><div class="mini-bar"><div class="mini-fill" style="width:66%;background:#FDCB6E"></div></div><span>66</span></div></td>
+              <td style="color:rgba(255,255,255,.4);font-size:12px;">Dec 28, 2025</td>
+              <td><div class="action-btns"><button class="act-btn primary">View</button><button class="act-btn">Report</button><button class="act-btn">WhatsApp</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="client-cell"><div class="c-avatar" style="background:linear-gradient(135deg,#FD79A8,#E84393)">SC</div><div><div class="c-name">Sunrise Cafe</div><div class="c-biz">Sylhet, BD</div></div></div></td>
+              <td><span class="plan-badge plan-starter">Starter</span></td>
+              <td><span class="status-badge status-paused"><span class="dot"></span>Paused</span></td>
+              <td><div class="score-bar"><div class="mini-bar"><div class="mini-fill" style="width:55%;background:#FD79A8"></div></div><span>55</span></div></td>
+              <td style="color:rgba(255,255,255,.4);font-size:12px;">Dec 15, 2025</td>
+              <td><div class="action-btns"><button class="act-btn primary">View</button><button class="act-btn">Report</button><button class="act-btn">WhatsApp</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TWO COL -->
+      <div class="two-col">
+
+        <!-- Tasks -->
+        <div class="dark-card">
+          <div class="card-header">
+            <div class="card-title">📋 Pending Tasks</div>
+            <a class="card-action" href="#">View all</a>
+          </div>
+          <div class="task-item">
+            <div class="task-check" onclick="toggleTask(this)"></div>
+            <div class="task-text">
+              <div class="task-title">Send December report to John's Restaurant</div>
+              <div class="task-meta">Due today • John's Restaurant</div>
+            </div>
+            <div class="task-priority p-high">High</div>
+          </div>
+          <div class="task-item">
+            <div class="task-check" onclick="toggleTask(this)"></div>
+            <div class="task-text">
+              <div class="task-title">Upload 10 photos to Spice Kingdom GBP</div>
+              <div class="task-meta">Due Jan 8 • Spice Kingdom</div>
+            </div>
+            <div class="task-priority p-med">Medium</div>
+          </div>
+          <div class="task-item">
+            <div class="task-check done" onclick="toggleTask(this)"></div>
+            <div class="task-text">
+              <div class="task-title done">Reply to Green Hotel audit request</div>
+              <div class="task-meta">Completed yesterday</div>
+            </div>
+            <div class="task-priority p-low">Done</div>
+          </div>
+          <div class="task-item">
+            <div class="task-check" onclick="toggleTask(this)"></div>
+            <div class="task-text">
+              <div class="task-title">Set up Facebook ads for Royal Mart</div>
+              <div class="task-meta">Due Jan 10 • Royal Mart</div>
+            </div>
+            <div class="task-priority p-med">Medium</div>
+          </div>
+          <div class="task-item">
+            <div class="task-check" onclick="toggleTask(this)"></div>
+            <div class="task-text">
+              <div class="task-title">Follow up with Sunrise Cafe — paused account</div>
+              <div class="task-meta">Due Jan 12 • Sunrise Cafe</div>
+            </div>
+            <div class="task-priority p-high">High</div>
+          </div>
+        </div>
+
+        <!-- New Leads -->
+        <div class="dark-card">
+          <div class="card-header">
+            <div class="card-title">🔥 New Audit Requests</div>
+            <a class="card-action" href="#">View all</a>
+          </div>
+          <div class="lead-item">
+            <div class="lead-avatar">MK</div>
+            <div class="lead-info">
+              <div class="lead-name">Md. Karim — Karim Pharmacy</div>
+              <div class="lead-detail">Dhaka, BD • Submitted 2h ago</div>
+            </div>
+            <div class="lead-actions">
+              <a class="lead-act wa" href="https://wa.me/8801700000000" target="_blank">Chat</a>
+              <button class="lead-act email">Email</button>
+            </div>
+          </div>
+          <div class="lead-item">
+            <div class="lead-avatar" style="background:linear-gradient(135deg,#74B9FF,#0984E3);">SL</div>
+            <div class="lead-info">
+              <div class="lead-name">Sarah L. — The Bistro NYC</div>
+              <div class="lead-detail">New York, USA • Submitted 5h ago</div>
+            </div>
+            <div class="lead-actions">
+              <a class="lead-act wa" href="https://wa.me/19125419169" target="_blank">Chat</a>
+              <button class="lead-act email">Email</button>
+            </div>
+          </div>
+          <div class="lead-item">
+            <div class="lead-avatar" style="background:linear-gradient(135deg,#00B894,#00CEC9);">RA</div>
+            <div class="lead-info">
+              <div class="lead-name">Rahim Ahmed — Hotel Seagull</div>
+              <div class="lead-detail">Cox's Bazar, BD • Submitted yesterday</div>
+            </div>
+            <div class="lead-actions">
+              <a class="lead-act wa" href="https://wa.me/8801800000000" target="_blank">Chat</a>
+              <button class="lead-act email">Email</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVENUE -->
+      <div class="dark-card">
+        <div class="card-header">
+          <div class="card-title">💰 Monthly Revenue Breakdown</div>
+          <span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;">$2,994 / mo</span>
+        </div>
+        <div class="revenue-list">
+          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#A29BFE"></div><div><div class="rev-name">Spice Kingdom</div><div class="rev-plan">Pro Plan</div></div></div><div class="rev-amount">$799</div></div>
+          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#FF9F43"></div><div><div class="rev-name">John's Restaurant</div><div class="rev-plan">Growth Plan</div></div></div><div class="rev-amount">$399</div></div>
+          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#FDCB6E"></div><div><div class="rev-name">Royal Mart</div><div class="rev-plan">Growth Plan</div></div></div><div class="rev-amount">$399</div></div>
+          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#74B9FF"></div><div><div class="rev-name">3 × Starter Clients</div><div class="rev-plan">Starter Plan</div></div></div><div class="rev-amount">$597</div></div>
+          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#55EFC4"></div><div><div class="rev-name">2 × BD Clients</div><div class="rev-plan">BD Pricing</div></div></div><div class="rev-amount">$800</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar(){
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+  }
+  function setPage(page, el){
+    document.querySelectorAll('.nav-item').forEach(function(i){ i.classList.remove('active'); });
+    el.classList.add('active');
+    var titles = {dashboard:'Admin Dashboard',clients:'Clients',leads:'New Leads',tasks:'Tasks',reports:'Upload Reports',revenue:'Revenue'};
+    document.getElementById('pageTitle').textContent = titles[page] || 'Admin Dashboard';
+  }
+  function openModal(){ document.getElementById('addClientModal').classList.add('open'); }
+  function closeModal(){ document.getElementById('addClientModal').classList.remove('open'); }
+  document.getElementById('addClientModal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+  function toggleTask(el){
+    el.classList.toggle('done');
+    var title = el.parentElement.querySelector('.task-title');
+    if(title) title.classList.toggle('done');
+  }
+
+  function filterClients(){
+    var q = document.getElementById('clientSearch').value.toLowerCase();
+    document.querySelectorAll('#clientsBody tr').forEach(function(row){
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, getDocs, collection, addDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAbi6s7oGWCt-1iN2GmKg85eMAfc7Iy81I",
+    authDomain: "rangu-26535.firebaseapp.com",
+    projectId: "rangu-26535",
+    storageBucket: "rangu-26535.firebasestorage.app",
+    messagingSenderId: "537526636713",
+    appId: "1:537526636713:web:e21ab9bdc193f45d03d9b8"
+  };
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  // Sign out
+  document.querySelectorAll('a[href="./login.html"]').forEach(a => {
+    a.addEventListener('click', async function(e){
+      e.preventDefault();
+      await signOut(auth);
+      window.location.href = './login.html';
+    });
+  });
+
+  // Auth check
+  onAuthStateChanged(auth, async function(user){
+    if(!user){ window.location.href = './login.html'; return; }
+
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if(!snap.exists() || snap.data().role !== 'admin'){
+      window.location.href = './login.html'; return;
+    }
+
+    const data = snap.data();
+    // Update admin name in sidebar
+    document.querySelector('.admin-name').textContent = data.name || 'Admin';
+
+    // Load all clients
+    loadClients();
+  });
+
+  // ── Load real clients from Firestore ──
+  async function loadClients(){
+    const tbody  = document.getElementById('clientsBody');
+    const snap   = await getDocs(collection(db, 'users'));
+    const clients = [];
+
+    snap.forEach(function(d){
+      const u = d.data();
+      if(u.role === 'client') clients.push({id: d.id, ...u});
+    });
+
+    // Update stats
+    document.querySelector('.stat-value').textContent = clients.length;
+
+    if(clients.length === 0){
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No clients yet — add your first client!</td></tr>`;
+      return;
+    }
+
+    // Calculate MRR
+    const planPrices = {'Starter':199,'Growth':399,'Pro':799,'Admin':0};
+    const mrr = clients.reduce((sum, c) => sum + (planPrices[c.plan] || 0), 0);
+    document.querySelectorAll('.stat-value')[1].textContent = '$' + mrr.toLocaleString();
+
+    tbody.innerHTML = '';
+    clients.forEach(function(c){
+      const initials = (c.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+      const score    = c.stats?.mapsRank ? Math.min(99, 100 - c.stats.mapsRank * 5 + 40) : 0;
+      const colors   = ['#FF6B6B','#FF9F43','#A29BFE','#00B894','#74B9FF','#FD79A8','#FDCB6E'];
+      const color    = colors[Math.abs(c.name?.charCodeAt(0)||0) % colors.length];
+      const planClass= c.plan==='Pro'?'plan-pro':c.plan==='Growth'?'plan-growth':'plan-starter';
+      const status   = c.status||'active';
+      const statusClass = status==='active'?'status-active':status==='pending'?'status-pending':'status-paused';
+      const lastReport  = c.lastReport || 'Not sent yet';
+      const waNum    = (c.phone||'').replace(/[^0-9]/g,'');
+
+      tbody.innerHTML += `
+        <tr>
+          <td>
+            <div class="client-cell">
+              <div class="c-avatar" style="background:linear-gradient(135deg,${color},${color}aa)">${initials}</div>
+              <div>
+                <div class="c-name">${c.business||c.name||'—'}</div>
+                <div class="c-biz">${c.city||'—'}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="plan-badge ${planClass}">${c.plan||'Starter'}</span></td>
+          <td><span class="status-badge ${statusClass}"><span class="dot"></span>${status.charAt(0).toUpperCase()+status.slice(1)}</span></td>
+          <td>
+            <div class="score-bar">
+              <div class="mini-bar"><div class="mini-fill" style="width:${score}%;background:${color}"></div></div>
+              <span>${score||'—'}</span>
+            </div>
+          </td>
+          <td style="color:rgba(255,255,255,.4);font-size:12px;">${lastReport}</td>
+          <td>
+            <div class="action-btns">
+              <button class="act-btn primary" onclick="viewClient('${c.id}')">View</button>
+              <button class="act-btn" onclick="uploadReport('${c.id}','${c.business||c.name}')">Report</button>
+              ${waNum ? `<a class="act-btn" href="https://wa.me/${waNum}" target="_blank">WhatsApp</a>` : '<button class="act-btn" style="opacity:.4" disabled>WhatsApp</button>'}
+            </div>
+          </td>
+        </tr>`;
+    });
+  }
+
+  window.viewClient = function(uid){
+    alert('Client UID: ' + uid + '\n\nFull client view coming soon!');
+  };
+
+  window.uploadReport = function(uid, name){
+    const url   = prompt('Enter Google Drive PDF link for ' + name + ':');
+    const title = prompt('Report title (e.g. December 2025 Report):');
+    if(!url || !title) return;
+    addDoc(collection(db, 'users', uid, 'reports'), {
+      title,
+      type: 'Monthly Report',
+      date: new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
+      downloadUrl: url,
+      score: '—',
+      preview: 'Report uploaded by Rangu team.',
+      createdAt: new Date().toISOString()
+    }).then(function(){
+      alert('✅ Report uploaded! Client can now see it on their dashboard.');
+    }).catch(function(e){
+      alert('Error: ' + e.message);
+    });
+  };
+
+  // Save new client to Firestore
+  window.saveClient = async function(){
+    const name     = document.querySelector('#addClientModal input[type="text"]:nth-of-type(1)').value.trim();
+    const business = document.querySelector('#addClientModal input[type="text"]:nth-of-type(2)').value.trim();
+    const email    = document.querySelector('#addClientModal input[type="email"]').value.trim();
+    const phone    = document.querySelector('#addClientModal input[type="tel"]').value.trim();
+    const city     = document.querySelector('#addClientModal input[type="text"]:nth-of-type(3)').value.trim();
+    const plan     = document.querySelector('#addClientModal select').value.split(' —')[0];
+
+    if(!name || !email){ alert('Name and email are required!'); return; }
+
+    try {
+      await addDoc(collection(db, 'clients'), {
+        name, business, email, phone, city,
+        plan, role: 'client', status: 'active',
+        createdAt: new Date().toISOString()
+      });
+      closeModal();
+      alert('✅ Client added successfully!');
+      loadClients();
+    } catch(e){
+      alert('Error: ' + e.message);
+    }
+  };
+</script>
+</body>
+</html>
