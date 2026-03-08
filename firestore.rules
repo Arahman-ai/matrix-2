@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ──
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isOwner(uid) {
+      return request.auth.uid == uid;
+    }
+    function isAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ── users/{uid} ──
+    // Client can read/write their own doc. Admin can read/write all.
+    match /users/{uid} {
+      allow read:  if isOwner(uid) || isAdmin();
+      allow write: if isOwner(uid) || isAdmin();
+
+      // reports subcollection
+      match /reports/{reportId} {
+        allow read:  if isOwner(uid) || isAdmin();
+        allow write: if isAdmin();
+      }
+    }
+
+    // ── auditRequests ──
+    // Anyone can create (public contact form). Only admin can read/update.
+    match /auditRequests/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
