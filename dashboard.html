@@ -363,7 +363,7 @@
     <div class="client-info">
       <div class="client-avatar" id="avatarInitial">JD</div>
       <div class="client-name" id="clientNameDisplay">John's Restaurant</div>
-      <div class="client-plan">
+      <div class="client-plan" id="sidebarPlan">
         <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="#FF9F43"/></svg>
         Growth Plan
       </div>
@@ -769,7 +769,8 @@
     if(page === 'billing'){
       content.style.display = 'none';
       billing.style.display = 'block';
-      var plan = document.getElementById('sidebarPlan')?.textContent || 'Starter';
+      var planRaw = document.getElementById('sidebarPlan')?.textContent?.trim() || 'Starter Plan';
+      var plan = planRaw.replace(' Plan','').trim();
       var prices = {'Starter':'$199','Growth':'$399','Pro':'$799'};
       var descs = {'Starter':'Google Business Profile + Reviews + Monthly Report','Growth':'Starter + SEO + Social + Citations','Pro':'Growth + Ads + Backlinks + Manager'};
       document.getElementById('billingPlanName').textContent = plan + ' Plan';
@@ -934,4 +935,9 @@
   });
 
   function setEl(id, val){ const el=document.getElementById(id); if(el) el.textContent=val; }
-  function setBar(id, pct){ const el=document.getElementByI
+  function setBar(id, pct){ const el=document.getElementById(id); if(el) el.style.width=Math.min(100,pct)+'%'; }
+  function setPct(id, pct){ const el=document.getElementById(id); if(el) el.textContent=pct+'%'; }
+  function formatNum(n){ if(n>=1000) return (n/1000).toFixed(1)+'k'; return n; }
+</script>
+</body>
+</html>
