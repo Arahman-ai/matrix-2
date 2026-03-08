@@ -81,8 +81,21 @@
 
       } catch(err) {
         setLoading(false);
+        if(err.code === 'auth/email-already-in-use'){
+          showMsg('This email is already registered.', 'error');
+          // Show login redirect button
+          const el = document.getElementById('signupMsg');
+          el.innerHTML = `
+            <span>This email already has an account.</span>
+            <a href="./login.html" style="display:inline-block;margin-top:10px;padding:10px 20px;background:#111;color:#fff;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">
+              → Log in instead
+            </a>
+            <span style="display:block;margin-top:8px;font-size:12px;color:#9ca3af;">
+              Forgot your password? <a href="./reset.html" style="color:#FF9F43;font-weight:700;">Reset it here</a>
+            </span>`;
+          return;
+        }
         const msgs = {
-          'auth/email-already-in-use': 'This email is already registered. Try logging in.',
           'auth/invalid-email': 'Please enter a valid email address.',
           'auth/weak-password': 'Use at least 6 characters for your password.',
         };
@@ -92,7 +105,7 @@
 
     function showMsg(text, type){
       const el = document.getElementById('signupMsg');
-      el.textContent = text; el.className = 'msg ' + type + ' show';
+      el.innerHTML = text; el.className = 'msg ' + type + ' show';
     }
     function setLoading(on){
       const btn = document.getElementById('submitBtn');
