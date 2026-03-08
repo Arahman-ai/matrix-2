@@ -317,6 +317,38 @@
   </div>
 </div>
 
+<!-- CLIENT DETAIL MODAL -->
+<div class="modal-backdrop" id="clientDetailModal">
+  <div class="modal" style="width:min(680px,100%);max-height:90vh;overflow-y:auto;">
+    <div class="modal-head">
+      <h3 id="detailModalTitle">Client Details</h3>
+      <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    </div>
+    <div class="modal-body" id="clientDetailBody" style="padding:24px;">
+      <p style="color:rgba(255,255,255,.4);">Loading…</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeDetailModal()">Close</button>
+      <button class="btn-save" id="saveStatsBtn" onclick="saveClientStats()">Save Changes →</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION TOAST -->
+<div id="notifToast" style="
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:linear-gradient(135deg,#FF9F43,#FF6B6B);
+  color:#fff;border-radius:16px;padding:16px 20px;
+  box-shadow:0 8px 32px rgba(255,107,107,.4);
+  display:none;max-width:320px;cursor:pointer;
+  animation:slideIn .3s ease;
+" onclick="document.getElementById('notifToast').style.display='none'">
+  <div style="font-weight:800;font-size:14px;margin-bottom:4px;" id="toastTitle">🔔 New Lead!</div>
+  <div style="font-size:13px;opacity:.9;" id="toastMsg">New audit request received.</div>
+  <div style="font-size:11px;opacity:.6;margin-top:6px;">Click to dismiss</div>
+</div>
+<style>@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}</style>
+
 <div class="layout">
 
   <!-- ── SIDEBAR ── -->
@@ -356,7 +388,7 @@
       <a class="nav-item" href="#" onclick="setPage('leads',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         New Leads
-        <span class="nav-badge">3</span>
+        <span class="nav-badge" id="auditBadge" style="display:none;">0</span>
       </a>
 
       <div class="nav-label" style="margin-top:10px;">Work</div>
@@ -614,7 +646,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, getDocs, collection, addDoc, query, where, orderBy, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, getDocs, collection, addDoc, query, where, orderBy, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAbi6s7oGWCt-1iN2GmKg85eMAfc7Iy81I",
@@ -660,6 +692,37 @@
 
     // Load all clients
     loadClients();
+
+    // ── Real-time notification listener for new audit requests ──
+    let knownIds = null;
+    onSnapshot(
+      query(collection(db, 'auditRequests'), orderBy('submittedAt', 'desc')),
+      function(snapshot){
+        // First call: just learn existing IDs, don't alert
+        if(knownIds === null){
+          knownIds = new Set(snapshot.docs.map(d => d.id));
+          // Update badge count
+          const pending = snapshot.docs.filter(d => d.data().status !== 'done').length;
+          updateAuditBadge(pending);
+          return;
+        }
+        // Subsequent calls: detect newly added docs
+        snapshot.docChanges().forEach(function(change){
+          if(change.type === 'added'){
+            const d = change.doc.data();
+            if(!knownIds.has(change.doc.id)){
+              knownIds.add(change.doc.id);
+              showToast('🔔 New Audit Request!', (d.name||'Someone') + ' from ' + (d.business||'a business') + ' submitted a request.');
+              // Reload audit table
+              loadAuditRequests();
+            }
+          }
+        });
+        // Update badge count
+        const pending = snapshot.docs.filter(d => d.data().status !== 'done').length;
+        updateAuditBadge(pending);
+      }
+    );
   });
 
   // ── Load real clients from Firestore ──
@@ -792,9 +855,178 @@
     return Math.floor(seconds/86400) + 'd ago';
   }
 
-  window.viewClient = function(uid){
-    alert('Client UID: ' + uid + '\n\nFull client view coming soon!');
+  window.viewClient = async function(uid){
+    document.getElementById('clientDetailModal').classList.add('open');
+    document.getElementById('clientDetailBody').innerHTML = '<p style="color:rgba(255,255,255,.4);text-align:center;padding:20px;">Loading…</p>';
+    document.getElementById('saveStatsBtn').dataset.uid = uid;
+
+    try {
+      const snap = await getDoc(doc(db, 'users', uid));
+      if(!snap.exists()){ document.getElementById('clientDetailBody').innerHTML='<p style="color:#FF6B6B;">Client not found.</p>'; return; }
+      const c = snap.data();
+      const s = c.stats || {};
+      const camp = c.campaign || {};
+      document.getElementById('detailModalTitle').textContent = (c.business || c.name || 'Client') + ' — Details';
+
+      document.getElementById('clientDetailBody').innerHTML = `
+        <!-- Info grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;">
+            <div style="font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Client</div>
+            <div style="font-weight:700;color:#fff;font-size:15px;">${c.name||'—'}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;">${c.email||'—'}</div>
+          </div>
+          <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px;">
+            <div style="font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Business</div>
+            <div style="font-weight:700;color:#fff;font-size:15px;">${c.business||'—'}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;">${c.city||'—'} • ${c.plan||'Starter'} Plan</div>
+          </div>
+        </div>
+
+        <!-- Editable Stats -->
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">📊 Performance Stats</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Maps Rank #</label>
+            <input id="edit_mapsRank" type="number" value="${s.mapsRank||''}" placeholder="e.g. 4" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Previous Rank #</label>
+            <input id="edit_mapsRankPrev" type="number" value="${s.mapsRankPrev||''}" placeholder="e.g. 9" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Monthly Calls</label>
+            <input id="edit_calls" type="number" value="${s.calls||''}" placeholder="e.g. 142" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Calls Change %</label>
+            <input id="edit_callsChange" type="number" value="${s.callsChange||''}" placeholder="e.g. 38" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Rating (e.g. 4.7)</label>
+            <input id="edit_rating" type="text" value="${s.rating||''}" placeholder="4.7" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">New Reviews</label>
+            <input id="edit_newReviews" type="number" value="${s.newReviews||''}" placeholder="e.g. 12" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Profile Views</label>
+            <input id="edit_profileViews" type="number" value="${s.profileViews||''}" placeholder="e.g. 2400" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Views Change %</label>
+            <input id="edit_profileViewsChange" type="number" value="${s.profileViewsChange||''}" placeholder="e.g. 61" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+        </div>
+
+        <!-- Campaign progress -->
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🎯 Campaign Progress (0–100)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          ${['googleProfile','reviewGeneration','localCitations','socialMedia','competitorTracking'].map(function(k){
+            var labels = {googleProfile:'Google Profile %',reviewGeneration:'Review Generation %',localCitations:'Local Citations %',socialMedia:'Social Media %',competitorTracking:'Competitor Tracking %'};
+            return `<div>
+              <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">${labels[k]}</label>
+              <input id="edit_${k}" type="number" min="0" max="100" value="${camp[k]||''}" placeholder="0–100" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+            </div>`;
+          }).join('')}
+        </div>
+
+        <!-- Report & plan -->
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">⚙️ Account Settings</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Plan</label>
+            <select id="edit_plan" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:#1a1c24;color:#fff;font-size:14px;outline:none;">
+              <option ${c.plan==='Starter'?'selected':''}>Starter</option>
+              <option ${c.plan==='Growth'?'selected':''}>Growth</option>
+              <option ${c.plan==='Pro'?'selected':''}>Pro</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Status</label>
+            <select id="edit_status" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:#1a1c24;color:#fff;font-size:14px;outline:none;">
+              <option ${c.status==='active'?'selected':''}>active</option>
+              <option ${c.status==='paused'?'selected':''}>paused</option>
+              <option ${c.status==='pending'?'selected':''}>pending</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Next Report</label>
+            <input id="edit_nextReport" type="text" value="${c.nextReport||''}" placeholder="e.g. Apr 1" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
+        </div>
+      `;
+    } catch(e){
+      document.getElementById('clientDetailBody').innerHTML = `<p style="color:#FF6B6B;">Error: ${e.message}</p>`;
+    }
   };
+
+  window.saveClientStats = async function(){
+    const uid = document.getElementById('saveStatsBtn').dataset.uid;
+    if(!uid) return;
+    const btn = document.getElementById('saveStatsBtn');
+    btn.disabled = true; btn.textContent = 'Saving…';
+
+    const val = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+    const num = id => { const v = parseInt(val(id)); return isNaN(v) ? 0 : v; };
+
+    try {
+      await updateDoc(doc(db, 'users', uid), {
+        plan:   val('edit_plan'),
+        status: val('edit_status'),
+        nextReport: val('edit_nextReport'),
+        stats: {
+          mapsRank:           num('edit_mapsRank'),
+          mapsRankPrev:       num('edit_mapsRankPrev'),
+          calls:              num('edit_calls'),
+          callsChange:        num('edit_callsChange'),
+          rating:             val('edit_rating'),
+          newReviews:         num('edit_newReviews'),
+          profileViews:       num('edit_profileViews'),
+          profileViewsChange: num('edit_profileViewsChange'),
+        },
+        campaign: {
+          googleProfile:      num('edit_googleProfile'),
+          reviewGeneration:   num('edit_reviewGeneration'),
+          localCitations:     num('edit_localCitations'),
+          socialMedia:        num('edit_socialMedia'),
+          competitorTracking: num('edit_competitorTracking'),
+        }
+      });
+      btn.textContent = '✅ Saved!';
+      setTimeout(function(){ closeDetailModal(); loadClients(); btn.disabled=false; btn.textContent='Save Changes →'; }, 1200);
+    } catch(e){
+      alert('Error: ' + e.message);
+      btn.disabled=false; btn.textContent='Save Changes →';
+    }
+  };
+
+  window.closeDetailModal = function(){
+    document.getElementById('clientDetailModal').classList.remove('open');
+  };
+  document.getElementById('clientDetailModal').addEventListener('click', function(e){ if(e.target===this) closeDetailModal(); });
+
+  // ── Toast notification ──
+  function showToast(title, msg){
+    const t = document.getElementById('notifToast');
+    document.getElementById('toastTitle').textContent = title;
+    document.getElementById('toastMsg').textContent   = msg;
+    t.style.display = 'block';
+    t.style.animation = 'none';
+    requestAnimationFrame(function(){ t.style.animation = 'slideIn .3s ease'; });
+    // Auto-dismiss after 8 seconds
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function(){ t.style.display='none'; }, 8000);
+  }
+
+  // ── Audit requests badge on sidebar ──
+  function updateAuditBadge(count){
+    var badge = document.getElementById('auditBadge');
+    if(!badge) return;
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+  }
 
   window.generateInvoice = function(uid, business, email, plan){
     const prices = {'Starter':'199','Growth':'399','Pro':'799'};
