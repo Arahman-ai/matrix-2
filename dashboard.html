@@ -400,19 +400,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         WhatsApp Support
       </a>
+      <a class="nav-item" href="#" onclick="setPage('billing',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Billing & Payment
+      </a>
       <a class="nav-item" href="./index.html">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Back to Website
-      </a>
-
-      <div class="nav-label" style="margin-top:12px;">Payment</div>
-      <a class="nav-item" href="https://www.paypal.com/paypalme/arifur03071" target="_blank" rel="noopener" style="background:rgba(0,48,135,.15);color:#5b9bd5;">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.1zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.59 3.025-2.566 6.082-8.558 6.082H9.824l-1.129 7.158h3.139l.872-5.516h2.19c4.846 0 7.737-2.474 8.647-7.383a5.836 5.836 0 0 0-.321-.054z"/></svg>
-        Pay via PayPal 🇺🇸
-      </a>
-      <a class="nav-item" href="tel:01996423556" style="background:rgba(226,19,110,.12);color:#e2136e;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        bKash: 01996423556 🇧🇩
       </a>
     </div>
 
@@ -658,6 +652,104 @@
       </div>
 
     </div><!-- end content -->
+
+    <!-- BILLING PAGE -->
+    <div id="billingPage" style="display:none;padding:24px;max-width:760px;">
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#111;margin-bottom:4px;">Billing & Payment</div>
+      <p style="color:#6b7280;font-size:14px;margin-bottom:24px;">Manage your plan and make payments securely.</p>
+
+      <!-- Current Plan Card -->
+      <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:20px;padding:28px;margin-bottom:20px;color:#fff;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Current Plan</div>
+            <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;" id="billingPlanName">Starter Plan</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;" id="billingPlanDesc">Google Business Profile + Reviews + Monthly Report</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:28px;font-weight:900;" id="billingPlanPrice">$199<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.5)">/mo</span></div>
+            <div style="font-size:12px;color:#00B894;margin-top:4px;">● Active</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.1);margin-top:20px;padding-top:16px;font-size:13px;color:rgba(255,255,255,.5);">
+          Next payment due: <span style="color:#FF9F43;font-weight:600;" id="billingNextReport">—</span> &nbsp;•&nbsp; Questions? <a href="https://wa.me/19125419169" style="color:#A29BFE;">WhatsApp us</a>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div style="font-size:13px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">Choose Payment Method</div>
+
+      <!-- PayPal -->
+      <div style="background:#fff;border:2px solid #e5e7eb;border-radius:16px;padding:20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:48px;height:48px;background:#003087;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.1zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.59 3.025-2.566 6.082-8.558 6.082H9.824l-1.129 7.158h3.139l.872-5.516h2.19c4.846 0 7.737-2.474 8.647-7.383a5.836 5.836 0 0 0-.321-.054z"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;color:#111;font-size:15px;">PayPal</div>
+            <div style="font-size:12px;color:#6b7280;">For USA & international clients • Visa, Mastercard, PayPal balance</div>
+          </div>
+        </div>
+        <a href="https://www.paypal.com/paypalme/arifur03071" target="_blank" rel="noopener"
+           style="background:#003087;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;">
+          Pay with PayPal →
+        </a>
+      </div>
+
+      <!-- bKash -->
+      <div style="background:#fff;border:2px solid #e5e7eb;border-radius:16px;padding:20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:48px;height:48px;background:#E2136E;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">💳</div>
+          <div>
+            <div style="font-weight:700;color:#111;font-size:15px;">bKash</div>
+            <div style="font-size:12px;color:#6b7280;">For Bangladesh clients • Send to: <b style="color:#E2136E;">01996423556</b></div>
+          </div>
+        </div>
+        <a href="https://shop.bkash.com/rangu01996423556" target="_blank" rel="noopener"
+           style="background:#E2136E;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;">
+          Pay with bKash →
+        </a>
+      </div>
+
+      <!-- After payment note -->
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:16px;margin-top:8px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:20px;">✅</span>
+        <div>
+          <div style="font-weight:700;color:#166534;font-size:14px;">After making payment</div>
+          <div style="font-size:13px;color:#15803d;margin-top:3px;">Send your payment receipt to <b>rangu.connect@gmail.com</b> or WhatsApp us at <b>+1 912-541-9169</b> to activate your plan within 24 hours.</div>
+        </div>
+      </div>
+
+      <!-- Plan comparison -->
+      <div style="margin-top:28px;">
+        <div style="font-size:13px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">Available Plans</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:#111;">🌱 Starter</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:2px;">GBP + Reviews + Monthly Report</div>
+            </div>
+            <div style="font-weight:900;color:#111;">$199<span style="font-size:11px;color:#9ca3af;">/mo</span></div>
+          </div>
+          <div style="background:linear-gradient(135deg,rgba(255,159,67,.06),rgba(255,107,107,.04));border:2px solid rgba(255,159,67,.3);border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:#111;">🚀 Growth <span style="font-size:10px;background:linear-gradient(135deg,#FF6B6B,#FF9F43);color:#fff;padding:2px 8px;border-radius:999px;">Popular</span></div>
+              <div style="font-size:12px;color:#6b7280;margin-top:2px;">Starter + SEO + Social + Citations</div>
+            </div>
+            <div style="font-weight:900;color:#111;">$399<span style="font-size:11px;color:#9ca3af;">/mo</span></div>
+          </div>
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:#111;">👑 Pro</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:2px;">Growth + Ads + Backlinks + Manager</div>
+            </div>
+            <div style="font-weight:900;color:#111;">$799<span style="font-size:11px;color:#9ca3af;">/mo</span></div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#9ca3af;margin-top:10px;text-align:center;">Want to upgrade? Contact us on WhatsApp and we'll switch your plan instantly.</p>
+      </div>
+    </div>
+
   </div><!-- end main -->
 </div><!-- end layout -->
 
@@ -669,8 +761,25 @@
   function setPage(page, el){
     document.querySelectorAll('.nav-item').forEach(function(i){ i.classList.remove('active'); });
     el.classList.add('active');
-    var titles = {overview:'Dashboard',reports:'Reports',maps:'Google Maps SEO',social:'Social Media',reviews:'Reviews'};
+    var titles = {overview:'Dashboard',reports:'Reports',maps:'Google Maps SEO',social:'Social Media',reviews:'Reviews',billing:'Billing & Payment'};
     document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
+
+    var content = document.querySelector('.content');
+    var billing = document.getElementById('billingPage');
+    if(page === 'billing'){
+      content.style.display = 'none';
+      billing.style.display = 'block';
+      var plan = document.getElementById('sidebarPlan')?.textContent || 'Starter';
+      var prices = {'Starter':'$199','Growth':'$399','Pro':'$799'};
+      var descs = {'Starter':'Google Business Profile + Reviews + Monthly Report','Growth':'Starter + SEO + Social + Citations','Pro':'Growth + Ads + Backlinks + Manager'};
+      document.getElementById('billingPlanName').textContent = plan + ' Plan';
+      document.getElementById('billingPlanPrice').innerHTML = (prices[plan]||'$199') + '<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.5)">/mo</span>';
+      document.getElementById('billingPlanDesc').textContent = descs[plan] || '';
+      document.getElementById('billingNextReport').textContent = document.getElementById('badgeNextReport')?.textContent?.replace('Next report: ','') || '—';
+    } else {
+      content.style.display = '';
+      billing.style.display = 'none';
+    }
   }
 </script>
 
