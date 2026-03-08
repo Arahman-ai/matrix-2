@@ -876,6 +876,7 @@
     });
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -892,6 +893,9 @@
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
 
+  // Init EmailJS
+  emailjs.init("Qp-R9FKGsTWbEo570");
+
   document.getElementById('auditForm').addEventListener('submit', async function(e){
     e.preventDefault();
     const btn = document.getElementById('submitAuditBtn');
@@ -906,13 +910,21 @@
     const website  = document.getElementById('f_website').value.trim();
     const maps     = document.getElementById('f_maps').value.trim();
     const message  = document.getElementById('f_message').value.trim();
+    const time     = new Date().toLocaleString();
 
     try {
+      // Save to Firestore
       await addDoc(collection(db, 'auditRequests'), {
         name, business, city, phone, address, website, maps, message,
         submittedAt: new Date().toISOString(),
         status: 'new'
       });
+
+      // Send email via EmailJS
+      await emailjs.send("service_buftlyg", "template_1adudxj", {
+        name, business, city, phone, address, website, message, time
+      });
+
       document.getElementById('formSuccess').style.display = 'block';
       document.getElementById('formError').style.display = 'none';
       document.getElementById('auditForm').reset();
