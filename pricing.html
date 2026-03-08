@@ -44,7 +44,11 @@
     .hero h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1.05;color:#fff;margin-bottom:16px;}
     .hero h1 span{background:linear-gradient(90deg,#FF9F43,#FF6B6B,#A29BFE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .hero p{color:rgba(255,255,255,.55);font-size:18px;max-width:540px;margin:0 auto 28px;}
-    .toggle-wrap{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:48px;}
+    .toggle-wrap{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;}
+    .currency-switcher{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:48px;}
+    .curr-btn{padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;}
+    .curr-btn.active{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);color:#fff;}
+    .price-bd{font-size:12px;color:#00B894;font-weight:700;margin-top:2px;min-height:16px;}
     .toggle-label{font-size:14px;font-weight:700;color:rgba(255,255,255,.45);}
     .toggle-label.active{color:#fff;}
     .toggle{position:relative;width:52px;height:28px;background:rgba(255,255,255,.1);border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.15);transition:background .2s;}
@@ -178,6 +182,11 @@
       <div class="toggle" id="billingToggle" onclick="toggleBilling()"><div class="toggle-knob"></div></div>
       <span class="toggle-label" id="labelAnnual">Annual &nbsp;<span class="save-badge">Save 20%</span></span>
     </div>
+    <!-- Currency switcher -->
+    <div class="currency-switcher">
+      <button class="curr-btn active" id="btnUSD" onclick="setCurrency('usd')">🇺🇸 USD</button>
+      <button class="curr-btn" id="btnBDT" onclick="setCurrency('bdt')">🇧🇩 BDT</button>
+    </div>
   </div>
 
   <!-- PLAN CARDS -->
@@ -189,6 +198,7 @@
       <div class="plan-name">Starter</div>
       <div class="plan-tagline">Perfect for new businesses</div>
       <div class="plan-price"><div class="price-amount" id="s-price">$199</div><div class="price-period">/mo</div></div>
+      <div class="price-bd" id="s-bd">&nbsp;</div>
       <div class="price-annual" id="s-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
       <hr class="divider"/>
@@ -211,6 +221,7 @@
       <div class="plan-name">Growth</div>
       <div class="plan-tagline">For businesses serious about ranking</div>
       <div class="plan-price"><div class="price-amount" id="g-price">$399</div><div class="price-period">/mo</div></div>
+      <div class="price-bd" id="g-bd">&nbsp;</div>
       <div class="price-annual" id="g-annual">&nbsp;</div>
       <a class="plan-cta cta-accent" href="./index.html#contact">Get Started →</a>
       <hr class="divider"/>
@@ -232,6 +243,7 @@
       <div class="plan-name">Pro</div>
       <div class="plan-tagline">Full-service digital domination</div>
       <div class="plan-price"><div class="price-amount" id="p-price">$799</div><div class="price-period">/mo</div></div>
+      <div class="price-bd" id="p-bd">&nbsp;</div>
       <div class="price-annual" id="p-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
       <hr class="divider"/>
@@ -292,7 +304,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">How do I pay? <span class="faq-icon">+</span></div>
-      <div class="faq-a">We accept PayPal (paypal.me/RanguDT) for USA and international clients, and bKash (01996423556) for Bangladesh clients. After payment, send your receipt to rangu.connect@gmail.com and we'll activate your account within 24 hours.</div>
+      <div class="faq-a">We accept PayPal (paypal.me/RanguDT) for USA and international clients, and bKash (01996423556) for Bangladesh clients. After payment, send your receipt to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c0d3dcd5c79cd1dddcdcd7d1c6f2d5dfd3dbde9cd1dddf">[email&#160;protected]</a> and we'll activate your account within 24 hours.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">When will I see results? <span class="faq-icon">+</span></div>
@@ -337,7 +349,7 @@
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   // Mobile menu
@@ -346,30 +358,43 @@
     document.getElementById('mobileMenu').classList.toggle('open');
   });
 
-  // Annual / Monthly toggle
   var isAnnual = false;
+  var currency = 'usd';
+  var priceData = {
+    usd: { monthly:{s:'$199',g:'$399',p:'$799'}, annual:{s:'$159',g:'$319',p:'$639'} },
+    bdt: { monthly:{s:'৳18,000',g:'৳35,000',p:'৳65,000'}, annual:{s:'৳14,400',g:'৳28,000',p:'৳52,000'} }
+  };
+
+  function updatePrices(){
+    var prices = priceData[currency][isAnnual ? 'annual' : 'monthly'];
+    document.getElementById('s-price').textContent = prices.s;
+    document.getElementById('g-price').textContent = prices.g;
+    document.getElementById('p-price').textContent = prices.p;
+    var note = isAnnual ? (currency==='usd' ? 'Billed annually — 2 months free' : 'বার্ষিক বিলিং — ২ মাস বিনামূল্যে') : '\u00a0';
+    ['s-annual','g-annual','p-annual'].forEach(function(id){ document.getElementById(id).textContent = note; });
+    var altPrices = currency==='usd'
+      ? (isAnnual ? {s:'≈ ৳14,400/mo BD',g:'≈ ৳28,000/mo BD',p:'≈ ৳52,000/mo BD'} : {s:'≈ ৳18,000/mo BD',g:'≈ ৳35,000/mo BD',p:'≈ ৳65,000/mo BD'})
+      : (isAnnual ? {s:'≈ $159/mo USD',g:'≈ $319/mo USD',p:'≈ $639/mo USD'} : {s:'≈ $199/mo USD',g:'≈ $399/mo USD',p:'≈ $799/mo USD'});
+    document.getElementById('s-bd').textContent = altPrices.s;
+    document.getElementById('g-bd').textContent = altPrices.g;
+    document.getElementById('p-bd').textContent = altPrices.p;
+  }
+
   function toggleBilling(){
     isAnnual = !isAnnual;
     document.getElementById('billingToggle').classList.toggle('on', isAnnual);
     document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
     document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
-    var prices = isAnnual
-      ? {s:'$159', g:'$319', p:'$639'}
-      : {s:'$199', g:'$399', p:'$799'};
-    document.getElementById('s-price').textContent = prices.s;
-    document.getElementById('g-price').textContent = prices.g;
-    document.getElementById('p-price').textContent = prices.p;
-    var note = isAnnual ? 'Billed annually — 2 months free' : '\u00a0';
-    ['s-annual','g-annual','p-annual'].forEach(function(id){ document.getElementById(id).textContent = note; });
+    updatePrices();
+  }
+
+  function setCurrency(c){
+    currency = c;
+    document.getElementById('btnUSD').classList.toggle('active', c==='usd');
+    document.getElementById('btnBDT').classList.toggle('active', c==='bdt');
+    updatePrices();
   }
 
   // FAQ accordion
   function toggleFaq(el){
-    var item = el.closest('.faq-item');
-    var wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-    if(!wasOpen) item.classList.add('open');
-  }
-</script>
-</body>
-</html>
+    var item = el.closest('.
