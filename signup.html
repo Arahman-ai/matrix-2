@@ -82,9 +82,8 @@
       } catch(err) {
         setLoading(false);
         if(err.code === 'auth/email-already-in-use'){
-          showMsg('This email is already registered.', 'error');
-          // Show login redirect button
           const el = document.getElementById('signupMsg');
+          el.className = 'msg error show';
           el.innerHTML = `
             <span>This email already has an account.</span>
             <a href="./login.html" style="display:inline-block;margin-top:10px;padding:10px 20px;background:#111;color:#fff;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">
