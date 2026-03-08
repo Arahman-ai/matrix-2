@@ -447,7 +447,7 @@
       <!-- WELCOME BANNER -->
       <div class="welcome-banner">
         <div class="welcome-content">
-          <div class="welcome-greeting">Good morning 👋</div>
+          <div class="welcome-greeting" id="timeGreeting">Good morning 👋</div>
           <div class="welcome-name" id="welcomeName">John's Restaurant</div>
           <div class="welcome-sub">Here's your visibility snapshot for this week</div>
           <div class="welcome-badges">
@@ -754,6 +754,14 @@
 </div><!-- end layout -->
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Dynamic greeting
+  (function(){
+    var h = new Date().getHours();
+    var g = h < 12 ? 'Good morning 👋' : h < 17 ? 'Good afternoon 👋' : h < 21 ? 'Good evening 👋' : 'Good night 👋';
+    var el = document.getElementById('timeGreeting');
+    if(el) el.textContent = g;
+  })();
+
   function toggleSidebar(){
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('sidebarOverlay').classList.toggle('open');
