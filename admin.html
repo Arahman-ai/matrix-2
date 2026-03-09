@@ -406,6 +406,11 @@
       </a>
 
       <div class="nav-label" style="margin-top:10px;">Tools</div>
+      <a class="nav-item" href="#" onclick="setPage('referrals',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Referrals
+        <span class="nav-badge" id="referralBadge" style="display:none;background:#A29BFE;">0</span>
+      </a>
       <a class="nav-item" href="https://wa.me/19125419169" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         WhatsApp
@@ -554,8 +559,26 @@
 
       <!-- ═══════════ LEADS PAGE ═══════════ -->
       <div id="page-leads" style="display:none;">
+        <!-- Follow-up stats -->
+        <div class="stats-grid" style="margin-bottom:20px;">
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(255,159,67,.12);">🔥</div><div class="stat-badge" style="background:rgba(255,107,107,.12);color:#FF6B6B;">Action needed</div></div><div class="stat-value" id="leadStatNew">—</div><div class="stat-label">New Leads</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(116,185,255,.12);">💬</div></div><div class="stat-value" id="leadStatContacted">—</div><div class="stat-label">Contacted</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(253,203,110,.12);">⏳</div></div><div class="stat-value" id="leadStatFollowup">—</div><div class="stat-label">Follow-up Due</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(0,184,148,.12);">✅</div></div><div class="stat-value" id="leadStatDone">—</div><div class="stat-label">Closed / Done</div></div>
+        </div>
         <div class="dark-card" style="margin:0;">
-          <div class="card-header"><div class="card-title">🔥 All Audit Requests</div></div>
+          <div class="card-header">
+            <div class="card-title">🔥 All Leads — Follow-up Tracker</div>
+            <div style="display:flex;gap:8px;">
+              <select id="leadFilter" onchange="filterLeads()" style="background:#1a1c24;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);padding:6px 10px;border-radius:8px;font-size:12px;outline:none;">
+                <option value="">All leads</option>
+                <option value="new">New only</option>
+                <option value="contacted">Contacted</option>
+                <option value="followup">Follow-up due</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
           <div id="allAuditList"><div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div></div>
         </div>
       </div>
@@ -611,6 +634,35 @@
           <div class="card-header"><div class="card-title">💰 Revenue by Client</div><span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;" id="revTotal">—</span></div>
           <div class="revenue-list" id="revList"><div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div></div>
         </div>
+      </div><!-- end page-revenue -->
+
+      <!-- ═══════════ REFERRALS PAGE ═══════════ -->
+      <div id="page-referrals" style="display:none;">
+        <div class="stats-grid" style="margin-bottom:20px;">
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(162,155,254,.12);">🤝</div></div><div class="stat-value" id="refStatTotal">—</div><div class="stat-label">Total Referrals</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(255,159,67,.12);">⏳</div></div><div class="stat-value" id="refStatPending">—</div><div class="stat-label">Pending</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(0,184,148,.12);">✅</div></div><div class="stat-value" id="refStatConverted">—</div><div class="stat-label">Converted</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(253,203,110,.12);">💰</div></div><div class="stat-value" id="refStatRewards">$0</div><div class="stat-label">Rewards Issued</div></div>
+        </div>
+        <div class="dark-card" style="margin:0 0 20px;">
+          <div class="card-header">
+            <div class="card-title">🤝 Referral Tracker</div>
+            <button onclick="openAddReferral()" style="background:linear-gradient(135deg,#A29BFE,#6C5CE7);border:none;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">+ Log Referral</button>
+          </div>
+          <div id="referralList"><div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading referrals...</div></div>
+        </div>
+        <div class="dark-card" style="margin:0;">
+          <div class="card-header"><div class="card-title">📋 Referral Program Rules</div></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:4px 0;">
+            <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:16px;"><div style="font-size:24px;margin-bottom:8px;">🎁</div><div style="font-weight:700;font-size:14px;margin-bottom:4px;">Client Reward</div><div style="font-size:13px;color:rgba(255,255,255,.5);">$50 off next invoice for every successful referral</div></div>
+            <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:16px;"><div style="font-size:24px;margin-bottom:8px;">🚀</div><div style="font-weight:700;font-size:14px;margin-bottom:4px;">Referred Business Gets</div><div style="font-size:13px;color:rgba(255,255,255,.5);">First month 20% off — any plan</div></div>
+            <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:16px;"><div style="font-size:24px;margin-bottom:8px;">✅</div><div style="font-weight:700;font-size:14px;margin-bottom:4px;">Qualifies When</div><div style="font-size:13px;color:rgba(255,255,255,.5);">Referred business pays their first invoice</div></div>
+          </div>
+          <div style="margin-top:16px;padding:14px;background:rgba(162,155,254,.08);border-radius:12px;border:1px solid rgba(162,155,254,.2);">
+            <div style="font-size:13px;color:#A29BFE;font-weight:600;">📨 Review request link to share with clients:</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">https://rangu.us/review-request.html</div>
+          </div>
+        </div>
       </div>
 
     </div><!-- end adminContent -->
@@ -618,7 +670,7 @@
 </div><!-- end layout -->
 
 <script>
-  var _allPages = ['dashboard','clients','leads','tasks','reports','revenue'];
+  var _allPages = ['dashboard','clients','leads','tasks','reports','revenue','referrals'];
 
   function toggleSidebar(){
     document.getElementById('sidebar').classList.toggle('open');
@@ -628,16 +680,17 @@
   function setPage(page, el){
     document.querySelectorAll('.nav-item').forEach(function(i){ i.classList.remove('active'); });
     if(el) el.classList.add('active');
-    var titles = {dashboard:'Admin Dashboard',clients:'Clients',leads:'New Leads',tasks:'Tasks',reports:'Upload Reports',revenue:'Revenue'};
+    var titles = {dashboard:'Admin Dashboard',clients:'Clients',leads:'New Leads',tasks:'Tasks',reports:'Upload Reports',revenue:'Revenue',referrals:'Referral Tracker'};
     document.getElementById('pageTitle').textContent = titles[page] || 'Admin Dashboard';
     _allPages.forEach(function(p){
       var div = document.getElementById('page-'+p);
       if(div) div.style.display = (p === page) ? '' : 'none';
     });
-    if(page === 'revenue') populateRevenuePage();
-    if(page === 'clients') mirrorClientsTable();
-    if(page === 'leads')   loadAllAuditRequests();
-    if(page === 'reports') populateReportClientSelect();
+    if(page === 'revenue')   populateRevenuePage();
+    if(page === 'clients')   mirrorClientsTable();
+    if(page === 'leads')     loadAllAuditRequests();
+    if(page === 'reports')   populateReportClientSelect();
+    if(page === 'referrals') loadReferrals();
   }
 
   function setPageById(page){
@@ -950,38 +1003,89 @@
       const requests = [];
       snap.forEach(d => requests.push({id: d.id, ...d.data()}));
       requests.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
-      if(requests.length === 0){ list.innerHTML='<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No audit requests yet.</div>'; return; }
-      const colors = ['#FF6B6B','#FF9F43','#A29BFE','#00B894','#74B9FF','#FD79A8'];
-      list.innerHTML = requests.map(function(r){
-        const initials = (r.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-        const color    = colors[Math.abs((r.name||'').charCodeAt(0)||0) % colors.length];
-        const waNum    = (r.phone||'').replace(/[^0-9]/g,'');
-        const timeAgo  = r.submittedAt ? timeSince(new Date(r.submittedAt)) : 'Recently';
-        const done     = r.status === 'done';
-        return `<div class="lead-item" id="allreq-${r.id}" style="${done?'opacity:.4':''}">
-          <div class="lead-avatar" style="background:linear-gradient(135deg,${color},${color}aa)">${initials}</div>
-          <div class="lead-info" style="flex:1;">
-            <div class="lead-name">${r.name||'—'} — ${r.business||'—'}</div>
-            <div class="lead-detail">${r.city||'—'} • ${r.phone||'—'} • ${timeAgo}</div>
-            ${r.address ? `<div class="lead-detail">📍 ${r.address}</div>` : ''}
-            ${r.website ? `<div class="lead-detail">🌐 ${r.website}</div>` : ''}
-            ${r.message ? `<div class="lead-detail" style="margin-top:4px;font-style:italic;color:#FF9F43;">"${r.message}"</div>` : ''}
-          </div>
-          <div class="lead-actions">
-            ${waNum ? `<a class="lead-act wa" href="https://wa.me/${waNum}" target="_blank">Chat</a>` : ''}
-            ${!done ? `<button class="lead-act email" onclick="markDoneAll('${r.id}')" style="background:#00B894">✓ Done</button>` : '<span style="color:#00B894;font-size:12px;font-weight:700;">✓ Done</span>'}
-          </div>
-        </div>`;
-      }).join('');
+
+      // Update stat cards
+      const statNew       = requests.filter(r => !r.status || r.status === 'new').length;
+      const statContacted = requests.filter(r => r.status === 'contacted').length;
+      const statFollowup  = requests.filter(r => r.status === 'followup').length;
+      const statDone      = requests.filter(r => r.status === 'done').length;
+      ['leadStatNew','leadStatContacted','leadStatFollowup','leadStatDone'].forEach(function(id,i){
+        const el = document.getElementById(id);
+        if(el) el.textContent = [statNew, statContacted, statFollowup, statDone][i];
+      });
+
+      window._allLeads = requests;
+      renderLeads(requests);
     } catch(e){
       list.innerHTML = `<div style="color:#FF6B6B;padding:20px;">Error: ${e.message}</div>`;
     }
   };
 
-  window.markDoneAll = async function(id){
-    await updateDoc(doc(db, 'auditRequests', id), { status: 'done' });
-    const el = document.getElementById('allreq-'+id);
-    if(el) el.style.opacity = '0.4';
+  window._allLeads = [];
+  window.filterLeads = function(){
+    const val = document.getElementById('leadFilter').value;
+    const filtered = val ? window._allLeads.filter(function(r){
+      if(val === 'new')       return !r.status || r.status === 'new';
+      if(val === 'contacted') return r.status === 'contacted';
+      if(val === 'followup')  return r.status === 'followup';
+      if(val === 'done')      return r.status === 'done';
+      return true;
+    }) : window._allLeads;
+    renderLeads(filtered);
+  };
+
+  function renderLeads(requests){
+    const list = document.getElementById('allAuditList');
+    if(!list) return;
+    if(requests.length === 0){ list.innerHTML='<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No leads found.</div>'; return; }
+    const colors = ['#FF6B6B','#FF9F43','#A29BFE','#00B894','#74B9FF','#FD79A8'];
+    const statusStyles = {
+      'new':       {label:'New',       bg:'rgba(255,107,107,.15)', color:'#FF6B6B'},
+      'contacted': {label:'Contacted', bg:'rgba(116,185,255,.15)', color:'#74B9FF'},
+      'followup':  {label:'Follow-up', bg:'rgba(253,203,110,.15)', color:'#FDCB6E'},
+      'done':      {label:'Done',      bg:'rgba(0,184,148,.15)',   color:'#00B894'},
+    };
+    list.innerHTML = requests.map(function(r){
+      const initials = (r.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+      const color    = colors[Math.abs((r.name||'').charCodeAt(0)||0) % colors.length];
+      const waNum    = (r.phone||'').replace(/[^0-9]/g,'');
+      const timeAgo  = r.submittedAt ? timeSince(new Date(r.submittedAt)) : 'Recently';
+      const st       = statusStyles[r.status] || statusStyles['new'];
+      const notes    = r.followupNotes || '';
+      return `<div class="lead-item" id="allreq-${r.id}" style="flex-wrap:wrap;gap:10px;${r.status==='done'?'opacity:.5':''}">
+        <div class="lead-avatar" style="background:linear-gradient(135deg,${color},${color}99)">${initials}</div>
+        <div class="lead-info" style="flex:1;min-width:200px;">
+          <div class="lead-name">${r.name||'—'} — <span style="color:${color}">${r.business||'—'}</span></div>
+          <div class="lead-detail">${r.city||'—'} • ${r.phone||'—'} • ${timeAgo}</div>
+          ${r.address ? `<div class="lead-detail">📍 ${r.address}</div>` : ''}
+          ${r.website ? `<div class="lead-detail">🌐 <a href="${r.website}" target="_blank" style="color:#74B9FF;">${r.website}</a></div>` : ''}
+          ${r.message ? `<div class="lead-detail" style="margin-top:4px;font-style:italic;color:rgba(255,255,255,.5);">"${r.message}"</div>` : ''}
+          ${notes ? `<div class="lead-detail" style="margin-top:4px;color:#FDCB6E;">📝 ${notes}</div>` : ''}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+          <span style="padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:${st.bg};color:${st.color};">${st.label}</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
+            ${waNum ? `<a class="lead-act wa" href="https://wa.me/${waNum}" target="_blank" onclick="updateLeadStatus('${r.id}','contacted')">💬 Chat</a>` : ''}
+            <button class="lead-act" style="background:#74B9FF;color:#fff;border:none;cursor:pointer;" onclick="updateLeadStatus('${r.id}','followup')">⏳ Follow-up</button>
+            <button class="lead-act" style="background:#00B894;color:#fff;border:none;cursor:pointer;" onclick="updateLeadStatus('${r.id}','done')">✓ Done</button>
+          </div>
+          <input type="text" placeholder="Add note..." value="${notes}" onblur="saveLeadNote('${r.id}',this.value)"
+            style="width:160px;padding:5px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:11px;outline:none;font-family:inherit;">
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  window.updateLeadStatus = async function(id, status){
+    try {
+      await updateDoc(doc(db, 'auditRequests', id), { status });
+      window.loadAllAuditRequests();
+    } catch(e){ alert('Error: ' + e.message); }
+  };
+
+  window.saveLeadNote = async function(id, note){
+    try { await updateDoc(doc(db, 'auditRequests', id), { followupNotes: note }); }
+    catch(e){ console.error(e); }
   };
 
   // Submit report to client's Firestore subcollection
@@ -1019,6 +1123,75 @@
   window.markDone = async function(id){
     await updateDoc(doc(db, 'auditRequests', id), { status: 'done' });
     document.getElementById('req-'+id).style.opacity = '0.4';
+  };
+
+  // ── Referral System ──
+  window.loadReferrals = async function(){
+    const list = document.getElementById('referralList');
+    if(!list) return;
+    try {
+      const snap = await getDocs(collection(db, 'referrals'));
+      const refs = [];
+      snap.forEach(d => refs.push({id:d.id,...d.data()}));
+      refs.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+
+      const total     = refs.length;
+      const pending   = refs.filter(r=>r.status==='pending').length;
+      const converted = refs.filter(r=>r.status==='converted').length;
+      const rewards   = converted * 50;
+      document.getElementById('refStatTotal').textContent     = total;
+      document.getElementById('refStatPending').textContent   = pending;
+      document.getElementById('refStatConverted').textContent = converted;
+      document.getElementById('refStatRewards').textContent   = '$'+rewards;
+      const badge = document.getElementById('referralBadge');
+      if(badge){ badge.textContent=pending; badge.style.display=pending>0?'inline-flex':'none'; }
+
+      if(refs.length === 0){
+        list.innerHTML='<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No referrals yet. Share the referral link with happy clients!</div>';
+        return;
+      }
+      const statusSt = {pending:{label:'Pending',bg:'rgba(255,159,67,.15)',color:'#FF9F43'},converted:{label:'Converted ✓',bg:'rgba(0,184,148,.15)',color:'#00B894'},lost:{label:'Lost',bg:'rgba(255,107,107,.15)',color:'#FF6B6B'}};
+      list.innerHTML = refs.map(function(r){
+        const st = statusSt[r.status]||statusSt['pending'];
+        return `<div class="lead-item" style="flex-wrap:wrap;gap:10px;">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,#A29BFE,#6C5CE7)">${(r.referredBy||'?').charAt(0).toUpperCase()}</div>
+          <div class="lead-info" style="flex:1;min-width:180px;">
+            <div class="lead-name">Referred: <strong>${r.referredBiz||'—'}</strong></div>
+            <div class="lead-detail">By: ${r.referredBy||'—'} • ${r.referredPhone||'—'}</div>
+            <div class="lead-detail">${r.notes||''}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+            <span style="padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;background:${st.bg};color:${st.color};">${st.label}</span>
+            <div style="display:flex;gap:6px;">
+              ${r.status!=='converted'?`<button onclick="updateRefStatus('${r.id}','converted')" style="background:#00B894;color:#fff;border:none;cursor:pointer;padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;">✓ Converted</button>`:''}
+              ${r.status==='pending'?`<button onclick="updateRefStatus('${r.id}','lost')" style="background:rgba(255,107,107,.2);color:#FF6B6B;border:none;cursor:pointer;padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;">✗ Lost</button>`:''}
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    } catch(e){
+      list.innerHTML=`<div style="color:#FF6B6B;padding:20px;">Error: ${e.message}</div>`;
+    }
+  };
+
+  window.openAddReferral = function(){
+    const referredBy  = prompt('Referring client name (who sent the referral)?');
+    if(!referredBy) return;
+    const referredBiz = prompt('Referred business name?');
+    if(!referredBiz) return;
+    const referredPhone = prompt('Referred business phone?') || '';
+    const notes         = prompt('Notes (optional):') || '';
+    addDoc(collection(db,'referrals'),{
+      referredBy, referredBiz, referredPhone, notes,
+      status:'pending', createdAt: new Date().toISOString()
+    }).then(function(){
+      window.loadReferrals();
+    }).catch(function(e){ alert('Error: '+e.message); });
+  };
+
+  window.updateRefStatus = async function(id, status){
+    await updateDoc(doc(db,'referrals',id),{status});
+    window.loadReferrals();
   };
 
   function timeSince(date){
