@@ -383,7 +383,7 @@
       <a class="nav-item" href="#" onclick="setPage('clients',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Clients
-        <span class="nav-badge">8</span>
+        <span class="nav-badge" id="clientsBadge" style="display:none;">0</span>
       </a>
       <a class="nav-item" href="#" onclick="setPage('leads',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -455,7 +455,7 @@
             <div class="stat-icon" style="background:rgba(162,155,254,.12);">👥</div>
             <div class="stat-badge" style="background:rgba(0,184,148,.12);color:#00B894;">↑ +2 this month</div>
           </div>
-          <div class="stat-value">8</div>
+          <div class="stat-value" id="statActiveClients">—</div>
           <div class="stat-label">Active Clients</div>
         </div>
         <div class="stat-card">
@@ -738,7 +738,13 @@
     });
 
     // Update stats
-    document.querySelector('.stat-value').textContent = clients.length;
+    const activeCount = clients.filter(c => c.status === 'active').length;
+    const totalCount  = clients.length;
+    const statEl = document.getElementById('statActiveClients');
+    if(statEl) statEl.textContent = activeCount;
+    // Update sidebar badge
+    const badge = document.getElementById('clientsBadge');
+    if(badge){ badge.textContent = totalCount; badge.style.display = totalCount > 0 ? 'inline-flex' : 'none'; }
 
     if(clients.length === 0){
       tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No clients yet — add your first client!</td></tr>`;
