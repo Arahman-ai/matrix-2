@@ -446,7 +446,10 @@
       </div>
     </div>
 
-    <div class="content">
+    <div class="content" id="adminContent">
+
+      <!-- ═══════════ DASHBOARD PAGE ═══════════ -->
+      <div id="page-dashboard">
 
       <!-- STATS -->
       <div class="stats-grid">
@@ -463,16 +466,15 @@
             <div class="stat-icon" style="background:rgba(255,159,67,.12);">💰</div>
             <div class="stat-badge" style="background:rgba(255,159,67,.12);color:#FF9F43;">MRR</div>
           </div>
-          <div class="stat-value">$2,994</div>
+          <div class="stat-value" id="statMRR">—</div>
           <div class="stat-label">Monthly Revenue</div>
-          <div class="stat-change up">↑ +$798 vs last month</div>
         </div>
         <div class="stat-card">
           <div class="stat-top">
             <div class="stat-icon" style="background:rgba(255,107,107,.12);">🔥</div>
             <div class="stat-badge" style="background:rgba(255,107,107,.12);color:#FF6B6B;">Action needed</div>
           </div>
-          <div class="stat-value">3</div>
+          <div class="stat-value" id="statAuditCount">—</div>
           <div class="stat-label">New Audit Requests</div>
         </div>
         <div class="stat-card">
@@ -491,7 +493,7 @@
           <div class="quick-icon">➕</div>
           <div class="quick-label">Add Client</div>
         </a>
-        <a class="quick-btn" href="#">
+        <a class="quick-btn" href="#" onclick="document.querySelector('[onclick=\'setPage(\\\'reports\\\',this)\']').click()">
           <div class="quick-icon">📤</div>
           <div class="quick-label">Upload Report</div>
         </a>
@@ -499,7 +501,7 @@
           <div class="quick-icon">💬</div>
           <div class="quick-label">Message Client</div>
         </a>
-        <a class="quick-btn" href="#">
+        <a class="quick-btn" href="https://analytics.google.com" target="_blank">
           <div class="quick-icon">📊</div>
           <div class="quick-label">View Analytics</div>
         </a>
@@ -513,118 +515,136 @@
           <input type="text" placeholder="Search clients..." id="clientSearch" oninput="filterClients()">
         </div>
       </div>
-
       <div class="table-wrap">
         <table id="clientsTable">
-          <thead>
-            <tr>
-              <th>Client</th>
-              <th>Plan</th>
-              <th>Status</th>
-              <th>Visibility Score</th>
-              <th>Last Report</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="clientsBody">
-            <tr><td colspan="6" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading clients...</td></tr>
-          </tbody>
+          <thead><tr><th>Client</th><th>Plan</th><th>Status</th><th>Visibility Score</th><th>Last Report</th><th>Actions</th></tr></thead>
+          <tbody id="clientsBody"><tr><td colspan="6" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading clients...</td></tr></tbody>
         </table>
       </div>
 
       <!-- TWO COL -->
       <div class="two-col">
-
-        <!-- Tasks -->
         <div class="dark-card">
-          <div class="card-header">
-            <div class="card-title">📋 Pending Tasks</div>
-            <a class="card-action" href="#">View all</a>
-          </div>
-          <div class="task-item">
-            <div class="task-check" onclick="toggleTask(this)"></div>
-            <div class="task-text">
-              <div class="task-title">Send December report to John's Restaurant</div>
-              <div class="task-meta">Due today • John's Restaurant</div>
-            </div>
-            <div class="task-priority p-high">High</div>
-          </div>
-          <div class="task-item">
-            <div class="task-check" onclick="toggleTask(this)"></div>
-            <div class="task-text">
-              <div class="task-title">Upload 10 photos to Spice Kingdom GBP</div>
-              <div class="task-meta">Due Jan 8 • Spice Kingdom</div>
-            </div>
-            <div class="task-priority p-med">Medium</div>
-          </div>
-          <div class="task-item">
-            <div class="task-check done" onclick="toggleTask(this)"></div>
-            <div class="task-text">
-              <div class="task-title done">Reply to Green Hotel audit request</div>
-              <div class="task-meta">Completed yesterday</div>
-            </div>
-            <div class="task-priority p-low">Done</div>
-          </div>
-          <div class="task-item">
-            <div class="task-check" onclick="toggleTask(this)"></div>
-            <div class="task-text">
-              <div class="task-title">Set up Facebook ads for Royal Mart</div>
-              <div class="task-meta">Due Jan 10 • Royal Mart</div>
-            </div>
-            <div class="task-priority p-med">Medium</div>
-          </div>
-          <div class="task-item">
-            <div class="task-check" onclick="toggleTask(this)"></div>
-            <div class="task-text">
-              <div class="task-title">Follow up with Sunrise Cafe — paused account</div>
-              <div class="task-meta">Due Jan 12 • Sunrise Cafe</div>
-            </div>
-            <div class="task-priority p-high">High</div>
+          <div class="card-header"><div class="card-title">📋 Pending Tasks</div><a class="card-action" href="#" onclick="setPageById('tasks')">View all</a></div>
+          <div id="dashTasksPreview"></div>
+        </div>
+        <div class="dark-card">
+          <div class="card-header"><div class="card-title">🔥 New Audit Requests</div><a class="card-action" href="#" onclick="setPageById('leads')">View all</a></div>
+          <div id="auditRequestsList"><div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div></div>
+        </div>
+      </div>
+
+      </div><!-- end page-dashboard -->
+
+      <!-- ═══════════ CLIENTS PAGE ═══════════ -->
+      <div id="page-clients" style="display:none;">
+        <div class="section-header" style="margin-bottom:16px;">
+          <div class="section-title" style="color:#fff;">All Clients</div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="search-bar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search clients..." id="clientSearch2" oninput="filterClients2()"></div>
+            <button class="topbar-btn primary" onclick="openModal()">+ Add Client</button>
           </div>
         </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Client</th><th>Plan</th><th>Status</th><th>Visibility Score</th><th>Last Report</th><th>Actions</th></tr></thead>
+          <tbody id="clientsBody2"><tr><td colspan="6" style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">Loading...</td></tr></tbody></table>
+        </div>
+      </div>
 
-        <!-- New Leads -->
-        <div class="dark-card">
-          <div class="card-header">
-            <div class="card-title">🔥 New Audit Requests</div>
-            <a class="card-action" href="#">View all</a>
+      <!-- ═══════════ LEADS PAGE ═══════════ -->
+      <div id="page-leads" style="display:none;">
+        <div class="dark-card" style="margin:0;">
+          <div class="card-header"><div class="card-title">🔥 All Audit Requests</div></div>
+          <div id="allAuditList"><div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- ═══════════ TASKS PAGE ═══════════ -->
+      <div id="page-tasks" style="display:none;">
+        <div class="dark-card" style="margin:0;max-width:700px;">
+          <div class="card-header"><div class="card-title">📋 All Tasks</div>
+            <button onclick="addTask()" style="background:linear-gradient(135deg,#FF9F43,#FF6B6B);border:none;color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">+ Add Task</button>
           </div>
-          <div id="auditRequestsList">
-            <div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div>
+          <div id="allTasksList">
+            <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">Send December report to John's Restaurant</div><div class="task-meta">Due today • John's Restaurant</div></div><div class="task-priority p-high">High</div></div>
+            <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">Upload 10 photos to Spice Kingdom GBP</div><div class="task-meta">Due Jan 8 • Spice Kingdom</div></div><div class="task-priority p-med">Medium</div></div>
+            <div class="task-item"><div class="task-check done" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title done">Reply to Green Hotel audit request</div><div class="task-meta">Completed yesterday</div></div><div class="task-priority p-low">Done</div></div>
+            <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">Set up Facebook ads for Royal Mart</div><div class="task-meta">Due Jan 10 • Royal Mart</div></div><div class="task-priority p-med">Medium</div></div>
+            <div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">Follow up with Sunrise Cafe — paused account</div><div class="task-meta">Due Jan 12 • Sunrise Cafe</div></div><div class="task-priority p-high">High</div></div>
           </div>
         </div>
       </div>
 
-      <!-- REVENUE -->
-      <div class="dark-card">
-        <div class="card-header">
-          <div class="card-title">💰 Monthly Revenue Breakdown</div>
-          <span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;">$2,994 / mo</span>
-        </div>
-        <div class="revenue-list">
-          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#A29BFE"></div><div><div class="rev-name">Spice Kingdom</div><div class="rev-plan">Pro Plan</div></div></div><div class="rev-amount">$799</div></div>
-          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#FF9F43"></div><div><div class="rev-name">John's Restaurant</div><div class="rev-plan">Growth Plan</div></div></div><div class="rev-amount">$399</div></div>
-          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#FDCB6E"></div><div><div class="rev-name">Royal Mart</div><div class="rev-plan">Growth Plan</div></div></div><div class="rev-amount">$399</div></div>
-          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#74B9FF"></div><div><div class="rev-name">3 × Starter Clients</div><div class="rev-plan">Starter Plan</div></div></div><div class="rev-amount">$597</div></div>
-          <div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:#55EFC4"></div><div><div class="rev-name">2 × BD Clients</div><div class="rev-plan">BD Pricing</div></div></div><div class="rev-amount">$800</div></div>
+      <!-- ═══════════ UPLOAD REPORTS PAGE ═══════════ -->
+      <div id="page-reports" style="display:none;">
+        <div class="dark-card" style="margin:0;max-width:600px;">
+          <div class="card-header"><div class="card-title">📤 Upload Report to Client</div></div>
+          <div style="padding:4px 0 16px;">
+            <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Select Client</label>
+            <select id="reportClientSelect" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:#1a1c24;color:#fff;font-size:14px;outline:none;margin-bottom:14px;">
+              <option value="">Loading clients...</option>
+            </select>
+            <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Report Title</label>
+            <input id="reportTitle" type="text" placeholder="e.g. March 2026 Performance Report" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;margin-bottom:14px;">
+            <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Report URL (Google Drive / PDF link)</label>
+            <input id="reportUrl" type="url" placeholder="https://drive.google.com/..." style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;margin-bottom:14px;">
+            <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Score (0–100)</label>
+            <input id="reportScore" type="number" min="0" max="100" placeholder="e.g. 87" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;margin-bottom:14px;">
+            <label style="font-size:12px;color:rgba(255,255,255,.5);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">Preview Text</label>
+            <textarea id="reportPreview" placeholder="Brief summary shown to client..." style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;resize:vertical;min-height:80px;margin-bottom:20px;font-family:inherit;"></textarea>
+            <div id="reportMsg" style="display:none;padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:14px;"></div>
+            <button onclick="submitReport()" style="width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">📤 Upload Report</button>
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+      <!-- ═══════════ REVENUE PAGE ═══════════ -->
+      <div id="page-revenue" style="display:none;">
+        <div class="stats-grid" style="margin-bottom:20px;">
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(255,159,67,.12);">💰</div><div class="stat-badge" style="background:rgba(0,184,148,.12);color:#00B894;">Live</div></div><div class="stat-value" id="revMRR">—</div><div class="stat-label">Monthly Revenue</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(162,155,254,.12);">👥</div></div><div class="stat-value" id="revClients">—</div><div class="stat-label">Paying Clients</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(0,184,148,.12);">📈</div></div><div class="stat-value" id="revARR">—</div><div class="stat-label">Annual Run Rate</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:rgba(253,203,110,.12);">⭐</div></div><div class="stat-value" id="revAvg">—</div><div class="stat-label">Avg Revenue / Client</div></div>
+        </div>
+        <div class="dark-card" style="margin:0;">
+          <div class="card-header"><div class="card-title">💰 Revenue by Client</div><span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;" id="revTotal">—</span></div>
+          <div class="revenue-list" id="revList"><div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div></div>
+        </div>
+      </div>
+
+    </div><!-- end adminContent -->
+  </div><!-- end main -->
+</div><!-- end layout -->
 
 <script>
+  var _allPages = ['dashboard','clients','leads','tasks','reports','revenue'];
+
   function toggleSidebar(){
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('sidebarOverlay').classList.toggle('open');
   }
+
   function setPage(page, el){
     document.querySelectorAll('.nav-item').forEach(function(i){ i.classList.remove('active'); });
-    el.classList.add('active');
+    if(el) el.classList.add('active');
     var titles = {dashboard:'Admin Dashboard',clients:'Clients',leads:'New Leads',tasks:'Tasks',reports:'Upload Reports',revenue:'Revenue'};
     document.getElementById('pageTitle').textContent = titles[page] || 'Admin Dashboard';
+    _allPages.forEach(function(p){
+      var div = document.getElementById('page-'+p);
+      if(div) div.style.display = (p === page) ? '' : 'none';
+    });
+    if(page === 'revenue') populateRevenuePage();
+    if(page === 'clients') mirrorClientsTable();
+    if(page === 'leads')   loadAllAuditRequests();
+    if(page === 'reports') populateReportClientSelect();
   }
+
+  function setPageById(page){
+    var navEl = document.querySelector('[onclick="setPage('+page+'',this)"]');
+    setPage(page, navEl);
+  }
+
   function openModal(){ document.getElementById('addClientModal').classList.add('open'); }
   function closeModal(){ document.getElementById('addClientModal').classList.remove('open'); }
   document.getElementById('addClientModal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
@@ -635,10 +655,72 @@
     if(title) title.classList.toggle('done');
   }
 
+  function addTask(){
+    var title = prompt('Task title:');
+    if(!title) return;
+    var list = document.getElementById('allTasksList');
+    var item = document.createElement('div');
+    item.className = 'task-item';
+    item.innerHTML = '<div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">'+title+'</div><div class="task-meta">Added just now</div></div><div class="task-priority p-med">Medium</div>';
+    list.appendChild(item);
+  }
+
   function filterClients(){
     var q = document.getElementById('clientSearch').value.toLowerCase();
     document.querySelectorAll('#clientsBody tr').forEach(function(row){
       row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+  function filterClients2(){
+    var q = document.getElementById('clientSearch2')?.value.toLowerCase() || '';
+    document.querySelectorAll('#clientsBody2 tr').forEach(function(row){
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+
+  function mirrorClientsTable(){
+    var src = document.getElementById('clientsBody').innerHTML;
+    var dst = document.getElementById('clientsBody2');
+    if(dst) dst.innerHTML = src;
+  }
+
+  function populateRevenuePage(){
+    var rows = document.querySelectorAll('#clientsBody tr');
+    var planPrices = {'Starter':199,'Growth':399,'Pro':799,'Admin':0};
+    var dotColors = ['#A29BFE','#FF9F43','#FF6B6B','#74B9FF','#55EFC4','#FDCB6E','#00B894','#FD79A8'];
+    var items = [];
+    rows.forEach(function(row){
+      var cells = row.querySelectorAll('td');
+      if(cells.length < 2) return;
+      var nameEl = row.querySelector('.client-name');
+      var name   = nameEl ? nameEl.textContent.trim() : (cells[0] ? cells[0].textContent.trim() : 'Client');
+      var plan   = cells[1] ? cells[1].textContent.trim() : 'Starter';
+      var price  = planPrices[plan] || 0;
+      if(price > 0) items.push({name:name, plan:plan, price:price});
+    });
+    var mrr = items.reduce(function(s,i){ return s+i.price; }, 0);
+    document.getElementById('revMRR').textContent     = '$' + mrr.toLocaleString();
+    document.getElementById('revClients').textContent = items.length;
+    document.getElementById('revARR').textContent     = '$' + (mrr*12).toLocaleString();
+    document.getElementById('revAvg').textContent     = items.length ? '$' + Math.round(mrr/items.length) : '-';
+    document.getElementById('revTotal').textContent   = '$' + mrr.toLocaleString() + ' / mo';
+    document.getElementById('revList').innerHTML = items.length
+      ? items.map(function(item,i){
+          return '<div class="rev-item"><div class="rev-left"><div class="rev-dot" style="background:'+dotColors[i%dotColors.length]+'"></div><div><div class="rev-name">'+item.name+'</div><div class="rev-plan">'+item.plan+' Plan</div></div></div><div class="rev-amount">$'+item.price+'</div></div>';
+        }).join('')
+      : '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">No paying clients yet.</div>';
+  }
+
+  function populateReportClientSelect(){
+    var rows = document.querySelectorAll('#clientsBody tr');
+    var sel = document.getElementById('reportClientSelect');
+    if(!sel) return;
+    sel.innerHTML = '<option value="">-- Select a client --</option>';
+    rows.forEach(function(row){
+      var uid = row.dataset.uid;
+      var nameEl = row.querySelector('.client-name');
+      var name = nameEl ? nameEl.textContent.trim() : row.cells[0]?.textContent?.trim();
+      if(uid && name){ var opt = document.createElement('option'); opt.value = uid; opt.textContent = name; sel.appendChild(opt); }
     });
   }
 </script>
@@ -693,7 +775,18 @@
     // Load all clients
     loadClients();
 
-    // ── Real-time notification listener for new audit requests ──
+    // Populate dashboard tasks preview
+    const taskItems = [
+      {title:"Send December report to John's Restaurant", meta:'Due today • John\'s Restaurant', priority:'High', pClass:'p-high'},
+      {title:'Upload 10 photos to Spice Kingdom GBP',    meta:'Due Jan 8 • Spice Kingdom',      priority:'Medium', pClass:'p-med'},
+      {title:'Set up Facebook ads for Royal Mart',       meta:'Due Jan 10 • Royal Mart',         priority:'Medium', pClass:'p-med'},
+    ];
+    const preview = document.getElementById('dashTasksPreview');
+    if(preview){
+      preview.innerHTML = taskItems.map(function(t){
+        return '<div class="task-item"><div class="task-check" onclick="toggleTask(this)"></div><div class="task-text"><div class="task-title">'+t.title+'</div><div class="task-meta">'+t.meta+'</div></div><div class="task-priority '+t.pClass+'">'+t.priority+'</div></div>';
+      }).join('');
+    }
     let knownIds = null;
     onSnapshot(
       query(collection(db, 'auditRequests'), orderBy('submittedAt', 'desc')),
@@ -810,13 +903,12 @@
     const snap = await getDocs(collection(db, 'auditRequests'));
     const requests = [];
     snap.forEach(d => requests.push({id: d.id, ...d.data()}));
-
-    // Sort newest first
     requests.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 
-    // Update stat count
-    const statCards = document.querySelectorAll('.stat-value');
-    if(statCards[2]) statCards[2].textContent = requests.filter(r => r.status === 'new').length;
+    // Update stat card
+    const pending = requests.filter(r => r.status !== 'done').length;
+    const statEl = document.getElementById('statAuditCount');
+    if(statEl) statEl.textContent = pending;
 
     if(requests.length === 0){
       list.innerHTML = `<div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">No audit requests yet</div>`;
@@ -847,6 +939,82 @@
       list.innerHTML = `<div style="text-align:center;padding:20px;color:#FF6B6B;">Error: ${e.message}</div>`;
     }
   }
+
+  // Full audit requests list for leads page
+  window.loadAllAuditRequests = async function(){
+    const list = document.getElementById('allAuditList');
+    if(!list) return;
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.3);">Loading...</div>';
+    try {
+      const snap = await getDocs(collection(db, 'auditRequests'));
+      const requests = [];
+      snap.forEach(d => requests.push({id: d.id, ...d.data()}));
+      requests.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+      if(requests.length === 0){ list.innerHTML='<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);">No audit requests yet.</div>'; return; }
+      const colors = ['#FF6B6B','#FF9F43','#A29BFE','#00B894','#74B9FF','#FD79A8'];
+      list.innerHTML = requests.map(function(r){
+        const initials = (r.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+        const color    = colors[Math.abs((r.name||'').charCodeAt(0)||0) % colors.length];
+        const waNum    = (r.phone||'').replace(/[^0-9]/g,'');
+        const timeAgo  = r.submittedAt ? timeSince(new Date(r.submittedAt)) : 'Recently';
+        const done     = r.status === 'done';
+        return `<div class="lead-item" id="allreq-${r.id}" style="${done?'opacity:.4':''}">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,${color},${color}aa)">${initials}</div>
+          <div class="lead-info" style="flex:1;">
+            <div class="lead-name">${r.name||'—'} — ${r.business||'—'}</div>
+            <div class="lead-detail">${r.city||'—'} • ${r.phone||'—'} • ${timeAgo}</div>
+            ${r.address ? `<div class="lead-detail">📍 ${r.address}</div>` : ''}
+            ${r.website ? `<div class="lead-detail">🌐 ${r.website}</div>` : ''}
+            ${r.message ? `<div class="lead-detail" style="margin-top:4px;font-style:italic;color:#FF9F43;">"${r.message}"</div>` : ''}
+          </div>
+          <div class="lead-actions">
+            ${waNum ? `<a class="lead-act wa" href="https://wa.me/${waNum}" target="_blank">Chat</a>` : ''}
+            ${!done ? `<button class="lead-act email" onclick="markDoneAll('${r.id}')" style="background:#00B894">✓ Done</button>` : '<span style="color:#00B894;font-size:12px;font-weight:700;">✓ Done</span>'}
+          </div>
+        </div>`;
+      }).join('');
+    } catch(e){
+      list.innerHTML = `<div style="color:#FF6B6B;padding:20px;">Error: ${e.message}</div>`;
+    }
+  };
+
+  window.markDoneAll = async function(id){
+    await updateDoc(doc(db, 'auditRequests', id), { status: 'done' });
+    const el = document.getElementById('allreq-'+id);
+    if(el) el.style.opacity = '0.4';
+  };
+
+  // Submit report to client's Firestore subcollection
+  window.submitReport = async function(){
+    const uid     = document.getElementById('reportClientSelect').value;
+    const title   = document.getElementById('reportTitle').value.trim();
+    const url     = document.getElementById('reportUrl').value.trim();
+    const score   = parseInt(document.getElementById('reportScore').value) || 0;
+    const preview = document.getElementById('reportPreview').value.trim();
+    const msgEl   = document.getElementById('reportMsg');
+
+    if(!uid)  { msgEl.style.display='block'; msgEl.style.background='#fff0f0'; msgEl.style.color='#e74c3c'; msgEl.textContent='Please select a client.'; return; }
+    if(!title){ msgEl.style.display='block'; msgEl.style.background='#fff0f0'; msgEl.style.color='#e74c3c'; msgEl.textContent='Please enter a report title.'; return; }
+
+    try {
+      await addDoc(collection(db, 'users', uid, 'reports'), {
+        title, downloadUrl: url, score, preview,
+        type: 'monthly', date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+        createdAt: new Date().toISOString()
+      });
+      // Also update lastReport date on user doc
+      await updateDoc(doc(db, 'users', uid), { lastReport: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) });
+      msgEl.style.display='block'; msgEl.style.background='#f0fff8'; msgEl.style.color='#00B894';
+      msgEl.textContent='✅ Report uploaded successfully! Client can now see it in their dashboard.';
+      document.getElementById('reportTitle').value='';
+      document.getElementById('reportUrl').value='';
+      document.getElementById('reportScore').value='';
+      document.getElementById('reportPreview').value='';
+    } catch(e){
+      msgEl.style.display='block'; msgEl.style.background='#fff0f0'; msgEl.style.color='#e74c3c';
+      msgEl.textContent='Error: ' + e.message;
+    }
+  };
 
   window.markDone = async function(id){
     await updateDoc(doc(db, 'auditRequests', id), { status: 'done' });
