@@ -750,6 +750,163 @@
       </div>
     </div>
 
+    </div><!-- end billing page last div -->
+
+    <!-- GOOGLE MAPS SEO PAGE -->
+    <div id="mapsPage" style="display:none;padding:24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#111;margin-bottom:4px;">Google Maps SEO</div>
+      <p style="color:#6b7280;font-size:14px;margin-bottom:24px;">Your local search visibility, rankings, and optimisation progress.</p>
+
+      <!-- Rank + Calls row -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:8px;">📍 Google Maps Rank</div>
+          <div style="font-size:36px;font-weight:900;color:#111;" id="mapRankBig">—</div>
+          <div style="font-size:13px;color:#6b7280;margin-top:4px;" id="mapRankChange">—</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:8px;">📞 Calls This Month</div>
+          <div style="font-size:36px;font-weight:900;color:#111;" id="mapCallsBig">—</div>
+          <div style="font-size:13px;" id="mapCallsChange">—</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:8px;">👁️ Profile Views</div>
+          <div style="font-size:36px;font-weight:900;color:#111;" id="mapViewsBig">—</div>
+          <div style="font-size:13px;" id="mapViewsChange">—</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+          <div style="font-size:12px;color:#9ca3af;margin-bottom:8px;">⭐ Average Rating</div>
+          <div style="font-size:36px;font-weight:900;color:#111;" id="mapRatingBig">—</div>
+          <div style="font-size:13px;color:#6b7280;" id="mapReviewsBig">—</div>
+        </div>
+      </div>
+
+      <!-- Optimisation checklist -->
+      <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:16px;">🗺️ Google Business Profile Optimisation</div>
+        <div style="display:flex;flex-direction:column;gap:12px;" id="mapsChecklist">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- What we do -->
+      <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;padding:24px;color:#fff;">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;">🚀 What Rangu Does Every Month</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          ${['Update GBP posts weekly','Respond to all reviews','Add new photos monthly','Fix NAP inconsistencies','Monitor keyword rankings','Analyse competitor profiles','Submit to local directories','Generate monthly report'].map(t=>`
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);">
+            <span style="color:#00B894;font-size:16px;">✓</span> ${t}
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- SOCIAL MEDIA PAGE -->
+    <div id="socialPage" style="display:none;padding:24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#111;margin-bottom:4px;">Social Media</div>
+      <p style="color:#6b7280;font-size:14px;margin-bottom:24px;">Your social media campaign progress and activity.</p>
+
+      <!-- Progress card -->
+      <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:6px;">📱 Social Media Progress</div>
+        <p style="font-size:13px;color:#9ca3af;margin-bottom:20px;">Campaign strength across all platforms</p>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+          <div style="flex:1;background:#f3f4f6;border-radius:999px;height:14px;overflow:hidden;">
+            <div id="socialProgressBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#A29BFE,#6C5CE7);transition:width .6s ease;width:0%;"></div>
+          </div>
+          <div style="font-size:22px;font-weight:900;color:#6C5CE7;" id="socialProgressPct">0%</div>
+        </div>
+      </div>
+
+      <!-- Platforms -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px;">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #1877f2;">
+          <div style="font-size:20px;margin-bottom:8px;">📘 Facebook</div>
+          <div style="font-size:13px;color:#6b7280;line-height:1.6;">Regular posts, business updates, and customer engagement managed by Rangu.</div>
+          <div style="margin-top:12px;font-size:12px;font-weight:700;color:#1877f2;">ACTIVE</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #e1306c;">
+          <div style="font-size:20px;margin-bottom:8px;">📸 Instagram</div>
+          <div style="font-size:13px;color:#6b7280;line-height:1.6;">Visual content, stories, and reels to grow brand awareness and attract local customers.</div>
+          <div style="margin-top:12px;font-size:12px;font-weight:700;color:#e1306c;">ACTIVE</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #25D366;">
+          <div style="font-size:20px;margin-bottom:8px;">💬 WhatsApp Business</div>
+          <div style="font-size:13px;color:#6b7280;line-height:1.6;">Customer communication templates and business profile optimisation.</div>
+          <div style="margin-top:12px;font-size:12px;font-weight:700;color:#25D366;">ACTIVE</div>
+        </div>
+      </div>
+
+      <!-- Monthly plan -->
+      <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:16px;">📅 Monthly Social Activity</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          ${[
+            ['Week 1','Content calendar planning + 3 posts published'],
+            ['Week 2','Engagement monitoring + 3 posts + story updates'],
+            ['Week 3','Review responses + 3 posts + competitor analysis'],
+            ['Week 4','Monthly report + 3 posts + next month strategy']
+          ].map(([w,t])=>`
+          <div style="background:#f8fafc;border-radius:12px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">${w}</div>
+            <div style="font-size:13px;color:#374151;">${t}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEWS PAGE -->
+    <div id="reviewsPage" style="display:none;padding:24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#111;margin-bottom:4px;">Reviews</div>
+      <p style="color:#6b7280;font-size:14px;margin-bottom:24px;">Your Google rating, review count, and generation strategy.</p>
+
+      <!-- Rating + count -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px;">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;">
+          <div style="font-size:48px;font-weight:900;color:#111;" id="reviewRatingBig">—</div>
+          <div style="font-size:22px;margin:4px 0;">⭐⭐⭐⭐⭐</div>
+          <div style="font-size:13px;color:#9ca3af;">Average Rating</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;">
+          <div style="font-size:48px;font-weight:900;color:#00B894;" id="reviewNewBig">—</div>
+          <div style="font-size:13px;color:#9ca3af;margin-top:8px;">New Reviews This Month</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;">
+          <div style="font-size:48px;font-weight:900;color:#FF9F43;" id="reviewGenPct">—</div>
+          <div style="font-size:13px;color:#9ca3af;margin-top:8px;">Review Generation Progress</div>
+        </div>
+      </div>
+
+      <!-- How we generate reviews -->
+      <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;">
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:16px;">⭐ How We Generate Reviews For You</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          ${[
+            ['1','Review Request SMS/WhatsApp','We send polite review request messages to your recent customers with a direct Google review link.'],
+            ['2','QR Code Generation','Printable QR code for your counter, receipts, or packaging that opens your Google review page instantly.'],
+            ['3','Follow-up Sequence','Customers who didn\'t respond get a gentle reminder after 3 days — maximising conversion.'],
+            ['4','Negative Review Protection','We alert you immediately when a low review comes in so you can respond fast and protect your rating.']
+          ].map(([n,title,desc])=>`
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${n}</div>
+            <div>
+              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">${title}</div>
+              <div style="font-size:13px;color:#6b7280;">${desc}</div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Leave a review CTA -->
+      <div style="background:linear-gradient(135deg,#FF9F43,#FF6B6B);border-radius:16px;padding:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px;">Happy with our service?</div>
+          <div style="font-size:14px;opacity:.85;">Leave us a Google review — it means the world to us 🙏</div>
+        </div>
+        <a href="https://search.google.com/local/writereview?placeid=" target="_blank" style="background:#fff;color:#FF6B6B;font-weight:800;font-size:14px;padding:12px 22px;border-radius:12px;text-decoration:none;white-space:nowrap;">⭐ Write a Review</a>
+      </div>
+    </div>
+
   </div><!-- end main -->
 </div><!-- end layout -->
 
@@ -772,10 +929,16 @@
     var titles = {overview:'Dashboard',reports:'Reports',maps:'Google Maps SEO',social:'Social Media',reviews:'Reviews',billing:'Billing & Payment'};
     document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
 
-    var content = document.querySelector('.content');
-    var billing = document.getElementById('billingPage');
+    var content  = document.querySelector('.content');
+    var billing  = document.getElementById('billingPage');
+    var maps     = document.getElementById('mapsPage');
+    var social   = document.getElementById('socialPage');
+    var reviews  = document.getElementById('reviewsPage');
+
+    // Hide all
+    [content, billing, maps, social, reviews].forEach(function(el){ if(el) el.style.display='none'; });
+
     if(page === 'billing'){
-      content.style.display = 'none';
       billing.style.display = 'block';
       var planRaw = document.getElementById('sidebarPlan')?.textContent?.trim() || 'Starter Plan';
       var plan = planRaw.replace(' Plan','').trim();
@@ -785,10 +948,68 @@
       document.getElementById('billingPlanPrice').innerHTML = (prices[plan]||'$199') + '<span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.5)">/mo</span>';
       document.getElementById('billingPlanDesc').textContent = descs[plan] || '';
       document.getElementById('billingNextReport').textContent = document.getElementById('badgeNextReport')?.textContent?.replace('Next report: ','') || '—';
+    } else if(page === 'maps'){
+      maps.style.display = 'block';
+      populateMapsPage();
+    } else if(page === 'social'){
+      social.style.display = 'block';
+      populateSocialPage();
+    } else if(page === 'reviews'){
+      reviews.style.display = 'block';
+      populateReviewsPage();
     } else {
       content.style.display = '';
-      billing.style.display = 'none';
     }
+  }
+
+  // Populated from cached client data set by the Firebase loader
+  // _clientData is set on window when Firebase loads
+
+  function populateMapsPage(){
+    var s = window._clientData?.stats || {};
+    var camp = window._clientData?.campaign || {};
+    var rank = s.mapsRank ? '#' + s.mapsRank : '—';
+    var prev = s.mapsRankPrev;
+    document.getElementById('mapRankBig').textContent = rank;
+    document.getElementById('mapRankChange').innerHTML = prev ? (s.mapsRank < prev ? '<span style="color:#00B894;">↑ Up from #'+prev+'</span>' : '<span style="color:#FF6B6B;">↓ Down from #'+prev+'</span>') : '—';
+    document.getElementById('mapCallsBig').textContent = s.calls ? s.calls.toLocaleString() : '—';
+    document.getElementById('mapCallsChange').innerHTML = s.callsChange ? '<span style="color:#00B894;">+'+s.callsChange+'% vs last month</span>' : '—';
+    document.getElementById('mapViewsBig').textContent = s.profileViews ? (s.profileViews >= 1000 ? (s.profileViews/1000).toFixed(1)+'k' : s.profileViews) : '—';
+    document.getElementById('mapViewsChange').innerHTML = s.profileViewsChange ? '<span style="color:#00B894;">+'+s.profileViewsChange+'% vs last month</span>' : '—';
+    document.getElementById('mapRatingBig').textContent = s.rating || '—';
+    document.getElementById('mapReviewsBig').textContent = s.newReviews ? s.newReviews + ' new reviews' : '—';
+
+    var gbpPct = camp.googleProfile || 0;
+    var items = [
+      ['Business info complete (name, address, phone, website)', gbpPct >= 20],
+      ['Business hours updated', gbpPct >= 35],
+      ['10+ photos uploaded', gbpPct >= 50],
+      ['Services/products listed', gbpPct >= 65],
+      ['Regular posts being published', gbpPct >= 80],
+      ['Responding to all reviews', gbpPct >= 90],
+      ['Q&A section populated', gbpPct >= 95],
+    ];
+    document.getElementById('mapsChecklist').innerHTML = items.map(function(item){
+      return '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:'+(item[1]?'#f0fdf4':'#f9fafb')+';border-radius:10px;">'
+        +'<span style="font-size:18px;">'+(item[1]?'✅':'⬜')+'</span>'
+        +'<span style="font-size:14px;color:'+(item[1]?'#15803d':'#6b7280')+';">'+item[0]+'</span>'
+        +'</div>';
+    }).join('');
+  }
+
+  function populateSocialPage(){
+    var camp = window._clientData?.campaign || {};
+    var pct = camp.socialMedia || 0;
+    document.getElementById('socialProgressBar').style.width = pct + '%';
+    document.getElementById('socialProgressPct').textContent = pct + '%';
+  }
+
+  function populateReviewsPage(){
+    var s    = window._clientData?.stats    || {};
+    var camp = window._clientData?.campaign || {};
+    document.getElementById('reviewRatingBig').textContent  = s.rating      || '—';
+    document.getElementById('reviewNewBig').textContent     = s.newReviews  || '—';
+    document.getElementById('reviewGenPct').textContent     = (camp.reviewGeneration || 0) + '%';
   }
 </script>
 
@@ -828,6 +1049,8 @@
     if(!snap.exists()){ window.location.href = './login.html'; return; }
 
     const data = snap.data();
+    // Cache for sub-pages (Maps, Social, Reviews)
+    window._clientData = data;
 
     // Redirect admin to admin panel
     if(data.role === 'admin'){ window.location.href = './admin.html'; return; }
