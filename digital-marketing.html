@@ -226,7 +226,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 .wa-float svg{width:26px;height:26px;fill:#fff;}
 
 /* ANIMATIONS */
-.fade-up{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 .fade-up.d1{transition-delay:.1s;}.fade-up.d2{transition-delay:.2s;}.fade-up.d3{transition-delay:.3s;}
 
@@ -500,13 +500,13 @@ h1{animation-delay:.18s!important;}
       <h2>Let's see what<br>you're missing<br>on Google.</h2>
       <p>We'll audit your Google presence for free — no sales pressure. Just a clear picture of where you stand and what's possible.</p>
       <div class="channels">
-        <a class="ch" href="https://wa.me/19125419169" target="_blank">
+        <a class="ch" href="https://wa.me/14706156766" target="_blank">
           <div class="ch-icon" style="background:rgba(37,211,102,.15);">💬</div>
-          <div><div class="ch-lbl">WhatsApp (fastest response)</div><div class="ch-val">+1 912-541-9169</div></div>
+          <div><div class="ch-lbl">WhatsApp (fastest response)</div><div class="ch-val">+1 470-615-6766</div></div>
         </a>
-        <a class="ch" href="mailto:rangu.connect@gmail.com">
+        <a class="ch" href="/cdn-cgi/l/email-protection#1062717e77653e737f7e7e75736450777d71797c3e737f7d">
           <div class="ch-icon" style="background:rgba(255,159,67,.12);">✉️</div>
-          <div><div class="ch-lbl">Email</div><div class="ch-val">rangu.connect@gmail.com</div></div>
+          <div><div class="ch-lbl">Email</div><div class="ch-val"><span class="__cf_email__" data-cfemail="b0c2d1ded7c59ed3dfdeded5d3c4f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</span></div></div>
         </a>
       </div>
     </div>
@@ -561,11 +561,11 @@ h1{animation-delay:.18s!important;}
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/19125419169" target="_blank">
+<a class="wa-float" href="https://wa.me/14706156766" target="_blank">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
   emailjs.init('Qp-R9FKGsTWbEo570');
 
@@ -574,10 +574,9 @@ h1{animation-delay:.18s!important;}
   function closeMM(){ document.getElementById('mobileMenu').classList.remove('open'); }
 
   // Scroll animations
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  },{threshold:0.08});
+  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:0,rootMargin:'0px 0px -10px 0px'});
   document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }, 1500);
 
   // Counter animation
   function animateNum(el){
@@ -631,11 +630,4 @@ h1{animation-delay:.18s!important;}
       btn.textContent='Sent ✓';
       gtag('event','audit_request',{event_category:'lead',event_label:'digital-marketing-page'});
     },function(){
-      msg.style.display='block';msg.style.background='rgba(255,107,107,.1)';msg.style.color='#FF6B6B';
-      msg.textContent='Error sending. Please WhatsApp us directly at +1 912-541-9169.';
-      btn.disabled=false; btn.textContent='Send Free Audit Request →';
-    });
-  }
-</script>
-</body>
-</html>
+      msg.style.display='block';msg.style.backgroun
