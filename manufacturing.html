@@ -24,7 +24,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:-.3px;}
 .nav-links{display:flex;align-items:center;gap:4px;}
-.nav-links a{color:var(--muted);font-size:13.5px;font-weight:500;text-decoration:none;padding:7px 13px;border-radius:8px;transition:color .15s,background .15s;}
+.nav-links a{color:rgba(255,255,255,.80);font-size:13.5px;font-weight:500;text-decoration:none;padding:7px 13px;border-radius:8px;transition:color .15s,background .15s;}
 .nav-links a:hover{color:#fff;}
 .nav-links a.active{background:rgba(255,255,255,.07);color:#fff;}
 .nav-cta{margin-left:8px;padding:9px 20px;border-radius:10px;background:linear-gradient(135deg,var(--orange),var(--coral));color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:filter .15s;}
@@ -113,8 +113,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 .wa-float{position:fixed;bottom:26px;right:26px;z-index:99;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.3);text-decoration:none;transition:transform .2s;}
 .wa-float:hover{transform:scale(1.1);}
 .wa-float svg{width:26px;height:26px;}
-.fade-up{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
-.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease;}
+.fade-up.will-animate{opacity:0;transform:translateY(26px);}
+.fade-up.will-animate.visible{opacity:1;transform:translateY(0);}
 .fade-up.d1{transition-delay:.1s;}.fade-up.d2{transition-delay:.2s;}.fade-up.d3{transition-delay:.3s;}
 .hero-left>*{animation:hIn .65s ease both;}
 @keyframes hIn{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
@@ -428,7 +429,11 @@ Industry.
   document.getElementById('mobileClose').onclick = function(){ closeMM(); };
   function closeMM(){ document.getElementById('mobileMenu').classList.remove('open'); }
   var obs = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:0.08});
-  document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
+  document.querySelectorAll('.fade-up').forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    if(rect.top > window.innerHeight){ el.classList.add('will-animate'); obs.observe(el); }
+  });
+  setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }, 1000);
   setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }, 1500);
   function toggleFaq(el){
     var ans = el.nextElementSibling; var icon = el.querySelector('.faq-icon');
