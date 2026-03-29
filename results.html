@@ -127,13 +127,30 @@
     .fade-up{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease;}
     .fade-up.will-animate{opacity:0;transform:translateY(20px);}
     .fade-up.will-animate.visible{opacity:1;transform:translateY(0);}
-  </style>
+  /* ─── RUBIK'S CUBE LOGO ─────────────────────────── */
+.rubik-cube{width:36px;height:36px;border-radius:9px;background:#0F172A;overflow:hidden;display:flex;align-items:center;justify-content:center;animation:rubik-spin 6s linear infinite;}
+@keyframes rubik-spin{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;width:100%;height:100%;}
+.rc{border-radius:2px;animation:rc-pulse 3s ease-in-out infinite;}
+.rc1{background:#FF6B6B;animation-delay:.0s}.rc2{background:#FF9F43;animation-delay:.2s}.rc3{background:#FFEAA7;animation-delay:.4s}
+.rc4{background:#55EFC4;animation-delay:.6s}.rc5{background:#74B9FF;animation-delay:.8s}.rc6{background:#A29BFE;animation-delay:1.0s}
+.rc7{background:#FD79A8;animation-delay:1.2s}.rc8{background:#00CEC9;animation-delay:1.4s}.rc9{background:#E17055;animation-delay:1.6s}
+@keyframes rc-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+/* ─── NAV CENTER CONTACTS ───────────────────────── */
+.nav-center{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.nav-center a{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.55);font-size:12px;font-weight:500;text-decoration:none;transition:color .15s;white-space:nowrap;}
+.nav-center a:hover{color:#FF9F43;}
+.nav-center .nc-div{width:1px;height:14px;background:rgba(255,255,255,.12);}
+@media(max-width:860px){.nav-center{display:none;}}
+</style>
 </head>
 <body>
+<canvas id="matrixCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.13;"></canvas>
+
 
 <nav>
   <a class="brand" href="./index.html">
-    <div class="nav-pixel"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#0F172A"/><rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/><rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/><rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/><rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/><rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/><rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/><rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/></svg></div>
+    <div class="nav-pixel"><div class="rubik-cube"><div class="rc-grid"><div class="rc rc1"></div><div class="rc rc2"></div><div class="rc rc3"></div><div class="rc rc4"></div><div class="rc rc5"></div><div class="rc rc6"></div><div class="rc rc7"></div><div class="rc rc8"></div><div class="rc rc9"></div></div></div></div>
     </div>
     <span class="brand-name">BizAutomatrix</span>
   </a>
@@ -378,6 +395,34 @@
     if(rect.top > window.innerHeight){ el.classList.add('will-animate'); observer.observe(el); }
   });
   setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }, 1000);
+</script>
+<script>
+(function(){
+  var canvas = document.getElementById('matrixCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var chars = 'アイウエオカキクケコサシスセソタチツテトBIZAUTOMATRIX0123456789$%#@!';
+  var fontSize = 14;
+  var cols, drops;
+  function resize(){
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    cols=Math.floor(canvas.width/fontSize);
+    drops=[];for(var i=0;i<cols;i++) drops.push(Math.random()*-50);
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    ctx.fillStyle='rgba(7,9,13,0.04)';ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<drops.length;i++){
+      var char=chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
+      ctx.font=fontSize+'px monospace';
+      ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+      if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,45);
+})();
 </script>
 </body>
 </html>

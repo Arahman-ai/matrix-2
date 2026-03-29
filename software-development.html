@@ -121,7 +121,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 @keyframes hIn{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 
 
-.nav-pixel{width:32px;height:32px;border-radius:9px;background:var(--bg3);border:1px solid var(--border2);padding:4px;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;}
+.nav-pixel{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .np{border-radius:1px;}
 .np1{background:#FF6B6B}.np2{background:#FF9F43}.np3{background:#FFEAA7}.np4{background:#55EFC4}
 .np5{background:#74B9FF}.np6{background:#A29BFE}.np7{background:#FD79A8}.np8{background:#00CEC9}
@@ -152,17 +152,30 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#4A9EFF,#A78BFA);-webki
 .coming-banner p{font-size:13px;color:var(--muted);line-height:1.6;}
 .steps::before{background:linear-gradient(90deg,transparent,#4A9EFF,#A78BFA,transparent);}
 .form-btn{background:linear-gradient(135deg,#4A9EFF,#A78BFA);}
+/* ─── RUBIK'S CUBE LOGO ─────────────────────────── */
+.rubik-cube{width:36px;height:36px;border-radius:9px;background:#0F172A;overflow:hidden;display:flex;align-items:center;justify-content:center;animation:rubik-spin 6s linear infinite;}
+@keyframes rubik-spin{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;width:100%;height:100%;}
+.rc{border-radius:2px;animation:rc-pulse 3s ease-in-out infinite;}
+.rc1{background:#FF6B6B;animation-delay:.0s}.rc2{background:#FF9F43;animation-delay:.2s}.rc3{background:#FFEAA7;animation-delay:.4s}
+.rc4{background:#55EFC4;animation-delay:.6s}.rc5{background:#74B9FF;animation-delay:.8s}.rc6{background:#A29BFE;animation-delay:1.0s}
+.rc7{background:#FD79A8;animation-delay:1.2s}.rc8{background:#00CEC9;animation-delay:1.4s}.rc9{background:#E17055;animation-delay:1.6s}
+@keyframes rc-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+/* ─── NAV CENTER CONTACTS ───────────────────────── */
+.nav-center{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.nav-center a{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.55);font-size:12px;font-weight:500;text-decoration:none;transition:color .15s;white-space:nowrap;}
+.nav-center a:hover{color:#FF9F43;}
+.nav-center .nc-div{width:1px;height:14px;background:rgba(255,255,255,.12);}
+@media(max-width:860px){.nav-center{display:none;}}
 </style>
 </head>
 <body>
+<canvas id="matrixCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.13;"></canvas>
+
 <header>
 <nav class="navbar">
   <a class="nav-brand" href="./index.html">
-    <div class="nav-pixel">
-      <div class="np np1"></div><div class="np np2"></div><div class="np np3"></div><div class="np np4"></div>
-      <div class="np np5"></div><div class="np np6"></div><div class="np np7"></div><div class="np np8"></div>
-      <div class="np np9"></div><div class="np np10"></div><div class="np np11"></div><div class="np np12"></div>
-      <div class="np np13"></div><div class="np np14"></div><div class="np np15"></div><div class="np np16"></div></div>
+    <div class="nav-pixel"><div class="rubik-cube"><div class="rc-grid"><div class="rc rc1"></div><div class="rc rc2"></div><div class="rc rc3"></div><div class="rc rc4"></div><div class="rc rc5"></div><div class="rc rc6"></div><div class="rc rc7"></div><div class="rc rc8"></div><div class="rc rc9"></div></div></div></div>
     <span class="nav-name">BizAutomatrix</span>
   </a>
   <div class="nav-links">
@@ -419,7 +432,17 @@ The Other Way.
   emailjs.init('Qp-R9FKGsTWbEo570');
   document.getElementById('hamburgerBtn').onclick = function(){ document.getElementById('mobileMenu').classList.add('open'); };
   document.getElementById('mobileClose').onclick = function(){ closeMM(); };
-  function closeMM(){ document.getElementById('mobileMenu').classList.remove('open'); }
+    // Mobile menu — iOS/Android touchstart fallback
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileMenu   = document.getElementById('mobileMenu');
+  function openMM(){ mobileMenu.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeMM(){ mobileMenu.classList.remove('open'); document.body.style.overflow=''; }
+  hamburgerBtn.addEventListener('click', openMM);
+  hamburgerBtn.addEventListener('touchend', function(e){ e.preventDefault(); openMM(); });
+  document.getElementById('mobileClose').addEventListener('click', closeMM);
+  document.getElementById('mobileClose').addEventListener('touchend', function(e){ e.preventDefault(); closeMM(); });
+  mobileMenu.addEventListener('click', function(e){ if(e.target===mobileMenu) closeMM(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMM(); });
   var obs = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:0.08});
   document.querySelectorAll('.fade-up').forEach(function(el){
     var rect = el.getBoundingClientRect();
