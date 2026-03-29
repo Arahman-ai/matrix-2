@@ -6,7 +6,7 @@
 <title>Digital Marketing, Local SEO & SEM — BizAutomatrix</title>
 <meta name="description" content="Get your business to the top of Google Maps and search results. BizAutomatrix specialises in Local SEO, SEM, Google Ads, review generation, and digital marketing for USA businesses."/>
 <link rel="canonical" href="https://bizautomatrix.com/digital-marketing.html"/>
-<meta property="og:title" content="Digital Marketing & Local SEO — Rangu"/>
+<meta property="og:title" content="Digital Marketing & Local SEO/SEM — BizAutomatrix"/>
 <meta property="og:description" content="From #11 to #2 on Google Maps in 90 days. Real results for local businesses."/>
 <meta property="og:image" content="https://bizautomatrix.com/og-image.png"/>
 <meta property="og:url" content="https://bizautomatrix.com/digital-marketing.html"/>
@@ -298,7 +298,7 @@ h1{animation-delay:.18s!important;}
       <div class="breadcrumb">
         <a href="./index.html">BizAutomatrix</a>
         <span>›</span>
-        <span style="color:var(--orange);">Digital Marketing & Local SEO</span>
+        <span style="color:var(--orange);">Digital Marketing & Local SEO/SEM</span>
       </div>
       <div class="hero-badge"><div class="hero-badge-dot"></div>Google Maps Specialists</div>
       <h1>Get Found.<br>Get Called.<br><em>Get Customers.</em></h1>
@@ -588,9 +588,6 @@ h1{animation-delay:.18s!important;}
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
   emailjs.init('Qp-R9FKGsTWbEo570');
-
-  document.getElementById('hamburgerBtn').onclick = function(){ document.getElementById('mobileMenu').classList.add('open'); };
-  document.getElementById('mobileClose').onclick = function(){ closeMM(); };
     // Mobile menu — iOS/Android touchstart fallback
   var hamburgerBtn = document.getElementById('hamburgerBtn');
   var mobileMenu   = document.getElementById('mobileMenu');
@@ -656,7 +653,7 @@ h1{animation-delay:.18s!important;}
       email:email,
       phone:document.getElementById('fPhone').value,
       city:document.getElementById('fCity').value,
-      service:'Digital Marketing & Local SEO',
+      service:'Digital Marketing & Local SEO/SEM',
       message:document.getElementById('fMsg').value||'No message.'
     }).then(function(){
       msg.style.display='block';msg.style.background='rgba(0,212,170,.1)';msg.style.color='#00D4AA';
@@ -665,3 +662,36 @@ h1{animation-delay:.18s!important;}
       gtag('event','audit_request',{event_category:'lead',event_label:'digital-marketing-page'});
     },function(){
       msg.style.display='block';msg.style.backgroun
+      });
+    }
+  </script>
+<script>
+/* Matrix Rain Background */
+(function(){
+  var c=document.getElementById('matrixCanvas');
+  if(!c)return;
+  var x=c.getContext('2d');
+  var ch='アイウエオカキクケコBIZAUTOMATRIX0123456789$%#@!';
+  var fs=14,cols,drops;
+  function resize(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    cols=Math.floor(c.width/fs);drops=[];
+    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
+    for(var i=0;i<drops.length;i++){
+      var t=ch[Math.floor(Math.random()*ch.length)];
+      x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
+      x.font=fs+'px monospace';
+      x.fillText(t,i*fs,drops[i]*fs);
+      if(drops[i]*fs>c.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,45);
+})();
+</script>
+</body>
+</html>
