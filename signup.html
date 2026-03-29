@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Sign Up — Rangu Digital Transformations</title>
+  <title>Sign Up — BizAutomatrix</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -117,8 +117,8 @@
     :root{--bg:#0c0e12;--orange:#FF9F43;--coral:#FF6B6B;--purple:#A29BFE;--green:#00B894;}
     *{box-sizing:border-box;margin:0;padding:0}
     body{
-      font-family:'DM Sans',system-ui,sans-serif;
-      background:var(--bg);min-height:100vh;display:flex;flex-direction:column;
+      font-family:'Inter',system-ui,sans-serif;
+      background-color:#07090d;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;
       background-image:
         radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,159,67,.07) 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 80% 80%, rgba(162,155,254,.07) 0%, transparent 60%),
@@ -180,7 +180,7 @@
 
     .field{margin-bottom:14px;}
     .field label{display:block;font-size:11px;font-weight:700;color:#777;margin-bottom:5px;letter-spacing:.4px;text-transform:uppercase;}
-    .field input{width:100%;padding:11px 14px;border-radius:11px;border:1.5px solid rgba(0,0,0,.14);font:500 14px 'DM Sans',sans-serif;outline:none;background:#fafafa;transition:all .15s;color:#111;}
+    .field input{width:100%;padding:11px 14px;border-radius:11px;border:1.5px solid rgba(0,0,0,.14);font:500 14px 'Inter',sans-serif;outline:none;background:#fafafa;transition:all .15s;color:#111;}
     .field input:focus{border-color:#FF9F43;background:#fff;box-shadow:0 0 0 4px rgba(255,159,67,.1);}
     .field input.purple:focus{border-color:#A29BFE;box-shadow:0 0 0 4px rgba(162,155,254,.1);}
     .hint{font-size:11px;color:#aaa;margin-top:4px;}
@@ -209,16 +209,10 @@
 
   <div class="topbar">
     <a class="brand" href="./index.html">
-      <div class="logo-wrap">
-        <div class="pixel-grid">
-          <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
-          <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
-          <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
-          <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
-        </div>
+      <div class="nav-pixel"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#0F172A"/><rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/><rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/><rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/><rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/><rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/><rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/><rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/></svg></div>
       </div>
       <div>
-        <div class="brand-name">Rangu</div>
+        <div class="brand-name">BizAutomatrix</div>
         <div class="brand-sub">Digital Transformations</div>
       </div>
     </a>
@@ -315,7 +309,7 @@
     </div>
   </div>
 
-  <div class="footer">© 2026 Rangu Digital Transformations</div>
+  <div class="footer">© 2026 BizAutomatrix</div>
 
   <script>
     function switchRole(role){

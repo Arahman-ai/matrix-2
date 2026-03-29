@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rangu Digital Transformations — Marketing · Automation · Software · Industry Solutions</title>
-<meta name="description" content="Rangu Digital Transformations delivers end-to-end digital solutions — local SEO, business automation, custom software, manufacturing process innovation, and enterprise IT for businesses of every scale."/>
-<link rel="canonical" href="https://rangu.us/"/>
-<meta property="og:title" content="Rangu Digital Transformations"/>
+<title>BizAutomatrix — Digital Marketing · Automation · Software · AI Solutions</title>
+<meta name="description" content="BizAutomatrix delivers end-to-end digital solutions — local SEO, business automation, custom software, and AI for businesses across the USA."/>
+<link rel="canonical" href="https://bizautomatrix.com/"/>
+<meta property="og:title" content="BizAutomatrix"/>
 <meta property="og:description" content="Marketing. Automation. Software. Industry Innovation. We transform businesses at every scale."/>
-<meta property="og:image" content="https://rangu.us/og-image.png"/>
-<meta property="og:url" content="https://rangu.us/"/>
+<meta property="og:image" content="https://bizautomatrix.com/og-image.png"/>
+<meta property="og:url" content="https://bizautomatrix.com/"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-76JEEVT8TB"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-76JEEVT8TB');</script>
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
 <style>
 /* ─── VARIABLES ─────────────────────────────────── */
@@ -37,8 +37,10 @@
   --subtle:rgba(255,255,255,.2);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;font-size:16px;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+html{scroll-behavior:smooth;font-size:16px;background:#07090d;}
+body{font-family:'Inter',sans-serif;background-color:#07090d;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+/* Force dark bg on all sections — prevents light flash on mobile */
+section,header,footer,div.stats-bar,div.pricing-bg,div.process-bg,div.industries-bg{background-color:transparent;}
 
 /* ─── NOISE OVERLAY ─────────────────────────────── */
 body::before{
@@ -57,12 +59,8 @@ body::before{
   border-bottom:1px solid var(--border);
 }
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
-.nav-pixel{width:32px;height:32px;border-radius:9px;background:var(--bg3);border:1px solid var(--border2);padding:4px;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;}
-.np{border-radius:1px;}
-.np1{background:#FF6B6B}.np2{background:#FF9F43}.np3{background:#FFEAA7}.np4{background:#55EFC4}
-.np5{background:#74B9FF}.np6{background:#A29BFE}.np7{background:#FD79A8}.np8{background:#00CEC9}
-.np9{background:#E17055}.np10{background:#6C5CE7}.np11{background:#00B894}.np12{background:#FDCB6E}
-.np13{background:#E84393}.np14{background:#0984E3}.np15{background:#F9CA24}.np16{background:#6AB04C}
+.nav-pixel{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* logo handled by SVG */
 .nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:-.3px;}
 .nav-links{display:flex;align-items:center;gap:4px;}
 .nav-links a{color:rgba(255,255,255,.80);font-size:13.5px;font-weight:500;text-decoration:none;padding:7px 13px;border-radius:8px;transition:color .15s,background .15s;}
@@ -82,11 +80,13 @@ body::before{
   display:flex;align-items:center;gap:6px;transition:background .15s;
 }
 .nav-login:hover{background:rgba(255,255,255,.12);}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:12px;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
 .hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .2s,opacity .2s;}
+.mm-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;padding:8px;line-height:1;z-index:201;}
+.mm-close:hover{color:rgba(255,255,255,.7);}
 .mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:rgba(7,9,13,.97);padding:80px 32px 32px;flex-direction:column;gap:4px;}
 .mobile-menu.open{display:flex;}
-.mm-close{position:absolute;top:20px;right:20px;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;}
+
 .mm-link{color:rgba(255,255,255,.75);font-size:18px;font-weight:600;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--border);}
 .mm-link:last-child{border:none;}
 .mm-cta{margin-top:16px;padding:16px;text-align:center;border-radius:14px;background:linear-gradient(135deg,var(--orange),var(--coral));color:#fff;font-size:16px;font-weight:800;text-decoration:none;}
@@ -239,7 +239,7 @@ body::before{
   font-family:'Instrument Serif',serif;font-size:19px;font-style:italic;
   color:rgba(255,255,255,.8);line-height:1.6;
 }
-.quote-block cite{display:block;margin-top:14px;font-style:normal;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--orange);}
+.quote-block cite{display:block;margin-top:14px;font-style:normal;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--orange);}
 @media(max-width:768px){.why-grid{grid-template-columns:1fr;}}
 
 /* ─── PROCESS ────────────────────────────────────── */
@@ -331,13 +331,13 @@ body::before{
 .form-group input,.form-group select,.form-group textarea{
   width:100%;padding:12px 14px;border-radius:11px;
   border:1.5px solid var(--border);background:rgba(255,255,255,.04);
-  color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;
+  color:#fff;font-size:14px;font-family:'Inter',sans-serif;
   outline:none;transition:border-color .15s;
 }
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(255,159,67,.5);}
 .form-group select option{background:#1a1c24;}
 .form-group textarea{resize:vertical;min-height:90px;}
-.form-submit{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--orange),var(--coral));color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:filter .15s,transform .1s;margin-top:4px;}
+.form-submit{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--orange),var(--coral));color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;transition:filter .15s,transform .1s;margin-top:4px;}
 .form-submit:hover{filter:brightness(1.08);transform:translateY(-1px);}
 .form-msg{display:none;padding:12px 16px;border-radius:10px;font-size:13px;margin-top:12px;}
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
@@ -404,12 +404,20 @@ footer{
 <nav class="navbar">
   <a class="nav-brand" href="#">
     <div class="nav-pixel">
-      <div class="np np1"></div><div class="np np2"></div><div class="np np3"></div><div class="np np4"></div>
-      <div class="np np5"></div><div class="np np6"></div><div class="np np7"></div><div class="np np8"></div>
-      <div class="np np9"></div><div class="np np10"></div><div class="np np11"></div><div class="np np12"></div>
-      <div class="np np13"></div><div class="np np14"></div><div class="np np15"></div><div class="np np16"></div>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="9" fill="#0F172A"/>
+        <rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/>
+        <rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/>
+        <rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/>
+        <rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/>
+        <rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/>
+        <rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/>
+        <rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/>
+        <rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/>
+        <rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/>
+      </svg>
     </div>
-    <span class="nav-name">Rangu</span>
+    <span class="nav-name">BizAutomatrix</span>
   </a>
   <div class="nav-links">
     <a href="#services">Services</a>
@@ -450,7 +458,7 @@ footer{
       <div class="hero-eyebrow"><span></span>Digital Transformation Partner</div>
       <h1>We Don't Just<br>Market.<br><span class="line2">We Transform.</span></h1>
       <p class="hero-sub">
-        From <strong>Google Maps dominance</strong> to <strong>custom software</strong>, <strong>business automation</strong>, and <strong>manufacturing innovation</strong> — Rangu is the end-to-end digital partner for businesses ready to lead their industry.
+        From <strong>Google Maps dominance</strong> to <strong>custom software</strong>, <strong>business automation</strong>, and <strong>manufacturing innovation</strong> — BizAutomatrix is the end-to-end digital partner for businesses ready to lead their industry.
       </p>
       <div class="hero-actions">
         <a class="btn-primary" href="#contact">
@@ -463,7 +471,7 @@ footer{
         </a>
       </div>
       <div class="hero-trust">
-        <div class="trust-item"><div class="trust-dot"></div>USA & Bangladesh</div>
+        <div class="trust-item"><div class="trust-dot"></div>Atlanta, GA &amp; Beyond</div>
         <div class="trust-item"><div class="trust-dot"></div>No long-term contracts</div>
         <div class="trust-item"><div class="trust-dot"></div>Results in 60 days</div>
       </div>
@@ -634,7 +642,7 @@ footer{
 <section class="section">
   <div class="section-eyebrow fade-up">Who We Serve</div>
   <div class="section-title fade-up">Built for every<br>industry scale</div>
-  <p class="section-sub fade-up">From a local restaurant in Atlanta to a manufacturing plant in Dhaka — our solutions adapt to your context.</p>
+  <p class="section-sub fade-up">From a local restaurant in Atlanta to an enterprise in New York — our solutions adapt to your context.</p>
   <div class="industries-grid">
     <div class="ind-card fade-up"><div class="ind-icon">🍽️</div><div class="ind-name">Restaurants & Food</div><div class="ind-desc">Get found locally, generate reviews, fill tables</div></div>
     <div class="ind-card fade-up d1"><div class="ind-icon">🏥</div><div class="ind-name">Healthcare & Clinics</div><div class="ind-desc">Patient acquisition, reputation, compliance</div></div>
@@ -652,12 +660,12 @@ footer{
 <section class="section">
   <div class="why-grid">
     <div class="why-left fade-up">
-      <div class="section-eyebrow">Why Rangu</div>
+      <div class="section-eyebrow">Why BizAutomatrix</div>
       <div class="section-title">A partner who<br>thinks big and<br>moves fast.</div>
-      <p class="section-sub" style="margin-bottom:0;">Most agencies pick one lane. We built Rangu to handle the full stack of digital transformation — so you never have to manage five vendors for five problems.</p>
+      <p class="section-sub" style="margin-bottom:0;">Most agencies pick one lane. We built BizAutomatrix to handle the full stack of digital transformation — so you never have to manage five vendors for five problems.</p>
       <div class="quote-block">
         "We don't hand you a report and disappear. We're embedded in your growth — every month, every milestone."
-        <cite>— Founder · Rangu Digital Transformations</cite>
+        <cite>— Founder · BizAutomatrix</cite>
       </div>
     </div>
     <div class="why-right">
@@ -671,11 +679,11 @@ footer{
       </div>
       <div class="why-item fade-up d2">
         <div class="why-icon" style="background:rgba(74,158,255,.12);">🌍</div>
-        <div><h4>USA & Bangladesh Expertise</h4><p>Deep market knowledge across both geographies — competitive in both USD and BDT, with local insights that offshore agencies miss.</p></div>
+        <div><h4>USA Market Expertise</h4><p>Deep market knowledge across the US — data-driven strategies with local insights that generic agencies miss.</p></div>
       </div>
       <div class="why-item fade-up d3">
         <div class="why-icon" style="background:rgba(167,139,250,.12);">📈</div>
-        <div><h4>Scalable From Day One</h4><p>Start with local SEO. Add automation. Build software. Expand to enterprise. Rangu grows with you at every stage.</p></div>
+        <div><h4>Scalable From Day One</h4><p>Start with local SEO. Add automation. Build software. Expand to enterprise. BizAutomatrix grows with you at every stage.</p></div>
       </div>
     </div>
   </div>
@@ -741,9 +749,9 @@ footer{
       <a class="case-cta" href="./results.html">Read full story →</a>
     </div>
     <div class="case-card fade-up d2">
-      <span class="case-tag-sm" style="background:rgba(0,212,170,.12);color:var(--teal);">🛒 Retail · Dhaka</span>
+      <span class="case-tag-sm" style="background:rgba(0,212,170,.12);color:var(--teal);">🛒 Retail · Miami</span>
       <div class="case-biz">Royal Mart</div>
-      <div class="case-loc">Dhaka, Bangladesh</div>
+      <div class="case-loc">Miami, Florida, USA</div>
       <div class="case-metrics-sm">
         <div class="case-met"><div class="case-met-val" style="color:var(--teal);">#14→#3</div><div class="case-met-lbl">Google Maps rank in 60 days</div></div>
         <div class="case-met"><div class="case-met-val" style="color:var(--orange);">+220%</div><div class="case-met-lbl">Direction requests</div></div>
@@ -810,7 +818,7 @@ footer{
     </div>
   </div>
   <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:28px;" class="fade-up">
-    Bangladesh clients? <a href="./pricing.html" style="color:var(--orange);text-decoration:none;font-weight:600;">See BDT pricing →</a> &nbsp;·&nbsp; Annual plans save 20%
+    Annual plans save 20%
   </p>
 </section>
 </div>
@@ -823,21 +831,21 @@ footer{
       <h2>Let's talk about<br>transforming<br>your business.</h2>
       <p>Whether you're a local restaurant wanting more customers, or an industry looking to modernise operations — we start with a free, no-pressure audit.</p>
       <div class="contact-channels">
-        <a class="channel" href="https://wa.me/8801813956455" target="_blank">
+        <a class="channel" href="https://wa.me/14042037674" target="_blank">
           <div class="channel-icon" style="background:rgba(37,211,102,.15);">💬</div>
-          <div><div class="channel-label">WhatsApp (fastest)</div><div class="channel-val">+880 181-395-6455</div></div>
+          <div><div class="channel-label">WhatsApp (fastest)</div><div class="channel-val">+1 (404) 203-7674</div></div>
         </a>
-        <a class="channel" href="tel:+17706096766">
+        <a class="channel" href="tel:+14042037674">
           <div class="channel-icon" style="background:rgba(74,158,255,.15);">📞</div>
-          <div><div class="channel-label">Call (USA)</div><div class="channel-val">(770) 609-7666</div></div>
+          <div><div class="channel-label">Call (USA)</div><div class="channel-val">+1 (404) 203-7674</div></div>
         </a>
-        <a class="channel" href="mailto:rangu.connect@gmail.com">
+        <a class="channel" href="mailto:info@bizautomatrix.com">
           <div class="channel-icon" style="background:rgba(255,159,67,.12);">✉️</div>
-          <div><div class="channel-label">Email</div><div class="channel-val">rangu.connect@gmail.com</div></div>
+          <div><div class="channel-label">Email</div><div class="channel-val">info@bizautomatrix.com</div></div>
         </a>
-        <a class="channel" href="https://rangu.us" target="_blank">
+        <a class="channel" href="https://bizautomatrix.com" target="_blank">
           <div class="channel-icon" style="background:rgba(74,158,255,.12);">🌐</div>
-          <div><div class="channel-label">Website</div><div class="channel-val">rangu.us</div></div>
+          <div><div class="channel-label">Website</div><div class="channel-val">bizautomatrix.com</div></div>
         </a>
       </div>
     </div>
@@ -850,7 +858,7 @@ footer{
       </div>
       <div class="form-row">
         <div class="form-group"><label>Email</label><input type="email" id="fEmail" placeholder="you@business.com"/></div>
-        <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="fPhone" placeholder="+1 or +880"/></div>
+        <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="fPhone" placeholder="+1 (404) 203-7674"/></div>
       </div>
       <div class="form-row">
         <div class="form-group"><label>City / Location</label><input type="text" id="fCity" placeholder="Atlanta, GA"/></div>
@@ -880,17 +888,25 @@ footer{
       <div class="footer-brand">
         <a class="nav-brand" href="#" style="text-decoration:none;">
           <div class="nav-pixel">
-            <div class="np np1"></div><div class="np np2"></div><div class="np np3"></div><div class="np np4"></div>
-            <div class="np np5"></div><div class="np np6"></div><div class="np np7"></div><div class="np np8"></div>
-            <div class="np np9"></div><div class="np np10"></div><div class="np np11"></div><div class="np np12"></div>
-            <div class="np np13"></div><div class="np np14"></div><div class="np np15"></div><div class="np np16"></div>
-          </div>
-          <span class="nav-name">Rangu</span>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="9" fill="#0F172A"/>
+            <rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/>
+            <rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/>
+            <rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/>
+            <rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/>
+            <rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/>
+            <rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/>
+            <rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/>
+            <rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/>
+            <rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/>
+          </svg>
+    </div>
+          <span class="nav-name">BizAutomatrix</span>
         </a>
         <p class="desc">Digital Transformations — Marketing, Automation, Software & Industrial Innovation for businesses ready to lead.</p>
         <div style="display:flex;gap:12px;margin-top:20px;">
-          <a href="https://wa.me/8801813956455" target="_blank" style="width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(255,255,255,.25)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)'">💬</a>
-          <a href="mailto:rangu.connect@gmail.com" style="width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(255,255,255,.25)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)'">✉️</a>
+          <a href="https://wa.me/14042037674" target="_blank" style="width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(255,255,255,.25)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)'">💬</a>
+          <a href="mailto:info@bizautomatrix.com" style="width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;transition:border-color .15s;" onmouseover="this.style.borderColor='rgba(255,255,255,.25)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)'">✉️</a>
         </div>
       </div>
       <div class="footer-col">
@@ -910,15 +926,15 @@ footer{
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
-        <a href="tel:+17706096766">(770) 609-7666 📞 Call</a>
-        <a href="https://wa.me/8801813956455">+880 181-395-6455 💬 WhatsApp</a>
-        <a href="mailto:rangu.connect@gmail.com">rangu.connect@gmail.com</a>
+        <a href="tel:+14042037674">+1 (404) 203-7674</a>
+        <a href="https://wa.me/14042037674">+1 (404) 203-7674 💬 WhatsApp</a>
+        <a href="mailto:info@bizautomatrix.com">info@bizautomatrix.com</a>
         <a href="#">Atlanta, Georgia, USA</a>
-        <a href="#">Dhaka, Bangladesh</a>
+        
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Rangu Digital Transformations. All rights reserved.</span>
+      <span class="footer-copy">© 2026 BizAutomatrix. All rights reserved.</span>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -928,7 +944,7 @@ footer{
 </footer>
 
 <!-- WhatsApp Float -->
-<a class="wa-float" href="https://wa.me/8801813956455" target="_blank" aria-label="Chat on WhatsApp">
+<a class="wa-float" href="https://wa.me/14042037674" target="_blank" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -938,11 +954,30 @@ footer{
   emailjs.init('Qp-R9FKGsTWbEo570');
 
   // Mobile menu
-  document.getElementById('hamburgerBtn').onclick = function(){
-    document.getElementById('mobileMenu').classList.add('open');
-  };
-  document.getElementById('mobileClose').onclick = function(){ closeMM(); };
-  function closeMM(){ document.getElementById('mobileMenu').classList.remove('open'); }
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileMenu   = document.getElementById('mobileMenu');
+
+  hamburgerBtn.addEventListener('click', function(){
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeMM(){
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('mobileClose').addEventListener('click', closeMM);
+
+  // Close on backdrop tap (tap outside the menu content)
+  mobileMenu.addEventListener('click', function(e){
+    if(e.target === mobileMenu) closeMM();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeMM();
+  });
 
   // Scroll animations — only animate elements that start BELOW the fold
   // Elements already in view on load stay visible immediately (no black flash)
@@ -1003,7 +1038,7 @@ footer{
     var city    = document.getElementById('fCity').value.trim();
     var service = document.getElementById('fService').value;
     var msg     = document.getElementById('fMsg').value.trim();
-    if(!name||!email){ res.style.display='block';res.style.background='rgba(255,107,107,.12)';res.style.color='#FF6B6B';res.textContent='Please enter your name and email.';return; }
+    if(!name||!email){ res.style.display='block';res.style.background='rgba(255,159,67,.12)';res.style.color='#FF9F43';res.textContent='Please enter your name and email.';return; }
     btn.disabled=true;btn.textContent='Sending...';
     emailjs.send('service_buftlyg','template_1adudxj',{
       from_name:name,business:biz,email:email,phone:phone,city:city,service:service,message:msg||'No message provided.'

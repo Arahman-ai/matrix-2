@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Admin Panel — Rangu Digital Transformations</title>
+  <title>Admin Panel — BizAutomatrix</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#07090d;
@@ -22,7 +22,7 @@
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
-      font-family:'DM Sans',system-ui,sans-serif;
+      font-family:'Inter',system-ui,sans-serif;
       background:#0f1117;
       color:#e2e8f0;
       min-height:100vh;
@@ -76,7 +76,7 @@
     .admin-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6C5CE7,#A29BFE);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex:0 0 32px;}
     .admin-name{font-size:12px;font-weight:600;color:#fff;}
     .admin-role{font-size:10px;color:rgba(255,255,255,.3);}
-    .logout-btn{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:11px;font-weight:500;text-decoration:none;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;transition:color .15s;}
+    .logout-btn{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:11px;font-weight:500;text-decoration:none;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;padding:0;transition:color .15s;}
     .logout-btn:hover{color:rgba(255,255,255,.6);}
 
     /* ── MAIN ── */
@@ -92,7 +92,7 @@
     .topbar-right{display:flex;align-items:center;gap:10px;}
     .topbar-btn{
       padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;
-      cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+      cursor:pointer;border:none;font-family:'Inter',sans-serif;
       transition:all .15s;
     }
     .topbar-btn.primary{background:linear-gradient(135deg,#6C5CE7,#A29BFE);color:#fff;}
@@ -130,7 +130,7 @@
       background:#161b24;border:1px solid rgba(255,255,255,.08);
       border-radius:999px;padding:7px 14px;
     }
-    .search-bar input{background:none;border:none;outline:none;color:#fff;font:500 13px 'DM Sans',sans-serif;width:180px;}
+    .search-bar input{background:none;border:none;outline:none;color:#fff;font:500 13px 'Inter',sans-serif;width:180px;}
     .search-bar input::placeholder{color:rgba(255,255,255,.25);}
 
     .table-wrap{
@@ -176,7 +176,7 @@
     .act-btn{
       padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;
       cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
-      color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;transition:all .15s;
+      color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;transition:all .15s;
     }
     .act-btn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2);}
     .act-btn.primary{background:rgba(162,155,254,.15);color:#A29BFE;border-color:rgba(162,155,254,.2);}
@@ -217,7 +217,7 @@
     .lead-detail{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;}
     .lead-time{font-size:11px;color:rgba(255,255,255,.25);}
     .lead-actions{display:flex;gap:5px;}
-    .lead-act{padding:5px 9px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+    .lead-act{padding:5px 9px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
     .lead-act.wa{background:#25D366;color:#fff;}
     .lead-act.email{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);}
 
@@ -254,13 +254,13 @@
     .modal-body{padding:20px;}
     .field{margin-bottom:14px;}
     .field label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,.35);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
-    .field input,.field select,.field textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font:500 13px 'DM Sans',sans-serif;outline:none;transition:border-color .15s;}
+    .field input,.field select,.field textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font:500 13px 'Inter',sans-serif;outline:none;transition:border-color .15s;}
     .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(162,155,254,.5);background:rgba(162,155,254,.05);}
     .field select option{background:#1e2330;color:#fff;}
     .field textarea{min-height:80px;resize:vertical;}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
     .modal-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:10px;justify-content:flex-end;}
-    .btn-cancel{padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);font:700 13px 'DM Sans',sans-serif;cursor:pointer;}
+    .btn-cancel{padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);font:700 13px 'Inter',sans-serif;cursor:pointer;}
     .btn-save{padding:9px 18px;border-radius:999px;background:linear-gradient(135deg,#6C5CE7,#A29BFE);color:#fff;border:none;font:700 13px 'Syne',sans-serif;cursor:pointer;}
 
     .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99;}
@@ -355,16 +355,10 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <div class="brand-row">
-        <div class="logo-wrap">
-          <div class="pixel-grid">
-            <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
-            <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
-            <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
-            <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
-          </div>
+        <div class="nav-pixel"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#0F172A"/><rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/><rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/><rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/><rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/><rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/><rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/><rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/></svg></div>
         </div>
         <div>
-          <div class="brand-name">Rangu</div>
+          <div class="brand-name">BizAutomatrix</div>
           <div class="brand-sub">Digital Transformations</div>
         </div>
       </div>
@@ -411,7 +405,7 @@
         Referrals
         <span class="nav-badge" id="referralBadge" style="display:none;background:#A29BFE;">0</span>
       </a>
-      <a class="nav-item" href="https://wa.me/8801813956455" target="_blank">
+      <a class="nav-item" href="https://wa.me/14042037674" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         WhatsApp
       </a>
@@ -502,7 +496,7 @@
           <div class="quick-icon">📤</div>
           <div class="quick-label">Upload Report</div>
         </a>
-        <a class="quick-btn" href="https://wa.me/8801813956455" target="_blank">
+        <a class="quick-btn" href="https://wa.me/14042037674" target="_blank">
           <div class="quick-icon">💬</div>
           <div class="quick-label">Message Client</div>
         </a>
@@ -660,7 +654,7 @@
           </div>
           <div style="margin-top:16px;padding:14px;background:rgba(162,155,254,.08);border-radius:12px;border:1px solid rgba(162,155,254,.2);">
             <div style="font-size:13px;color:#A29BFE;font-weight:600;">📨 Review request link to share with clients:</div>
-            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">https://rangu.us/review-request.html</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">https://bizautomatrix.com/review-request.html</div>
           </div>
         </div>
       </div>
@@ -1415,8 +1409,8 @@
 <div class="invoice">
   <div class="inv-header">
     <div class="inv-brand">
-      <h1>Rangu Digital Transformations</h1>
-      <p>rangu.us &nbsp;•&nbsp; rangu.connect@gmail.com &nbsp;•&nbsp; +880 181-395-6455</p>
+      <h1>BizAutomatrix</h1>
+      <p>bizautomatrix.com &nbsp;•&nbsp; info@bizautomatrix.com &nbsp;•&nbsp; +1 (404) 203-7674</p>
       <p style="margin-top:4px;">Atlanta, GA, USA</p>
     </div>
     <div class="inv-badge">INVOICE</div>
@@ -1446,13 +1440,13 @@
         <div class="pay-method">🇺🇸 PayPal: paypal.me/RanguDT</div>
         <div class="pay-method">🇧🇩 bKash: 01996423556</div>
       </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to rangu.connect@gmail.com</p>
+      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to info@bizautomatrix.com</p>
     </div>
-    <p style="font-size:13px;color:#9ca3af;">Thank you for your business! Questions? WhatsApp: +880 181-395-6455</p>
+    <p style="font-size:13px;color:#9ca3af;">Thank you for your business! Questions? WhatsApp: +1 (404) 203-7674</p>
   </div>
   <div class="inv-footer">
-    <span>© ${new Date().getFullYear()} Rangu Digital Transformations</span>
-    <span>rangu.us</span>
+    <span>© ${new Date().getFullYear()} BizAutomatrix</span>
+    <span>bizautomatrix.com</span>
   </div>
 </div>
 <script>window.onload=function(){window.print();}<\/script>
