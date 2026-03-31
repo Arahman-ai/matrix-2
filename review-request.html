@@ -49,9 +49,12 @@
     .ty-text{font-size:14px;color:#6b7280;line-height:1.6;}
 
     .footer-note{font-size:12px;color:#d1d5db;text-align:center;margin-top:16px;}
-  </style>
+  #matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.13;}
+</style>
 </head>
 <body>
+<canvas id="matrixCanvas"></canvas>
+
 <div class="card">
   <div class="card-top">
     <div class="nav-pixel"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#0F172A"/><rect x="5" y="5" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="15" y="5" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".7"/><rect x="25" y="5" width="6" height="8" rx="2" fill="#FF9F43" opacity=".4"/><rect x="5" y="15" width="8" height="8" rx="2" fill="#FF6B6B" opacity=".6"/><rect x="15" y="15" width="8" height="8" rx="2" fill="#FF9F43"/><rect x="25" y="15" width="6" height="8" rx="2" fill="#FFEAA7"/><rect x="5" y="25" width="8" height="6" rx="2" fill="#FF9F43" opacity=".4"/><rect x="15" y="25" width="8" height="6" rx="2" fill="#FF6B6B" opacity=".8"/><rect x="25" y="25" width="6" height="6" rx="2" fill="#FF9F43" opacity=".6"/></svg></div>
@@ -134,4 +137,35 @@
   }
   function showThankyou(){
     setTimeout(function(){
-  
+</script>
+
+<script>
+/* Matrix Rain */
+(function(){
+  var c=document.getElementById('matrixCanvas');
+  if(!c)return;
+  var x=c.getContext('2d');
+  var ch='アイウエオBIZAUTOMATRIX0123456789$%#@!';
+  var fs=14,cols,drops;
+  function resize(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    cols=Math.floor(c.width/fs);drops=[];
+    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
+    for(var i=0;i<drops.length;i++){
+      var t=ch[Math.floor(Math.random()*ch.length)];
+      x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
+      x.font=fs+'px monospace';
+      x.fillText(t,i*fs,drops[i]*fs);
+      if(drops[i]*fs>c.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,45);
+})();
+</script>
+</body>
+</html>

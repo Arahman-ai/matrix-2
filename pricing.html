@@ -181,6 +181,7 @@
     <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
+  <button class="mm-close" id="mobileClose">✕</button>
     <a class="mm-link" href="./index.html#how">How It Works</a>
     <a class="mm-link" href="./index.html#services">Services</a>
     <a class="mm-link" href="./pricing.html">Pricing</a>
@@ -430,5 +431,16 @@
   setInterval(draw,45);
 })();
 </script>
+
+  // iOS/Android hamburger fix
+  if(document.getElementById('hamburgerBtn')){
+    var _hb=document.getElementById('hamburgerBtn');
+    var _mm=document.getElementById('mobileMenu');
+    function _openMM(){ if(_mm){_mm.classList.add('open');document.body.style.overflow='hidden';} }
+    function _closeMM(){ if(_mm){_mm.classList.remove('open');document.body.style.overflow='';} }
+    _hb.addEventListener('touchend',function(e){e.preventDefault();_openMM();});
+    var _mc=document.getElementById('mobileClose');
+    if(_mc) _mc.addEventListener('touchend',function(e){e.preventDefault();_closeMM();});
+  }
 </body>
 </html>

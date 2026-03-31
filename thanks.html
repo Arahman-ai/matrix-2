@@ -206,10 +206,13 @@
     .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,.65);}
     @keyframes wa-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
     .wa-float svg{width:30px;height:30px;fill:#fff;}
-  </style>
+  #matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.13;}
+</style>
 </head>
 
 <body>
+<canvas id="matrixCanvas"></canvas>
+
 
   <!-- Floating WhatsApp -->
   <a class="wa-float" href="https://wa.me/14042037674" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
@@ -310,5 +313,34 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
+
+<script>
+/* Matrix Rain */
+(function(){
+  var c=document.getElementById('matrixCanvas');
+  if(!c)return;
+  var x=c.getContext('2d');
+  var ch='アイウエオBIZAUTOMATRIX0123456789$%#@!';
+  var fs=14,cols,drops;
+  function resize(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    cols=Math.floor(c.width/fs);drops=[];
+    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
+    for(var i=0;i<drops.length;i++){
+      var t=ch[Math.floor(Math.random()*ch.length)];
+      x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
+      x.font=fs+'px monospace';
+      x.fillText(t,i*fs,drops[i]*fs);
+      if(drops[i]*fs>c.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,45);
+})();
+</script>
 </body>
 </html>
