@@ -1413,7 +1413,7 @@
   <div class="inv-header">
     <div class="inv-brand">
       <h1>BizAutomatrix</h1>
-      <p>bizautomatrix.com &nbsp;•&nbsp; info@bizautomatrix.com &nbsp;•&nbsp; +1 (404) 203-7674</p>
+      <p>bizautomatrix.com &nbsp;•&nbsp; <span data-em="t"></span> &nbsp;•&nbsp; +1 (404) 203-7674</p>
       <p style="margin-top:4px;">Atlanta, GA, USA</p>
     </div>
     <div class="inv-badge">INVOICE</div>
@@ -1443,7 +1443,7 @@
         <div class="pay-method">🇺🇸 PayPal: paypal.me/RanguDT</div>
         <div class="pay-method">🇧🇩 bKash: 01996423556</div>
       </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to info@bizautomatrix.com</p>
+      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to <span data-em="t"></span></p>
     </div>
     <p style="font-size:13px;color:#9ca3af;">Thank you for your business! Questions? WhatsApp: +1 (404) 203-7674</p>
   </div>
@@ -1480,6 +1480,17 @@
     }
   }
   setInterval(draw,45);
+})();
+</script>
+
+<script>
+(function(){
+  var u='info',d='bizautomatrix',t='com';
+  var e=u+'@'+d+'.'+t;
+  var m='mailto:'+e;
+  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
+  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
+  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
 })();
 </script>
 </body></html>`;
@@ -1560,6 +1571,17 @@
     }
   }
   setInterval(draw,45);
+})();
+</script>
+
+<script>
+(function(){
+  var u='info',d='bizautomatrix',t='com';
+  var e=u+'@'+d+'.'+t;
+  var m='mailto:'+e;
+  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
+  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
+  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
 })();
 </script>
 </body>

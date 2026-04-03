@@ -527,7 +527,7 @@ h1{animation-delay:.18s!important;}
           <div class="ch-icon" style="background:rgba(37,211,102,.15);">💬</div>
           <div><div class="ch-lbl">WhatsApp (fastest response)</div><div class="ch-val">+1 (404) 203-7674</div></div>
         </a>
-        <a href="mailto:info@bizautomatrix.com">info@bizautomatrix.com</a>
+        <a href="#" data-em="l"><span data-em="t"></span></a>
       </div>
     </div>
     <div class="audit-box fade-up d1">
@@ -691,6 +691,17 @@ h1{animation-delay:.18s!important;}
     }
   }
   setInterval(draw,45);
+})();
+</script>
+
+<script>
+(function(){
+  var u='info',d='bizautomatrix',t='com';
+  var e=u+'@'+d+'.'+t;
+  var m='mailto:'+e;
+  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
+  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
+  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
 })();
 </script>
 </body>

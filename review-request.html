@@ -117,7 +117,7 @@
 
   </div>
 </div>
-<div class="footer-note">bizautomatrix.com · <a href="mailto:info@bizautomatrix.com">info@bizautomatrix.com</a></div>
+<div class="footer-note">bizautomatrix.com · <a href="#" data-em="l"><span data-em="t"></span></a></div>
 
 <script>
   var rating = 0;
@@ -165,6 +165,17 @@
     }
   }
   setInterval(draw,45);
+})();
+</script>
+
+<script>
+(function(){
+  var u='info',d='bizautomatrix',t='com';
+  var e=u+'@'+d+'.'+t;
+  var m='mailto:'+e;
+  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
+  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
+  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
 })();
 </script>
 </body>
