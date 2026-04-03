@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Pricing — BizAutomatrix</title>
+  <title>Pricing — BizAutomatrix | Digital Marketing, SEO & SEM Plans</title>
   <meta name="description" content="Simple, transparent pricing for Google Maps SEO, reviews, and local visibility. Plans for USA businesses."/>
   <link rel="canonical" href="https://bizautomatrix.com/pricing.html"/>
   <meta property="og:type"        content="website"/>
   <meta property="og:url"         content="https://bizautomatrix.com/pricing.html"/>
   <meta property="og:title"       content="Pricing — BizAutomatrix"/>
-  <meta property="og:description" content="Starter $199/mo · Growth $399/mo · Pro $799/mo. No contracts, cancel anytime."/>
+  <meta property="og:description" content="Custom pricing for Digital Marketing, Local SEO, SEM, Google Ads, Business Automation and AI solutions. No long-term contracts."/>
   <meta property="og:image"       content="https://bizautomatrix.com/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&display=swap" rel="stylesheet"/>
@@ -144,6 +144,64 @@
 .nav-center a:hover{color:#FF9F43;}
 .nav-center .nc-div{width:1px;height:14px;background:rgba(255,255,255,.12);}
 @media(max-width:860px){.nav-center{display:none;}}
+
+    /* ── Custom pricing styles ── */
+    .plan-price{ margin-bottom:6px; }
+    .price-label-custom{
+      font-family:'Syne',system-ui,sans-serif;
+      font-size:15px;font-weight:800;color:#FF9F43;
+      letter-spacing:.02em;
+    }
+    .price-sub-custom{
+      font-size:12px;color:#9ca3af;margin-top:3px;margin-bottom:20px;
+    }
+    .contact-badges{
+      display:flex;flex-direction:column;gap:8px;
+      margin:16px 0 20px;
+      padding:14px 16px;
+      background:rgba(255,159,67,.06);
+      border:1px solid rgba(255,159,67,.15);
+      border-radius:14px;
+    }
+    .contact-badge{
+      display:flex;align-items:center;gap:8px;
+      font-size:12px;color:rgba(0,0,0,.65);
+      text-decoration:none;
+    }
+    .contact-badge:hover{color:#FF9F43;}
+    .contact-badge svg{flex-shrink:0;}
+    .plan-bottom-note{
+      font-size:11px;color:#9ca3af;text-align:center;
+      margin-top:10px;line-height:1.6;
+    }
+    .team-cta-section{
+      text-align:center;
+      margin:60px 0 0;
+      padding:48px 32px;
+      background:linear-gradient(135deg,rgba(255,159,67,.08),rgba(162,155,254,.06));
+      border:1px solid rgba(255,159,67,.15);
+      border-radius:24px;
+    }
+    .team-cta-section h3{
+      font-family:'Syne',system-ui,sans-serif;
+      font-size:26px;font-weight:900;color:#fff;margin-bottom:10px;
+    }
+    .team-cta-section p{
+      font-size:15px;color:rgba(255,255,255,.55);margin-bottom:24px;
+    }
+    .team-contact-row{
+      display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+    }
+    .team-contact-item{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:12px 20px;border-radius:12px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      font-size:13px;font-weight:600;color:#fff;text-decoration:none;
+      transition:background .15s;
+    }
+    .team-contact-item:hover{background:rgba(255,255,255,.1);}
+    .team-contact-item.wa{background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.25);}
+    .team-contact-item.wa:hover{background:rgba(37,211,102,.2);}
 </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-76JEEVT8TB"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-76JEEVT8TB');</script>
@@ -198,7 +256,7 @@
       Simple, Transparent Pricing
     </div>
     <h1>Plans that <span>grow with you</span></h1>
-    <p>No hidden fees. No long contracts. Cancel anytime.</p>
+    <p>Digital Marketing · SEO · SEM · Automation · AI — custom plans for every business.</p>
     <div class="toggle-wrap">
       <span class="toggle-label active" id="labelMonthly">Monthly</span>
       <div class="toggle" id="billingToggle" onclick="toggleBilling()"><div class="toggle-knob"></div></div>
@@ -214,7 +272,7 @@
       <div class="plan-icon">🌱</div>
       <div class="plan-name">Starter</div>
       <div class="plan-tagline">Perfect for new businesses</div>
-      <div class="plan-price"><div class="price-amount" id="s-price">$199</div><div class="price-period">/mo</div></div>
+      <div class="plan-price"><div style="font-size:16px;font-weight:800;color:#FF9F43;padding:6px 0;">Custom Pricing</div></div>
       
       <div class="price-annual" id="s-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
@@ -237,7 +295,7 @@
       <div class="plan-icon">🚀</div>
       <div class="plan-name">Growth</div>
       <div class="plan-tagline">For businesses serious about ranking</div>
-      <div class="plan-price"><div class="price-amount" id="g-price">$399</div><div class="price-period">/mo</div></div>
+      <div class="plan-price"><div style="font-size:16px;font-weight:800;color:#FF9F43;padding:6px 0;">Custom Pricing</div></div>
       
       <div class="price-annual" id="g-annual">&nbsp;</div>
       <a class="plan-cta cta-accent" href="./index.html#contact">Get Started →</a>
@@ -259,14 +317,14 @@
       <div class="plan-icon">👑</div>
       <div class="plan-name">Pro</div>
       <div class="plan-tagline">Full-service digital domination</div>
-      <div class="plan-price"><div class="price-amount" id="p-price">$799</div><div class="price-period">/mo</div></div>
+      <div class="plan-price"><div style="font-size:16px;font-weight:800;color:#FF9F43;padding:6px 0;">Custom Pricing</div></div>
       
       <div class="price-annual" id="p-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
       <hr class="divider"/>
       <ul class="feature-list">
         <li><span class="check check-yes">✓</span><div><div class="feat-label">Everything in Growth</div></div></li>
-        <li><span class="check check-yes">✓</span><div><div class="feat-label">Google Ads Management</div><div class="feat-desc">Full campaign setup + optimization</div></div></li>
+        <li><span class="check check-yes">✓</span><div><div class="feat-label">Full SEM Management</div><div class="feat-desc">Google Ads, SEM strategy, full campaign setup + optimization</div></div></li>
         <li><span class="check check-yes">✓</span><div><div class="feat-label">Backlink Building</div><div class="feat-desc">High-authority local links monthly</div></div></li>
         <li><span class="check check-yes">✓</span><div><div class="feat-label">Dedicated Account Manager</div><div class="feat-desc">Direct WhatsApp access anytime</div></div></li>
         <li><span class="check check-yes">✓</span><div><div class="feat-label">Weekly Reports</div></div></li>
@@ -286,9 +344,9 @@
         <thead>
           <tr>
             <th>Feature</th>
-            <th>🌱 Starter<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">$199/mo</span></th>
-            <th class="th-popular">🚀 Growth<br><span style="font-weight:600;color:#d97706;font-size:12px;">$399/mo</span></th>
-            <th>👑 Pro<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">$799/mo</span></th>
+            <th>🌱 Starter<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">Custom Pricing</span></th>
+            <th class="th-popular">🚀 Growth<br><span style="font-weight:600;color:#d97706;font-size:12px;">Custom Pricing</span></th>
+            <th>👑 Pro<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">Custom Pricing</span></th>
           </tr>
         </thead>
         <tbody>
@@ -298,9 +356,10 @@
           <tr><td>Reports</td><td><span class="partial">Monthly</span></td><td><span class="partial">Bi-Weekly</span></td><td><span class="partial">Weekly</span></td></tr>
           <tr><td>Local Citations (50+)</td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
           <tr><td>Social Media Posts</td><td><span class="cross">—</span></td><td><span class="partial">8/mo</span></td><td><span class="partial">16/mo</span></td></tr>
+          <tr><td>SEO Optimization</td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
           <tr><td>Competitor Tracking</td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
           <tr><td>Backlink Building</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
-          <tr><td>Google Ads Management</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+          <tr><td>SEM / Google Ads</td><td><span class="cross">—</span></td><td><span class="partial">Setup</span></td><td><span class="tick">✓</span></td></tr>
           <tr><td>Dedicated Manager</td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
           <tr><td>WhatsApp Support</td><td><span class="partial">Standard</span></td><td><span class="partial">Priority</span></td><td><span class="partial">Dedicated</span></td></tr>
         </tbody>
@@ -321,7 +380,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">How do I pay? <span class="faq-icon">+</span></div>
-      <div class="faq-a">We accept PayPal (paypal.me/RanguDT) for USA and international clients, and bKash (01996423556) for USA clients. After payment, send your receipt to <a href="mailto:info@bizautomatrix.com" style="color:#FF9F43;">info@bizautomatrix.com</a> and we'll activate your account within 24 hours.</div>
+      <div class="faq-a">Our sales team will walk you through payment options after we understand your business needs. Every plan is custom-quoted — reach out to us directly: <a href="mailto:info@bizautomatrix.com" style="color:#FF9F43;">info@bizautomatrix.com</a> or WhatsApp <a href="https://wa.me/14042037674" style="color:#FF9F43;">+1 (404) 203-7674</a> and we'll get back to you within 24 hours.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">When will I see results? <span class="faq-icon">+</span></div>
@@ -333,7 +392,27 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Can I upgrade or downgrade my plan? <span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes! WhatsApp us at +1 (404) 203-7674 and we'll switch your plan at the start of your next billing cycle with no penalties.</div>
+      <div class="faq-a">Yes! WhatsApp us at <a href="https://wa.me/14042037674" style="color:#FF9F43;">+1 (404) 203-7674</a> and we'll switch your plan at the start of your next billing cycle with no penalties.</div>
+    </div>
+  </div>
+
+  <!-- TEAM REACH OUT SECTION -->
+  <div class="team-cta-section">
+    <h3>Not sure which plan fits your business?</h3>
+    <p>Tell us about your goals and our team will reach out with a tailored plan and transparent pricing — no commitment required.</p>
+    <div class="team-contact-row">
+      <a class="team-contact-item" href="mailto:info@bizautomatrix.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@bizautomatrix.com
+      </a>
+      <a class="team-contact-item wa" href="https://wa.me/14042037674" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp +1 (404) 203-7674
+      </a>
+      <a class="team-contact-item" href="./index.html#contact">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Free Audit Form
+      </a>
     </div>
   </div>
 
@@ -366,35 +445,11 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   // Mobile menu
   // mobile menu handled below
-
-  var isAnnual = false;
-  var priceData = {
-    usd: { monthly:{s:'$199',g:'$399',p:'$799'}, annual:{s:'$159',g:'$319',p:'$639'} }
-  };
-
-  function updatePrices(){
-    var prices = priceData.usd[isAnnual ? 'annual' : 'monthly'];
-    document.getElementById('s-price').textContent = prices.s;
-    document.getElementById('g-price').textContent = prices.g;
-    document.getElementById('p-price').textContent = prices.p;
-    var note = isAnnual ? 'Billed annually — 2 months free' : '\u00a0';
-    ['s-annual','g-annual','p-annual'].forEach(function(id){
-      var el = document.getElementById(id); if(el) el.textContent = note;
-    });
-  }
-
-  function toggleBilling(){
-    isAnnual = !isAnnual;
-    document.getElementById('billingToggle').classList.toggle('on', isAnnual);
-    document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
-    document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
-    updatePrices();
-  }
 
   function toggleFaq(el){
     var item = el.closest('.faq-item');
@@ -437,10 +492,4 @@
     var _hb=document.getElementById('hamburgerBtn');
     var _mm=document.getElementById('mobileMenu');
     function _openMM(){ if(_mm){_mm.classList.add('open');document.body.style.overflow='hidden';} }
-    function _closeMM(){ if(_mm){_mm.classList.remove('open');document.body.style.overflow='';} }
-    _hb.addEventListener('touchend',function(e){e.preventDefault();_openMM();});
-    var _mc=document.getElementById('mobileClose');
-    if(_mc) _mc.addEventListener('touchend',function(e){e.preventDefault();_closeMM();});
-  }
-</body>
-</html>
+    function _closeMM(){ if(_mm){_mm.classList.remove('open');document.body.style.overflow='
