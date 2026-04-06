@@ -71,35 +71,20 @@ body::before{
   .tb-divider{display:none;}
 }
 
-/* ─── RUBIK'S CUBE LOGO ─────────────────────────── */
-.rubik-cube{
-  width:36px;height:36px;border-radius:9px;
-  background:#0F172A;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  animation:rubik-spin 6s linear infinite;
+50%{opacity:.6;transform:scale(.85);}
 }
-@keyframes rubik-spin{
-  0%  {filter:hue-rotate(0deg);}
-  100%{filter:hue-rotate(360deg);}
-}
-.rc-grid{
+
+/* ─── PIXEL LOGO ─────────────────────────────────── */
+.nav-pixel{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pixel-logo{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:2px;padding:4px;width:100%;height:100%;
+  gap:3px;width:34px;height:34px;
+  background:#0F172A;border-radius:9px;padding:5px;
 }
-.rc{border-radius:2px;animation:rc-pulse 3s ease-in-out infinite;}
-.rc1{background:#FF6B6B;animation-delay:.0s}
-.rc2{background:#FF9F43;animation-delay:.2s}
-.rc3{background:#FFEAA7;animation-delay:.4s}
-.rc4{background:#55EFC4;animation-delay:.6s}
-.rc5{background:#74B9FF;animation-delay:.8s}
-.rc6{background:#A29BFE;animation-delay:1.0s}
-.rc7{background:#FD79A8;animation-delay:1.2s}
-.rc8{background:#00CEC9;animation-delay:1.4s}
-.rc9{background:#E17055;animation-delay:1.6s}
-@keyframes rc-pulse{
-  0%,100%{opacity:1;transform:scale(1);}
-  50%{opacity:.6;transform:scale(.85);}
-}
+.pl{border-radius:2px;}
+.pl1{background:#FF6B6B}.pl2{background:#FF9F43}.pl3{background:#FFEAA7}
+.pl4{background:#55EFC4}.pl5{background:#74B9FF}.pl6{background:#A29BFE}
+.pl7{background:#FD79A8}.pl8{background:#00CEC9}.pl9{background:#E17055}
 
 /* ─── NAV ───────────────────────────────────────── */
 .navbar{
@@ -471,13 +456,7 @@ footer{
 <header>
 <nav class="navbar">
   <a class="nav-brand" href="#">
-    <div class="nav-pixel" id="rubikLogo">
-      <div class="rubik-cube">
-        <div class="rc-grid">
-          <div class="rc rc1"></div><div class="rc rc2"></div><div class="rc rc3"></div>
-          <div class="rc rc4"></div><div class="rc rc5"></div><div class="rc rc6"></div>
-          <div class="rc rc7"></div><div class="rc rc8"></div><div class="rc rc9"></div>
-        </div>
+    <div class="nav-pixel"><div class="pixel-logo"><div class="pl pl1"></div><div class="pl pl2"></div><div class="pl pl3"></div><div class="pl pl4"></div><div class="pl pl5"></div><div class="pl pl6"></div><div class="pl pl7"></div><div class="pl pl8"></div><div class="pl pl9"></div></div></div>
       </div>
     </div>
     <span class="nav-name">BizAutomatrix</span>
@@ -862,7 +841,7 @@ footer{
   <div class="pricing-cards">
     <div class="price-card fade-up">
       <div class="price-label">Starter</div>
-      <div class="price-amount"><sup>$</sup>199<span>/mo</span></div>
+      <div style="font-size:18px;font-weight:800;color:var(--orange);padding:8px 0 12px;">Custom Pricing</div>
       <div class="price-desc">Perfect for local businesses taking their first step into digital visibility.</div>
       <div class="price-feats">
         <div class="price-feat yes">Google Business Profile setup</div>
@@ -872,11 +851,11 @@ footer{
         <div class="price-feat no">Social media management</div>
         <div class="price-feat no">Competitor tracking</div>
       </div>
-      <a class="price-btn outline" href="./pricing.html">See Full Details →</a>
+      <a class="price-btn outline" href="./pricing.html">Get a Custom Quote →</a>
     </div>
     <div class="price-card featured fade-up d1">
       <div class="price-label">Growth</div>
-      <div class="price-amount"><sup>$</sup>399<span>/mo</span></div>
+      <div style="font-size:18px;font-weight:800;color:var(--orange);padding:8px 0 12px;">Custom Pricing</div>
       <div class="price-desc">For businesses serious about dominating their local market and growing revenue.</div>
       <div class="price-feats">
         <div class="price-feat yes">Everything in Starter</div>
@@ -886,11 +865,11 @@ footer{
         <div class="price-feat yes">Competitor tracking</div>
         <div class="price-feat no">Dedicated account manager</div>
       </div>
-      <a class="price-btn filled" href="./pricing.html">Get Started →</a>
+      <a class="price-btn filled" href="./pricing.html">Let Our Team Reach Out →</a>
     </div>
     <div class="price-card fade-up d2">
       <div class="price-label">Pro</div>
-      <div class="price-amount"><sup>$</sup>799<span>/mo</span></div>
+      <div style="font-size:18px;font-weight:800;color:var(--orange);padding:8px 0 12px;">Custom Pricing</div>
       <div class="price-desc">Full-service digital domination for businesses ready to be the clear market leader.</div>
       <div class="price-feats">
         <div class="price-feat yes">Everything in Growth</div>
@@ -900,7 +879,7 @@ footer{
         <div class="price-feat yes">Dedicated account manager</div>
         <div class="price-feat yes">Priority support & reporting</div>
       </div>
-      <a class="price-btn outline" href="./pricing.html">See Full Details →</a>
+      <a class="price-btn outline" href="./pricing.html">Get a Custom Quote →</a>
     </div>
   </div>
   <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:28px;" class="fade-up">
@@ -1156,4 +1135,22 @@ footer{
     for(var i=0;i<cols;i++) drops.push(Math.random()*-50);
   }
   resize();
-  window.addEventL
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    ctx.fillStyle='rgba(7,9,13,0.04)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<drops.length;i++){
+      var t=chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
+      ctx.font=fontSize+'px monospace';
+      ctx.fillText(t,i*fontSize,drops[i]*fontSize);
+      if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,45);
+})();
+</script>
+</body>
+</html>
