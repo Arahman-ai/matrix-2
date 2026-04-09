@@ -353,7 +353,7 @@
     </div>
     <div class="testi fade-up">
       <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Our store went from invisible to the top of Google Maps in 60 days. Sales have increased significantly and new customers find us every day."</div>
+      <div class="testi-text">"Our store went from invisible to the top of Google Maps in 60 days. New customers find us every single day now — it's been a game changer."</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:linear-gradient(135deg,#00B894,#00CEC9);">RM</div>
         <div><div class="testi-name">R. Mahmud</div><div class="testi-biz">Store Owner, Miami, FL</div></div>
@@ -383,6 +383,16 @@
 </script>
 
 <script>
+/* Email */
+(function(){
+  var u='info',d='bizautomatrix',t='com';
+  var e=u+'@'+d+'.'+t, m='mailto:'+e;
+  document.querySelectorAll('[data-em="l"]').forEach(function(x){x.href=m;});
+  document.querySelectorAll('[data-em="t"]').forEach(function(x){x.textContent=e;});
+})();
+</script>
+<script>
+/* Matrix Rain */
 (function(){
   var c=document.getElementById('matrixCanvas');
   if(!c)return;
