@@ -10,15 +10,15 @@
   <meta property="og:description" content="From #11 to #2 in 90 days. Real numbers. Real businesses."/>
   <meta property="og:image" content="https://bizautomatrix.com/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root{
       --bg:#0c0e12;--card:#13151c;--border:rgba(255,255,255,.07);
       --orange:#FF9F43;--coral:#FF6B6B;--green:#00B894;--purple:#A29BFE;--blue:#74B9FF;
     }
     *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;background:#07090d;}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;}
 
     /* NAV */
     nav{position:sticky;top:0;z-index:90;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(12,14,18,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
@@ -32,7 +32,7 @@
     .px13{background:#E84393}.px14{background:#0984E3}.px15{background:#F9CA24}.px16{background:#6AB04C}
     .brand-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:900;color:#fff;}
     .nav-links{display:flex;align-items:center;gap:24px;}
-    .nav-links a{color:rgba(255,255,255,.80);font-size:14px;text-decoration:none;transition:color .15s;}
+    .nav-links a{color:rgba(255,255,255,.55);font-size:14px;text-decoration:none;transition:color .15s;}
     .nav-links a:hover{color:#fff;}
     .nav-cta{padding:8px 18px;border-radius:999px;background:linear-gradient(135deg,var(--orange),var(--coral));color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:filter .15s;}
     .nav-cta:hover{filter:brightness(1.1);}
@@ -124,33 +124,21 @@
     .btn-ghost:hover{border-color:rgba(255,255,255,.3);color:#fff;}
 
     /* SCROLL ANIMATIONS */
-    .fade-up{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease;}
-    .fade-up.will-animate{opacity:0;transform:translateY(20px);}
-    .fade-up.will-animate.visible{opacity:1;transform:translateY(0);}
-  /* ─── RUBIK'S CUBE LOGO ─────────────────────────── */
-.rubik-cube{width:36px;height:36px;border-radius:9px;background:#0F172A;overflow:hidden;display:flex;align-items:center;justify-content:center;animation:rubik-spin 6s linear infinite;}
-@keyframes rubik-spin{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
-.rc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;width:100%;height:100%;}
-.rc{border-radius:2px;animation:rc-pulse 3s ease-in-out infinite;}
-.rc1{background:#FF6B6B;animation-delay:.0s}.rc2{background:#FF9F43;animation-delay:.2s}.rc3{background:#FFEAA7;animation-delay:.4s}
-.rc4{background:#55EFC4;animation-delay:.6s}.rc5{background:#74B9FF;animation-delay:.8s}.rc6{background:#A29BFE;animation-delay:1.0s}
-.rc7{background:#FD79A8;animation-delay:1.2s}.rc8{background:#00CEC9;animation-delay:1.4s}.rc9{background:#E17055;animation-delay:1.6s}
-@keyframes rc-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
-/* ─── NAV CENTER CONTACTS ───────────────────────── */
-.nav-center{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-.nav-center a{display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.55);font-size:12px;font-weight:500;text-decoration:none;transition:color .15s;white-space:nowrap;}
-.nav-center a:hover{color:#FF9F43;}
-.nav-center .nc-div{width:1px;height:14px;background:rgba(255,255,255,.12);}
-@media(max-width:860px){.nav-center{display:none;}}
-</style>
+    .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+  </style>
 </head>
 <body>
-<canvas id="matrixCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.13;"></canvas>
-
 
 <nav>
   <a class="brand" href="./index.html">
-    <div class="nav-pixel"><div class="rubik-cube"><div class="rc-grid"><div class="rc rc1"></div><div class="rc rc2"></div><div class="rc rc3"></div><div class="rc rc4"></div><div class="rc rc5"></div><div class="rc rc6"></div><div class="rc rc7"></div><div class="rc rc8"></div><div class="rc rc9"></div></div></div></div>
+    <div class="logo-wrap">
+      <div class="pixel-grid">
+        <div class="px px1"></div><div class="px px2"></div><div class="px px3"></div><div class="px px4"></div>
+        <div class="px px5"></div><div class="px px6"></div><div class="px px7"></div><div class="px px8"></div>
+        <div class="px px9"></div><div class="px px10"></div><div class="px px11"></div><div class="px px12"></div>
+        <div class="px px13"></div><div class="px px14"></div><div class="px px15"></div><div class="px px16"></div>
+      </div>
     </div>
     <span class="brand-name">BizAutomatrix</span>
   </a>
@@ -211,7 +199,7 @@
         <span class="case-tag green">Pro Plan</span>
         <div class="case-challenge">The Challenge</div>
         <div class="case-problem">Ranked #11 for "Indian restaurant Atlanta" — invisible to anyone who doesn't scroll past the first 3 results. Getting maybe 20 calls a month from Google. 3.9 stars with 11 reviews.</div>
-        <div class="case-what">What Rangu Did</div>
+        <div class="case-what">What We Did</div>
         <div class="case-actions">
           <div class="case-action">Full GBP audit & optimisation (photos, services, posts)</div>
           <div class="case-action">Review generation campaign — 38 new 5-star reviews in 90 days</div>
@@ -252,7 +240,7 @@
         <span class="case-tag purple">Growth Plan</span>
         <div class="case-challenge">The Challenge</div>
         <div class="case-problem">New clinic with no online presence — not showing up for ANY local search terms. Competing against 3 established clinics in the same area that had been around for 10+ years.</div>
-        <div class="case-what">What Rangu Did</div>
+        <div class="case-what">What We Did</div>
         <div class="case-actions">
           <div class="case-action">Built GBP from scratch with complete optimisation</div>
           <div class="case-action">Structured review collection from every patient visit</div>
@@ -260,7 +248,7 @@
           <div class="case-action">Social media presence establishment</div>
         </div>
         <div class="case-quote">
-          "Rangu got us to #1 faster than I thought possible. We're fully booked 3 weeks out now."
+          "BizAutomatrix got us to #1 faster than I thought possible. We're fully booked 3 weeks out now."
           <cite>— Dr. Rahman, MedCare Clinic</cite>
         </div>
       </div>
@@ -271,7 +259,7 @@
       <div class="case-visual" style="background:linear-gradient(135deg,rgba(0,184,148,.06),rgba(253,203,110,.06));">
         <div class="case-industry">🛒 Retail</div>
         <div class="case-biz">Royal Mart</div>
-        <div class="case-city">📍 Atlanta, GA, USA</div>
+        <div class="case-city">📍 Miami, FL, USA</div>
         <div class="case-metrics">
           <div class="metric">
             <div class="metric-icon" style="background:rgba(0,184,148,.15);">📍</div>
@@ -291,16 +279,16 @@
         <span class="case-tag blue">Starter Plan</span>
         <div class="case-challenge">The Challenge</div>
         <div class="case-problem">Established store with loyal customers but zero digital presence. Losing foot traffic to a newer competitor that was showing up first on Google Maps despite being smaller and newer.</div>
-        <div class="case-what">What Rangu Did</div>
+        <div class="case-what">What We Did</div>
         <div class="case-actions">
           <div class="case-action">Complete GBP overhaul with 60+ photos uploaded</div>
           <div class="case-action">Review recovery — responded to all 47 existing reviews</div>
-          <div class="case-action">USAi local citation network (Bikroy, Pathao, etc.)</div>
+          <div class="case-action">USA local citation network (Yelp, Google, Facebook, etc.)</div>
           <div class="case-action">WhatsApp Business integration for customer follow-up</div>
         </div>
         <div class="case-quote">
           "Our competitors show up below us now. Customers tell us they found us on Google every single day."
-          <cite>— Manager, Royal Mart Dhaka</cite>
+          <cite>— Manager, Royal Mart Miami</cite>
         </div>
       </div>
     </div>
@@ -348,7 +336,7 @@
   <div class="testimonials">
     <div class="testi fade-up">
       <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"I was sceptical at first — I'd tried other agencies and gotten nothing. Rangu had us ranking in the top 3 within 8 weeks. The difference is they actually understand local SEO."</div>
+      <div class="testi-text">"I was sceptical at first — I'd tried other agencies and gotten nothing. BizAutomatrix had us ranking in the top 3 within 8 weeks. The difference is they actually understand local SEO."</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:linear-gradient(135deg,#FF9F43,#FF6B6B);">SK</div>
         <div><div class="testi-name">S. Khan</div><div class="testi-biz">Restaurant Owner, Atlanta</div></div>
@@ -364,10 +352,10 @@
     </div>
     <div class="testi fade-up">
       <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"আমার দোকান এখন Google-এ প্রথম পাতায়। প্রতিদিন নতুন কাস্টমার আসছে যারা Google থেকে খুঁজে পেয়েছে।"</div>
+      <div class="testi-text">"Our store went from invisible to the top of Google Maps in 60 days. Sales have increased significantly and new customers find us every day."</div>
       <div class="testi-author">
         <div class="testi-avatar" style="background:linear-gradient(135deg,#00B894,#00CEC9);">RM</div>
-        <div><div class="testi-name">R. Mahmud</div><div class="testi-biz">Shop Owner, Dhaka</div></div>
+        <div><div class="testi-name">R. Mahmud</div><div class="testi-biz">Store Owner, Miami, FL</div></div>
       </div>
     </div>
   </div>
@@ -390,39 +378,7 @@
       if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, {threshold:0.1});
-  document.querySelectorAll('.fade-up').forEach(function(el){
-    var rect = el.getBoundingClientRect();
-    if(rect.top > window.innerHeight){ el.classList.add('will-animate'); observer.observe(el); }
-  });
-  setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }, 1000);
-</script>
-<script>
-(function(){
-  var canvas = document.getElementById('matrixCanvas');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var chars = 'アイウエオカキクケコサシスセソタチツテトBIZAUTOMATRIX0123456789$%#@!';
-  var fontSize = 14;
-  var cols, drops;
-  function resize(){
-    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-    cols=Math.floor(canvas.width/fontSize);
-    drops=[];for(var i=0;i<cols;i++) drops.push(Math.random()*-50);
-  }
-  resize();window.addEventListener('resize',resize);
-  function draw(){
-    ctx.fillStyle='rgba(7,9,13,0.04)';ctx.fillRect(0,0,canvas.width,canvas.height);
-    for(var i=0;i<drops.length;i++){
-      var char=chars[Math.floor(Math.random()*chars.length)];
-      ctx.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
-      ctx.font=fontSize+'px monospace';
-      ctx.fillText(char,i*fontSize,drops[i]*fontSize);
-      if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0;
-      drops[i]++;
-    }
-  }
-  setInterval(draw,45);
-})();
+  document.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el); });
 </script>
 </body>
 </html>
