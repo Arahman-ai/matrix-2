@@ -9,7 +9,7 @@
   <meta property="og:type"        content="website"/>
   <meta property="og:url"         content="https://bizautomatrix.com/pricing.html"/>
   <meta property="og:title"       content="Pricing — BizAutomatrix"/>
-  <meta property="og:description" content="Starter $199/mo · Growth $399/mo · Pro $799/mo. No contracts, cancel anytime."/>
+  <meta property="og:description" content="Custom pricing for Digital Marketing, SEO/SEM, Automation and AI. No long-term contracts. Tailored to your goals."/>
   <meta property="og:image"       content="https://bizautomatrix.com/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&display=swap" rel="stylesheet"/>
@@ -144,6 +144,11 @@
 .nav-center a:hover{color:#FF9F43;}
 .nav-center .nc-div{width:1px;height:14px;background:rgba(255,255,255,.12);}
 @media(max-width:860px){.nav-center{display:none;}}
+
+    .contact-badges{display:flex;flex-direction:column;gap:8px;margin:12px 0 16px;padding:12px 14px;background:rgba(255,159,67,.06);border:1px solid rgba(255,159,67,.15);border-radius:12px;}
+    .contact-badge{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(0,0,0,.65);text-decoration:none;}
+    .contact-badge:hover{color:#FF9F43;}
+    .plan-bottom-note{font-size:11px;color:#9ca3af;text-align:center;margin-top:8px;line-height:1.6;}
 </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-76JEEVT8TB"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-76JEEVT8TB');</script>
@@ -198,7 +203,7 @@
       Simple, Transparent Pricing
     </div>
     <h1>Plans that <span>grow with you</span></h1>
-    <p>No hidden fees. No long contracts. Cancel anytime.</p>
+    <p>Digital Marketing · SEO · SEM · Automation · AI — custom plans for every business.</p>
     <div class="toggle-wrap">
       <span class="toggle-label active" id="labelMonthly">Monthly</span>
       <div class="toggle" id="billingToggle" onclick="toggleBilling()"><div class="toggle-knob"></div></div>
@@ -214,7 +219,7 @@
       <div class="plan-icon">🌱</div>
       <div class="plan-name">Starter</div>
       <div class="plan-tagline">Perfect for new businesses</div>
-      <div class="plan-price"><div class="price-amount" id="s-price">$199</div><div class="price-period">/mo</div></div>
+      
       
       <div class="price-annual" id="s-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
@@ -237,7 +242,7 @@
       <div class="plan-icon">🚀</div>
       <div class="plan-name">Growth</div>
       <div class="plan-tagline">For businesses serious about ranking</div>
-      <div class="plan-price"><div class="price-amount" id="g-price">$399</div><div class="price-period">/mo</div></div>
+      
       
       <div class="price-annual" id="g-annual">&nbsp;</div>
       <a class="plan-cta cta-accent" href="./index.html#contact">Get Started →</a>
@@ -259,7 +264,7 @@
       <div class="plan-icon">👑</div>
       <div class="plan-name">Pro</div>
       <div class="plan-tagline">Full-service digital domination</div>
-      <div class="plan-price"><div class="price-amount" id="p-price">$799</div><div class="price-period">/mo</div></div>
+      
       
       <div class="price-annual" id="p-annual">&nbsp;</div>
       <a class="plan-cta cta-dark" href="./index.html#contact">Get Started →</a>
@@ -286,9 +291,9 @@
         <thead>
           <tr>
             <th>Feature</th>
-            <th>🌱 Starter<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">$199/mo</span></th>
-            <th class="th-popular">🚀 Growth<br><span style="font-weight:600;color:#d97706;font-size:12px;">$399/mo</span></th>
-            <th>👑 Pro<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">$799/mo</span></th>
+            <th>🌱 Starter<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">Custom Pricing</span></th>
+            <th class="th-popular">🚀 Growth<br><span style="font-weight:600;color:#d97706;font-size:12px;">Custom Pricing</span></th>
+            <th>👑 Pro<br><span style="font-weight:500;color:#9ca3af;font-size:12px;">Custom Pricing</span></th>
           </tr>
         </thead>
         <tbody>
@@ -321,7 +326,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">How do I pay? <span class="faq-icon">+</span></div>
-      <div class="faq-a">We accept PayPal (paypal.me/RanguDT) for USA and international clients, and bKash (01996423556) for USA clients. After payment, send your receipt to <a href="mailto:info@bizautomatrix.com" style="color:#FF9F43;">info@bizautomatrix.com</a> and we'll activate your account within 24 hours.</div>
+      <div class="faq-a">Our sales team will walk you through payment options after understanding your needs. Reach out at <a href="mailto:info@bizautomatrix.com" style="color:#FF9F43;">info@bizautomatrix.com</a> or WhatsApp <a href="https://wa.me/14042037674" style="color:#FF9F43;">+1 (404) 203-7674</a> and we\'ll respond within 24 hours.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">When will I see results? <span class="faq-icon">+</span></div>
@@ -334,6 +339,17 @@
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Can I upgrade or downgrade my plan? <span class="faq-icon">+</span></div>
       <div class="faq-a">Yes! WhatsApp us at +1 (404) 203-7674 and we'll switch your plan at the start of your next billing cycle with no penalties.</div>
+    </div>
+  </div>
+
+  <!-- TEAM REACH OUT -->
+  <div style="text-align:center;margin:50px 0 0;padding:40px 24px;background:linear-gradient(135deg,rgba(255,159,67,.08),rgba(162,155,254,.06));border:1px solid rgba(255,159,67,.15);border-radius:24px;">
+    <h3 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:900;color:#fff;margin-bottom:8px;">Not sure which plan fits your business?</h3>
+    <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:24px;">Tell us about your goals — our team will reply with a tailored plan and transparent pricing.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+      <a href="mailto:info@bizautomatrix.com" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:13px;font-weight:600;color:#fff;text-decoration:none;">✉️ info@bizautomatrix.com</a>
+      <a href="https://wa.me/14042037674" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);font-size:13px;font-weight:600;color:#fff;text-decoration:none;">💬 WhatsApp +1 (404) 203-7674</a>
+      <a href="./index.html#contact" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:13px;font-weight:600;color:#fff;text-decoration:none;">📋 Free Audit Form</a>
     </div>
   </div>
 
@@ -371,31 +387,6 @@
 
   // Mobile menu
   // mobile menu handled below
-
-  var isAnnual = false;
-  var priceData = {
-    usd: { monthly:{s:'$199',g:'$399',p:'$799'}, annual:{s:'$159',g:'$319',p:'$639'} }
-  };
-
-  function updatePrices(){
-    var prices = priceData.usd[isAnnual ? 'annual' : 'monthly'];
-    document.getElementById('s-price').textContent = prices.s;
-    document.getElementById('g-price').textContent = prices.g;
-    document.getElementById('p-price').textContent = prices.p;
-    var note = isAnnual ? 'Billed annually — 2 months free' : '\u00a0';
-    ['s-annual','g-annual','p-annual'].forEach(function(id){
-      var el = document.getElementById(id); if(el) el.textContent = note;
-    });
-  }
-
-  function toggleBilling(){
-    isAnnual = !isAnnual;
-    document.getElementById('billingToggle').classList.toggle('on', isAnnual);
-    document.getElementById('labelMonthly').classList.toggle('active', !isAnnual);
-    document.getElementById('labelAnnual').classList.toggle('active', isAnnual);
-    updatePrices();
-  }
-
   function toggleFaq(el){
     var item = el.closest('.faq-item');
     var wasOpen = item.classList.contains('open');

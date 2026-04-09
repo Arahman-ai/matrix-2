@@ -1108,7 +1108,7 @@ footer{
       res.textContent='✅ Received! We\'ll be in touch within 24 hours.';
       btn.textContent='Sent ✓';
       ['fName','fBiz','fEmail','fPhone','fCity','fMsg'].forEach(function(id){ document.getElementById(id).value=''; });
-      ument.getElementById('fSubmit').textContent = 'Send Request →';
+      document.getElementById('fSubmit').textContent = 'Send Request →';
     }).catch(function(){
       res.style.display='block';res.style.background='rgba(255,107,107,.12)';res.style.color='#FF6B6B';
       res.textContent='Something went wrong. Please try again or WhatsApp us.';
