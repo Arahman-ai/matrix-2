@@ -56,7 +56,7 @@
       if(role === 'admin'){
         const enteredHash = await sha256(codeInput);
         if(enteredHash !== ADMIN_HASH)
-          return showMsg('Invalid admin access code. Contact the Rangu team.', 'error');
+          return showMsg('Invalid admin access code. Contact the BizAutomatrix team.', 'error');
       }
 
       setLoading(true);
@@ -294,7 +294,7 @@
         <div class="field admin-only" id="adminCodeField">
           <label>Admin Access Code *</label>
           <input type="password" id="s_admincode" placeholder="Team access code" class="purple">
-          <div class="hint">🔒 Contact the Rangu team for this code</div>
+          <div class="hint">🔒 Contact the BizAutomatrix team for this code</div>
         </div>
 
         <button class="submit-btn" id="submitBtn" onclick="window.handleSignup()">
@@ -306,7 +306,7 @@
       </div>
 
       <div class="security-note">
-        <strong>🔒 Your account is secure.</strong> Admin signup requires a private access code known only to the Rangu team. The code is verified using SHA-256 hashing — it is never stored or visible in the source code.
+        <strong>🔒 Your account is secure.</strong> Admin signup requires a private access code known only to the BizAutomatrix team. The code is verified using SHA-256 hashing — it is never stored or visible in the source code.
       </div>
 
     </div>
@@ -327,6 +327,7 @@
       }
     }
   </script>
+
 
 
 <script>

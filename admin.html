@@ -423,7 +423,7 @@
         <div class="admin-avatar">AR</div>
         <div>
           <div class="admin-name">Arifur Rahman</div>
-          <div class="admin-role">Admin • Rangu</div>
+          <div class="admin-role">Admin • BizAutomatrix</div>
         </div>
       </div>
       <a class="logout-btn" href="./login.html">
@@ -1413,7 +1413,7 @@
   <div class="inv-header">
     <div class="inv-brand">
       <h1>BizAutomatrix</h1>
-      <p>bizautomatrix.com &nbsp;•&nbsp; <span data-em="t"></span> &nbsp;•&nbsp; +1 (404) 203-7674</p>
+      <p>bizautomatrix.com &nbsp;•&nbsp; info@bizautomatrix.com &nbsp;•&nbsp; +1 (404) 203-7674</p>
       <p style="margin-top:4px;">Atlanta, GA, USA</p>
     </div>
     <div class="inv-badge">INVOICE</div>
@@ -1440,10 +1440,10 @@
     <div class="pay-box">
       <h3>💳 Payment Methods</h3>
       <div class="pay-methods">
-        <div class="pay-method">🇺🇸 PayPal: paypal.me/RanguDT</div>
+        <div class="pay-method">🇺🇸 PayPal: wa.me/14042037674</div>
         <div class="pay-method">🇧🇩 bKash: 01996423556</div>
       </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to <span data-em="t"></span></p>
+      <p style="font-size:12px;color:#9ca3af;margin-top:10px;">After payment, email receipt to info@bizautomatrix.com</p>
     </div>
     <p style="font-size:13px;color:#9ca3af;">Thank you for your business! Questions? WhatsApp: +1 (404) 203-7674</p>
   </div>
@@ -1453,6 +1453,7 @@
   </div>
 </div>
 <script>window.onload=function(){window.print();}<\/script>
+
 
 <script>
 /* Matrix Rain */
@@ -1482,17 +1483,6 @@
   setInterval(draw,45);
 })();
 </script>
-
-<script>
-(function(){
-  var u='info',d='bizautomatrix',t='com';
-  var e=u+'@'+d+'.'+t;
-  var m='mailto:'+e;
-  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
-  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
-  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
-})();
-</script>
 </body></html>`;
 
     const w = window.open('','_blank','width=800,height=900');
@@ -1510,7 +1500,7 @@
       date: new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
       downloadUrl: url,
       score: '—',
-      preview: 'Report uploaded by Rangu team.',
+      preview: 'Report uploaded by BizAutomatrix team.',
       createdAt: new Date().toISOString()
     }).then(function(){
       alert('✅ Report uploaded! Client can now see it on their dashboard.');
@@ -1545,44 +1535,6 @@
   };
 </script>
 
-<script>
-/* Matrix Rain */
-(function(){
-  var c=document.getElementById('matrixCanvas');
-  if(!c)return;
-  var x=c.getContext('2d');
-  var ch='アイウエオBIZAUTOMATRIX0123456789$%#@!';
-  var fs=14,cols,drops;
-  function resize(){
-    c.width=window.innerWidth;c.height=window.innerHeight;
-    cols=Math.floor(c.width/fs);drops=[];
-    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
-  }
-  resize();window.addEventListener('resize',resize);
-  function draw(){
-    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
-    for(var i=0;i<drops.length;i++){
-      var t=ch[Math.floor(Math.random()*ch.length)];
-      x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
-      x.font=fs+'px monospace';
-      x.fillText(t,i*fs,drops[i]*fs);
-      if(drops[i]*fs>c.height&&Math.random()>.975)drops[i]=0;
-      drops[i]++;
-    }
-  }
-  setInterval(draw,45);
-})();
-</script>
 
-<script>
-(function(){
-  var u='info',d='bizautomatrix',t='com';
-  var e=u+'@'+d+'.'+t;
-  var m='mailto:'+e;
-  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
-  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
-  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
-})();
-</script>
 </body>
 </html>
