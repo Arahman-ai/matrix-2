@@ -369,7 +369,7 @@ Your Business.
           <div class="ch-icon" style="background:rgba(37,211,102,.15);">💬</div>
           <div><div class="ch-lbl">WhatsApp (fastest)</div><div class="ch-val">+1 (404) 203-7674</div></div>
         </a>
-        <a href="#" data-em="l"><span data-em="t"></span></a>
+        <a href="mailto:info@bizautomatrix.com" style="color:#FF9F43;font-weight:600;text-decoration:none;">info@bizautomatrix.com</a>
       </div>
     </div>
     <div class="form-box fade-up d1">
@@ -383,7 +383,7 @@ Your Business.
         <div class="fg"><label>Email</label><input type="email" id="fEmail" placeholder="you@business.com"/></div>
         <div class="fg"><label>Phone / WhatsApp</label><input type="tel" id="fPhone" placeholder="+1 (404) 203-7674"/></div>
       </div>
-      <div class="fg"><label>City / Country</label><input type="text" id="fCity" placeholder="Atlanta, GA or Dhaka, BD"/></div>
+      <div class="fg"><label>City / Country</label><input type="text" id="fCity" placeholder="City, State (e.g. Atlanta, GA)"/></div>
       <div class="fg"><label>Tell us about your business</label><textarea id="fMsg" placeholder="Describe your project or current challenges..."></textarea></div>
       <button class="form-btn" id="fBtn" onclick="submitForm()">Request Free AI Demo →</button>
       <div class="form-msg" id="fMsgEl"></div>
@@ -492,6 +492,26 @@ Your Business.
     x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
     for(var i=0;i<drops.length;i++){
       var t=ch[Math.floor(Math.random()*ch.length)];
+      x.fillStyle=Math.
+
+<script>
+/* Matrix Rain */
+(function(){
+  var c=document.getElementById('matrixCanvas');
+  if(!c)return;
+  var x=c.getContext('2d');
+  var ch='アイウエオBIZAUTOMATRIX0123456789$%#@!';
+  var fs=14,cols,drops;
+  function resize(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    cols=Math.floor(c.width/fs);drops=[];
+    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
+    for(var i=0;i<drops.length;i++){
+      var t=ch[Math.floor(Math.random()*ch.length)];
       x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
       x.font=fs+'px monospace';
       x.fillText(t,i*fs,drops[i]*fs);
@@ -500,17 +520,6 @@ Your Business.
     }
   }
   setInterval(draw,45);
-})();
-</script>
-
-<script>
-(function(){
-  var u='info',d='bizautomatrix',t='com';
-  var e=u+'@'+d+'.'+t;
-  var m='mailto:'+e;
-  document.querySelectorAll('[data-em="l"]').forEach(function(el){el.href=m;});
-  document.querySelectorAll('[data-em="t"]').forEach(function(el){el.textContent=e;});
-  document.querySelectorAll('[data-em="b"]').forEach(function(el){el.href=m;el.textContent=e;});
 })();
 </script>
 </body>
