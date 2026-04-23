@@ -293,25 +293,25 @@
     </div>
     <div class="modal-body">
       <div class="grid2">
-        <div class="field"><label>Client Name</label><input type="text" placeholder="John Rahman"></div>
-        <div class="field"><label>Business Name</label><input type="text" placeholder="Rahman's Restaurant"></div>
+        <div class="field"><label>Client Name</label><input id="newName" type="text" placeholder="John Rahman"></div>
+        <div class="field"><label>Business Name</label><input id="newBusiness" type="text" placeholder="Rahman's Restaurant"></div>
       </div>
       <div class="grid2">
-        <div class="field"><label>Email</label><input type="email" placeholder="john@example.com"></div>
-        <div class="field"><label>WhatsApp</label><input type="tel" placeholder="+1 555 000 0000"></div>
+        <div class="field"><label>Email</label><input id="newEmail" type="email" placeholder="john@example.com"></div>
+        <div class="field"><label>WhatsApp</label><input id="newPhone" type="tel" placeholder="+1 555 000 0000"></div>
       </div>
       <div class="grid2">
-        <div class="field"><label>City / Country</label><input type="text" placeholder="New York, USA"></div>
+        <div class="field"><label>City / Country</label><input id="newCity" type="text" placeholder="New York, USA"></div>
         <div class="field"><label>Plan</label>
-          <select>
+          <select id="newPlan">
             <option>Starter — $199/mo</option>
             <option selected>Growth — $399/mo</option>
             <option>Pro — $799/mo</option>
           </select>
         </div>
       </div>
-      <div class="field"><label>Google Maps Link</label><input type="url" placeholder="https://maps.google.com/..."></div>
-      <div class="field"><label>Notes</label><textarea placeholder="Initial audit findings, goals..."></textarea></div>
+      <div class="field"><label>Google Maps Link</label><input id="newMapsLink" type="url" placeholder="https://maps.google.com/..."></div>
+      <div class="field"><label>Notes</label><textarea id="newNotes" placeholder="Initial audit findings, goals..."></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
@@ -495,7 +495,7 @@
           <div class="quick-icon">➕</div>
           <div class="quick-label">Add Client</div>
         </a>
-        <a class="quick-btn" href="#" onclick="document.querySelector('[onclick=\'setPage(\\\'reports\\\',this)\']').click()">
+        <a class="quick-btn" href="#" onclick="setPage('reports', document.querySelector('[onclick*=\'setPage\']'))">
           <div class="quick-icon">📤</div>
           <div class="quick-label">Upload Report</div>
         </a>
@@ -1278,7 +1278,7 @@
 
         <!-- Report & plan -->
         <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">⚙️ Account Settings</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
           <div>
             <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Plan</label>
             <select id="edit_plan" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:#1a1c24;color:#fff;font-size:14px;outline:none;">
@@ -1299,6 +1299,10 @@
             <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Next Report</label>
             <input id="edit_nextReport" type="text" value="${c.nextReport||''}" placeholder="e.g. Apr 1" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
           </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,.45);display:block;margin-bottom:4px;">Campaign Month #</label>
+            <input id="edit_campaignMonth" type="number" min="1" value="${c.campaignMonth||'1'}" placeholder="1" style="width:100%;padding:9px 12px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:14px;outline:none;">
+          </div>
         </div>
       `;
     } catch(e){
@@ -1317,9 +1321,10 @@
 
     try {
       await updateDoc(doc(db, 'users', uid), {
-        plan:   val('edit_plan'),
-        status: val('edit_status'),
-        nextReport: val('edit_nextReport'),
+        plan:          val('edit_plan'),
+        status:        val('edit_status'),
+        nextReport:    val('edit_nextReport'),
+        campaignMonth: val('edit_campaignMonth'),
         stats: {
           mapsRank:           num('edit_mapsRank'),
           mapsRankPrev:       num('edit_mapsRankPrev'),
@@ -1453,38 +1458,6 @@
   </div>
 </div>
 <script>window.onload=function(){window.print();}<\/script>
-
-
-<script>
-/* Matrix Rain */
-(function(){
-  var c=document.getElementById('matrixCanvas');
-  if(!c)return;
-  var x=c.getContext('2d');
-  var ch='アイウエオBIZAUTOMATRIX0123456789$%#@!';
-  var fs=14,cols,drops;
-  function resize(){
-    c.width=window.innerWidth;c.height=window.innerHeight;
-    cols=Math.floor(c.width/fs);drops=[];
-    for(var i=0;i<cols;i++)drops.push(Math.random()*-50);
-  }
-  resize();window.addEventListener('resize',resize);
-  function draw(){
-    x.fillStyle='rgba(7,9,13,0.04)';x.fillRect(0,0,c.width,c.height);
-    for(var i=0;i<drops.length;i++){
-      var t=ch[Math.floor(Math.random()*ch.length)];
-      x.fillStyle=Math.random()>.85?'#FF9F43':'#00D4AA';
-      x.font=fs+'px monospace';
-      x.fillText(t,i*fs,drops[i]*fs);
-      if(drops[i]*fs>c.height&&Math.random()>.975)drops[i]=0;
-      drops[i]++;
-    }
-  }
-  setInterval(draw,45);
-})();
-</script>
-<script src="./matrix.js"></script>
-<script src="./matrix.js"></script>
 </body></html>`;
 
     const w = window.open('','_blank','width=800,height=900');
@@ -1513,23 +1486,32 @@
 
   // Save new client to Firestore
   window.saveClient = async function(){
-    const name     = document.querySelector('#addClientModal input[type="text"]:nth-of-type(1)').value.trim();
-    const business = document.querySelector('#addClientModal input[type="text"]:nth-of-type(2)').value.trim();
-    const email    = document.querySelector('#addClientModal input[type="email"]').value.trim();
-    const phone    = document.querySelector('#addClientModal input[type="tel"]').value.trim();
-    const city     = document.querySelector('#addClientModal input[type="text"]:nth-of-type(3)').value.trim();
-    const plan     = document.querySelector('#addClientModal select').value.split(' —')[0];
+    const name     = document.getElementById('newName').value.trim();
+    const business = document.getElementById('newBusiness').value.trim();
+    const email    = document.getElementById('newEmail').value.trim();
+    const phone    = document.getElementById('newPhone').value.trim();
+    const city     = document.getElementById('newCity').value.trim();
+    const plan     = document.getElementById('newPlan').value.split(' —')[0];
+    const mapsLink = document.getElementById('newMapsLink').value.trim();
+    const notes    = document.getElementById('newNotes').value.trim();
 
     if(!name || !email){ alert('Name and email are required!'); return; }
 
     try {
       await addDoc(collection(db, 'users'), {
-        name, business, email, phone, city,
+        name, business, email, phone, city, mapsLink, notes,
         plan, role: 'client', status: 'active',
+        campaignMonth: '1',
         createdAt: new Date().toISOString()
       });
+      // Clear fields
+      ['newName','newBusiness','newEmail','newPhone','newCity','newMapsLink','newNotes'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.value = '';
+      });
+      document.getElementById('newPlan').selectedIndex = 1;
       closeModal();
-      alert('✅ Client added successfully!');
+      alert('✅ Client added successfully! Remember to create their Firebase Auth account so they can log in.');
       loadClients();
     } catch(e){
       alert('Error: ' + e.message);
@@ -1538,7 +1520,6 @@
 </script>
 
 
-<script src="./matrix.js"></script>
 <script src="./matrix.js"></script>
 </body>
 </html>

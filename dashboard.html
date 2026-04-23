@@ -623,28 +623,30 @@
           <span style="font-size:12px;color:#9ca3af;">From your BizAutomatrix team</span>
         </div>
         <div id="actionsList">
-          <div class="action-content">
-            <div class="action-title">Ask 10 more customers for reviews this week</div>
-            <div class="action-desc">You're close to hitting 50 reviews — a key trust milestone on Google Maps.</div>
+          <div class="action-item">
+            <div class="action-num">1</div>
+            <div class="action-content">
+              <div class="action-title">Ask 10 more customers for reviews this week</div>
+              <div class="action-desc">You're close to hitting 50 reviews — a key trust milestone on Google Maps.</div>
+            </div>
+            <div class="action-badge" style="background:#dcfce7;color:#16a34a;">High Impact</div>
           </div>
-          <div class="action-badge" style="background:#dcfce7;color:#16a34a;">High Impact</div>
-        </div>
-        <div class="action-item">
-          <div class="action-num">2</div>
-          <div class="action-content">
-            <div class="action-title">Add weekend hours to your Google profile</div>
-            <div class="action-desc">Profiles with complete hours get 20% more clicks than incomplete ones.</div>
+          <div class="action-item">
+            <div class="action-num">2</div>
+            <div class="action-content">
+              <div class="action-title">Add weekend hours to your Google profile</div>
+              <div class="action-desc">Profiles with complete hours get 20% more clicks than incomplete ones.</div>
+            </div>
+            <div class="action-badge" style="background:#fff7ed;color:#FF9F43;">Quick Win</div>
           </div>
-          <div class="action-badge" style="background:#fff7ed;color:#FF9F43;">Quick Win</div>
-        </div>
-        <div class="action-item">
-          <div class="action-num">3</div>
-          <div class="action-content">
-            <div class="action-title">Share your latest Google post on Instagram</div>
-            <div class="action-desc">Cross-posting increases overall engagement and signals freshness to Google.</div>
+          <div class="action-item">
+            <div class="action-num">3</div>
+            <div class="action-content">
+              <div class="action-title">Share your latest Google post on Instagram</div>
+              <div class="action-desc">Cross-posting increases overall engagement and signals freshness to Google.</div>
+            </div>
+            <div class="action-badge" style="background:#f5f3ff;color:#A29BFE;">Ongoing</div>
           </div>
-          <div class="action-badge" style="background:#f5f3ff;color:#A29BFE;">Ongoing</div>
-        </div>
         </div><!-- end actionsList -->
       </div>
 
@@ -687,7 +689,7 @@
             <div style="font-size:12px;color:#6b7280;">For USA & international clients • Visa, Mastercard, PayPal balance</div>
           </div>
         </div>
-        <a href="https://www.paypal.com/wa.me/14042037674" target="_blank" rel="noopener"
+        <a href="https://wa.me/14042037674?text=Hi%2C%20I%27d%20like%20to%20pay%20via%20PayPal%20for%20my%20BizAutomatrix%20plan." target="_blank" rel="noopener"
            style="background:#003087;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;">
           Pay with PayPal →
         </a>
@@ -790,10 +792,14 @@
       <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:16px;padding:24px;color:#fff;">
         <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;">🚀 What BizAutomatrix Does Every Month</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          ${['Update GBP posts weekly','Respond to all reviews','Add new photos monthly','Fix NAP inconsistencies','Monitor keyword rankings','Analyse competitor profiles','Submit to local directories','Generate monthly report'].map(t=>`
-          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);">
-            <span style="color:#00B894;font-size:16px;">✓</span> ${t}
-          </div>`).join('')}
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Update GBP posts weekly</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Respond to all reviews</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Add new photos monthly</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Fix NAP inconsistencies</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Monitor keyword rankings</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Analyse competitor profiles</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Submit to local directories</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.8);"><span style="color:#00B894;font-size:16px;">✓</span> Generate monthly report</div>
         </div>
       </div>
     </div>
@@ -838,16 +844,22 @@
       <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);">
         <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:16px;">📅 Monthly Social Activity</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          ${[
-            ['Week 1','Content calendar planning + 3 posts published'],
-            ['Week 2','Engagement monitoring + 3 posts + story updates'],
-            ['Week 3','Review responses + 3 posts + competitor analysis'],
-            ['Week 4','Monthly report + 3 posts + next month strategy']
-          ].map(([w,t])=>`
           <div style="background:#f8fafc;border-radius:12px;padding:14px;">
-            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">${w}</div>
-            <div style="font-size:13px;color:#374151;">${t}</div>
-          </div>`).join('')}
+            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Week 1</div>
+            <div style="font-size:13px;color:#374151;">Content calendar planning + 3 posts published</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:12px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Week 2</div>
+            <div style="font-size:13px;color:#374151;">Engagement monitoring + 3 posts + story updates</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:12px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Week 3</div>
+            <div style="font-size:13px;color:#374151;">Review responses + 3 posts + competitor analysis</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:12px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:#FF9F43;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Week 4</div>
+            <div style="font-size:13px;color:#374151;">Monthly report + 3 posts + next month strategy</div>
+          </div>
         </div>
       </div>
     </div>
@@ -878,19 +890,34 @@
       <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;">
         <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#111;margin-bottom:16px;">⭐ How We Generate Reviews For You</div>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          ${[
-            ['1','Review Request SMS/WhatsApp','We send polite review request messages to your recent customers with a direct Google review link.'],
-            ['2','QR Code Generation','Printable QR code for your counter, receipts, or packaging that opens your Google review page instantly.'],
-            ['3','Follow-up Sequence','Customers who didn\'t respond get a gentle reminder after 3 days — maximising conversion.'],
-            ['4','Negative Review Protection','We alert you immediately when a low review comes in so you can respond fast and protect your rating.']
-          ].map(([n,title,desc])=>`
           <div style="display:flex;gap:14px;align-items:flex-start;">
-            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${n}</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
             <div>
-              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">${title}</div>
-              <div style="font-size:13px;color:#6b7280;">${desc}</div>
+              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">Review Request SMS/WhatsApp</div>
+              <div style="font-size:13px;color:#6b7280;">We send polite review request messages to your recent customers with a direct Google review link.</div>
             </div>
-          </div>`).join('')}
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+            <div>
+              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">QR Code Generation</div>
+              <div style="font-size:13px;color:#6b7280;">Printable QR code for your counter, receipts, or packaging that opens your Google review page instantly.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+            <div>
+              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">Follow-up Sequence</div>
+              <div style="font-size:13px;color:#6b7280;">Customers who didn't respond get a gentle reminder after 3 days — maximising conversion.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#FF9F43,#FF6B6B);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+            <div>
+              <div style="font-weight:700;color:#111;font-size:14px;margin-bottom:3px;">Negative Review Protection</div>
+              <div style="font-size:13px;color:#6b7280;">We alert you immediately when a low review comes in so you can respond fast and protect your rating.</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1197,7 +1224,6 @@
   setInterval(draw,45);
 })();
 </script>
-<script src="./matrix.js"></script>
 <script src="./matrix.js"></script>
 </body>
 </html>
