@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard.html
-Disallow: /admin.html
-Disallow: /login.html
-Disallow: /signup.html
-Disallow: /reset.html
 
-Sitemap: https://rangu.us/sitemap.xml
+Sitemap: https://bizautomatrix.com/sitemap.xml
