@@ -426,7 +426,7 @@
           <div class="admin-role">Admin • BizAutomatrix</div>
         </div>
       </div>
-      <a class="logout-btn" href="./login.html">
+      <a class="logout-btn" href="https://app.bizautomatrix.com/login">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         Sign Out
       </a>
@@ -801,7 +801,7 @@
   console.log("Firebase admin script v3 loaded");
 
   // Sign out
-  document.querySelectorAll('a[href="./login.html"]').forEach(a => {
+  document.querySelectorAll('a[href="https://app.bizautomatrix.com/login"]').forEach(a => {
     a.addEventListener('click', async function(e){
       e.preventDefault();
       await signOut(auth);
