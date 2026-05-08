@@ -79,8 +79,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .trust-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);}
 .trust-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
 .hero-right{display:flex;flex-direction:column;gap:12px;}
-.svc-pill{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .2s;cursor:default;}
+.svc-pill{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .2s;text-decoration:none;cursor:pointer;}
 .svc-pill:hover{border-color:var(--border2);transform:translateX(6px);}
+.svc-pill:hover .svc-arrow{color:#fff;}
 .svc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .svc-text .name{font-weight:700;font-size:14px;color:#fff;margin-bottom:2px;}
 .svc-text .desc{font-size:12px;color:var(--muted);}
@@ -381,31 +382,31 @@ footer{background:#040608;border-top:1px solid var(--border);padding:60px 40px 3
       </div>
     </div>
     <div class="hero-right">
-      <div class="svc-pill">
+      <a href="#digital-marketing" class="svc-pill">
         <div class="svc-icon" style="background:rgba(255,159,67,.12);">📍</div>
         <div class="svc-text"><div class="name">Local SEO & Google Maps</div><div class="desc">Rank #1 in your city</div></div>
         <div class="svc-arrow">→</div>
-      </div>
-      <div class="svc-pill">
+      </a>
+      <a href="#digital-marketing" class="svc-pill">
         <div class="svc-icon" style="background:rgba(255,159,67,.12);">⭐</div>
         <div class="svc-text"><div class="name">Review Automation</div><div class="desc">5-star reviews on autopilot</div></div>
         <div class="svc-arrow">→</div>
-      </div>
-      <div class="svc-pill">
+      </a>
+      <a href="#software-ai" class="svc-pill">
         <div class="svc-icon" style="background:rgba(74,158,255,.12);">🤖</div>
         <div class="svc-text"><div class="name">AI & Workflow Automation</div><div class="desc">CRM, chatbots, n8n</div></div>
         <div class="svc-arrow">→</div>
-      </div>
-      <div class="svc-pill">
+      </a>
+      <a href="#software-ai" class="svc-pill">
         <div class="svc-icon" style="background:rgba(74,158,255,.12);">💻</div>
         <div class="svc-text"><div class="name">Custom Software</div><div class="desc">SaaS, dashboards, APIs</div></div>
         <div class="svc-arrow">→</div>
-      </div>
-      <div class="svc-pill">
+      </a>
+      <a href="#engineering" class="svc-pill">
         <div class="svc-icon" style="background:rgba(0,212,170,.12);">🏭</div>
         <div class="svc-text"><div class="name">Engineering Innovation</div><div class="desc">Industry 4.0 · Railway · AI</div></div>
         <div class="svc-arrow">→</div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
